@@ -14,6 +14,7 @@
     "file-loader": "^3.0.1",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
+    "i18next": "^15.0.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.3.1",
     "jest-pnp-resolver": "^1.2.1",
@@ -31,9 +32,11 @@
     "react-app-polyfill": "^0.2.2",
     "react-dev-utils": "6.0.3",
     "react-dom": "^16.8.4",
+    "react-i18next": "^10.2.0",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-select": "^3.0.8",
     "react-smooth-scrollbar": "^8.0.6",
     "reactstrap": "^7.1.0",
     "recharts": "1.5.0",
@@ -43,9 +46,7 @@
     "smooth-scrollbar": "^8.3.1",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
-    "url-loader": "1.1.2",
-    "react-i18next": "^10.2.0",
-    "i18next": "^15.0.5"
+    "url-loader": "1.1.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
