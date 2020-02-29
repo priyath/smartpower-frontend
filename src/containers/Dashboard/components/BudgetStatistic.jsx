@@ -8,7 +8,7 @@ const data01 = [{ value: 50, fill: '#4ce1b6' },
   { value: 50, fill: '#eeeeee' }];
 
 const BudgetStatistic = ({ t }) => (
-  <Panel md={12} lg={6} xl={4} title={t('dashboard_default.budget_statistic')}>
+  <Panel md={12} lg={6} xl={4} title={t('dashboard.budget_statistic')}>
     <div className="dashboard__stat dashboard__stat--budget">
       <div className="dashboard__stat-main">
         <p className="dashboard__stat-main-title">Total Budget</p>

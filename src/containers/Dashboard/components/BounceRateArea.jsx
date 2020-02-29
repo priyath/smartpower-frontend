@@ -22,7 +22,7 @@ const data = [
 ];
 
 const BounceRateArea = ({ t, dir, themeName }) => (
-  <Panel xl={5} lg={6} md={12} title={t('dashboard_default.bounce_rate')}>
+  <Panel xl={5} lg={6} md={12} title={t('dashboard.bounce_rate')}>
     <p className="dashboard__bounce-percent">32%</p>
     <div dir="ltr">
       <ResponsiveContainer height={220} className="dashboard__area">

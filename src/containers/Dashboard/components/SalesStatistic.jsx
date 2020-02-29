@@ -16,7 +16,7 @@ const SalesStatistic = ({ t }) => (
     lg={6}
     xl={3}
     xs={12}
-    title={t('dashboard_default.sales_statistic')}
+    title={t('dashboard.sales_statistic')}
     subhead="Top selling items statistic by last month"
   >
     <div className="dashboard__stat">

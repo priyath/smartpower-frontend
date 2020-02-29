@@ -12,7 +12,7 @@ const Italia = `${process.env.PUBLIC_URL}/img/flags/Italia.svg`;
 const Sierra = `${process.env.PUBLIC_URL}/img/flags/Sierra.svg`;
 
 const AudienceByCountry = ({ t }) => (
-  <Panel lg={12} xl={8} md={12} title={t('dashboard_default.audience_by_country')}>
+  <Panel lg={12} xl={8} md={12} title={t('dashboard.audience_by_country')}>
     <Table responsive className="table--bordered dashboard__audience-table">
       <thead>
         <tr>

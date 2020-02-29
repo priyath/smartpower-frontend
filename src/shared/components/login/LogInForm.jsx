@@ -105,7 +105,7 @@ class LogInForm extends PureComponent {
             form === 'modal_login'
               ? <Button className="account__btn" submit="true" color="primary">Sign In</Button>
               : (
-                <Link className="account__btn btn btn-primary" to="/dashboard_default">
+                <Link className="account__btn btn btn-primary" to="/dashboard">
                   Sign In
                 </Link>
               )

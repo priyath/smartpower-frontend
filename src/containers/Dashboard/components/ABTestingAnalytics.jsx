@@ -17,7 +17,7 @@ const data = [{ name: 'Mon', a: 590, b: 1400 },
   { name: 'Sun', a: 1400, b: 1700 }];
 
 const ABTestingAnalytics = ({ t, dir, themeName }) => (
-  <Panel md={12} lg={12} xl={12} title={t('dashboard_default.ab_testing')}>
+  <Panel md={12} lg={12} xl={12} title={t('dashboard.ab_testing')}>
     <div dir="ltr">
       <ResponsiveContainer height={250} className="dashboard__area">
         <AreaChart data={data} margin={{ top: 20, left: -15, bottom: 20 }}>
