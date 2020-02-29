@@ -1,12 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import {
-  BarChart, Bar, Cell, ResponsiveContainer,
-} from 'recharts';
-import TrendingUpIcon from 'mdi-react/TrendingUpIcon';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import MultiSelectDropdown from "../../../shared/components/MultiSelectDropdown";
 
 const data = [
   { name: 'Page A', uv: 4000 },
@@ -50,31 +47,9 @@ class Visits extends PureComponent {
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              <h5 className="bold-text">{t('dashboard_default.visits')}</h5>
+              <h5 className="bold-text">{t('dashboard.branch_selection')}</h5>
             </div>
-            <div className="dashboard__total">
-              <TrendingUpIcon className="dashboard__trend-icon" />
-              <p className="dashboard__total-stat">
-                {activeItem.uv}
-              </p>
-              <div className="dashboard__chart-container">
-                <ResponsiveContainer height={50}>
-                  <BarChart data={data}>
-                    <Bar dataKey="uv" onClick={this.handleClick}>
-                      {
-                        data.map((entry, index) => (
-                          <Cell
-                            cursor="pointer"
-                            fill={index === activeIndex ? '#4ce1b6' : '#ff4861'}
-                            key={`cell-${index}`}
-                          />
-                        ))
-                      }
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            <MultiSelectDropdown/>
           </CardBody>
         </Card>
       </Col>

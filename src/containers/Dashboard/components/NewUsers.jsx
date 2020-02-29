@@ -50,30 +50,10 @@ class NewUsers extends PureComponent {
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              <h5 className="bold-text">{t('dashboard_default.new_users')}</h5>
+              <h5 className="bold-text">{t('dashboard.cost')}</h5>
             </div>
-            <div className="dashboard__total">
-              <TrendingDownIcon className="dashboard__trend-icon" />
-              <p className="dashboard__total-stat">
-                {(activeItem.pv)}
-              </p>
-              <div className="dashboard__chart-container">
-                <ResponsiveContainer height={50}>
-                  <BarChart data={data}>
-                    <Bar dataKey="pv" onClick={this.handleClick}>
-                      {
-                        data.map((entry, index) => (
-                          <Cell
-                            cursor="pointer"
-                            fill={index === activeIndex ? '#4ce1b6' : '#c88ffa'}
-                            key={`cell-${index}`}
-                          />
-                        ))
-                      }
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+            <div className="dashboard__total dashboard__cost">
+              $12,384
             </div>
           </CardBody>
         </Card>

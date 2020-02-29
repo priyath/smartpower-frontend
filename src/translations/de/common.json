@@ -1,9 +1,9 @@
 {
-	"dashboard_default": {
+	"dashboard": {
 		"page_title": "Standard-Dashboard",
 		"visits": "Besuche",
-		"total_page_views": "Gesamtzahl der aufgerufenen Seiten",
-		"new_users": "Neue Nutzer",
+		"current_month_kwh_value": "Gesamtzahl der aufgerufenen Seiten",
+		"cost": "Neue Nutzer",
 		"bounce_rate": "Absprungrate",
 		"ab_testing": "A / B-Testanalyse",
 		"visitors_sessions": "Besuchersitzungen",

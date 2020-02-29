@@ -1,9 +1,9 @@
 {
-  "dashboard_default": {
+  "dashboard": {
     "page_title": "Dashboard Default",
     "visits":  "Visits",
-    "total_page_views":  "Total page views",
-    "new_users":  "New users",
+    "current_month_kwh_value":  "1st - 25th Jan 2020",
+    "cost":  "Cost",
     "bounce_rate":  "Bounce rate",
     "ab_testing":  "A/B testing analytics",
     "visitors_sessions":  "Visitor sessions",
@@ -11,7 +11,8 @@
     "budget_statistic":  "Budget statistic",
     "audience_by_country":  "Audience by country",
     "best_selling":  "Best selling regions",
-    "goals_completion":  "Goal completion"
+    "goals_completion":  "Goal completion",
+    "branch_selection":  "Select Branch or Branches"
   },
   "dashboard_commerce": {
     "page_title": "Dashboard E-commerce",

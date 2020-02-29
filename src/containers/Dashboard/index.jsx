@@ -20,14 +20,13 @@ const Dashboard = ({ t, rtl }) => (
     <Container className="dashboard">
         <Row>
             <Col md={12}>
-                <h3 className="page-title">{t('dashboard_default.page_title')}</h3>
+                <h3 className="page-title">{t('dashboard.page_title')}</h3>
             </Col>
         </Row>
         <Row>
             <Visits />
             <TotalPageViews />
             <NewUsers />
-            <BounceRate />
         </Row>
         <Row>
             <ABTestingAnalytics dir={rtl.direction} />

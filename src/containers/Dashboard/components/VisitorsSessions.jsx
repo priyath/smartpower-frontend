@@ -69,7 +69,7 @@ class VisitorsSessions extends PureComponent {
         lg={6}
         xl={4}
         md={12}
-        title={t('dashboard_default.visitors_sessions')}
+        title={t('dashboard.visitors_sessions')}
         subhead="What browsers are most popular"
       >
         <div className="dashboard__visitors-chart">

@@ -1,10 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import {
-  BarChart, Bar, Cell, ResponsiveContainer,
-} from 'recharts';
-import TrendingUpIcon from 'mdi-react/TrendingUpIcon';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
@@ -50,30 +46,10 @@ class TotalPageViews extends PureComponent {
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              <h5 className="bold-text">{t('dashboard_default.total_page_views')}</h5>
+              <h5 className="bold-text">{t('dashboard.current_month_kwh_value')}</h5>
             </div>
-            <div className="dashboard__total">
-              <TrendingUpIcon className="dashboard__trend-icon" />
-              <p className="dashboard__total-stat">
-                {activeItem.amt}
-              </p>
-              <div className="dashboard__chart-container">
-                <ResponsiveContainer height={50}>
-                  <BarChart data={data}>
-                    <Bar dataKey="amt" onClick={this.handleClick}>
-                      {
-                        data.map((entry, index) => (
-                          <Cell
-                            cursor="pointer"
-                            fill={index === activeIndex ? '#4ce1b6' : '#70bbfd'}
-                            key={`cell-${index}`}
-                          />
-                        ))
-                      }
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+            <div className="dashboard__total dashboard__cost">
+              5000 kW
             </div>
           </CardBody>
         </Card>
