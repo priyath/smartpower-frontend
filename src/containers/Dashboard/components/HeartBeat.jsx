@@ -21,11 +21,11 @@ const data = [
   { name: '21.03', uv: 3490 },
 ];
 
-const BounceRateArea = ({ t, dir, themeName }) => (
-  <Panel xl={5} lg={6} md={12} title={t('dashboard.bounce_rate')}>
+const HeartBeat = ({ t, dir, themeName }) => (
+  <Panel md={12} lg={12} xl={6} sm={12} xs={12} title={t('dashboard.bounce_rate')}>
     <p className="dashboard__bounce-percent">32%</p>
     <div dir="ltr">
-      <ResponsiveContainer height={220} className="dashboard__area">
+      <ResponsiveContainer height={500} className="dashboard__area">
         <AreaChart
           data={data}
           margin={{
@@ -43,10 +43,10 @@ const BounceRateArea = ({ t, dir, themeName }) => (
   </Panel>
 );
 
-BounceRateArea.propTypes = {
+HeartBeat.propTypes = {
   t: PropTypes.func.isRequired,
   dir: PropTypes.string.isRequired,
   themeName: PropTypes.string.isRequired,
 };
 
-export default connect(state => ({ themeName: state.theme.className }))(withTranslation('common')(BounceRateArea));
+export default connect(state => ({ themeName: state.theme.className }))(withTranslation('common')(HeartBeat));

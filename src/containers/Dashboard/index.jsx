@@ -10,6 +10,7 @@ import NewUsers from './components/NewUsers';
 import ABTestingAnalytics from './components/ABTestingAnalytics';
 import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
+import HeartBeat from "./components/HeartBeat";
 
 const Dashboard = ({ t, rtl }) => (
     <Container className="dashboard">
@@ -25,6 +26,7 @@ const Dashboard = ({ t, rtl }) => (
         </Row>
         <Row>
             <GaugeView/>
+            <HeartBeat/>
         </Row>
         <Row>
             <ABTestingAnalytics dir={rtl.direction} />
