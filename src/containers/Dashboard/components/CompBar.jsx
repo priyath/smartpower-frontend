@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
 const CompBar = ({ t }) => (
         <div>
                 <div className="card__title">
-                    <h5 className="bold-text">{t('charts.react_vis.bars')}</h5>
                 </div>
                 <div className="react-vis" dir="ltr">
                     <FlexibleWidthXYPlot

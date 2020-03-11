@@ -37,12 +37,8 @@ class CompControl extends PureComponent {
             <Panel
                 xl={4}
                 lg={12}
-                title={t('dashboard_crypto.trade_history')}
+                title={t('dashboard.comp_control')}
             >
-                        <div className="card__title">
-                            <h5 className="bold-text">{t('ui_elements.tabs.default_tabs')}</h5>
-                            <h5 className="subhead">Use default tabs</h5>
-                        </div>
                         <div className="tabs">
                             <div className="tabs__wrap">
                                 <Nav tabs>

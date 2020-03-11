@@ -12,7 +12,9 @@
     "audience_by_country":  "Audience by country",
     "best_selling":  "Best selling regions",
     "goals_completion":  "Goal completion",
-    "branch_selection":  "Select Branch or Branches"
+    "branch_selection":  "Select Branch or Branches",
+    "comp_control":  "Comparison Control",
+    "comp_view":  "Comparison View"
   },
   "dashboard_commerce": {
     "page_title": "Dashboard E-commerce",

@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 
 const CompView = ({ t, dir, themeName }) => {
     return (
-        <Panel md={12} lg={12} xl={8} sm={12} xs={12} title={t('dashboard.bounce_rate')}>
+        <Panel md={12} lg={12} xl={8} sm={12} xs={12} title={t('dashboard.comp_view')}>
             <ResponsiveContainer height={500}>
                     <CompBar/>
             </ResponsiveContainer>
