@@ -6,6 +6,29 @@
     margin-bottom: 10px;
   }
 
+  .dashboard-comp-dropdown-menu {
+    margin-bottom: 1px;
+    height: 40px;
+  }
+
+  .dashboard__comparison-tab {
+    form {
+      padding: 20px 20px 30px 20px;
+      border-radius: 5px;
+      margin-top: 10px;
+
+      @include themify($themes) {
+        background-color: themed('colorBorder');
+      }
+    }
+
+    input {
+      @include themify($themes) {
+        background-color: themed('colorBackground');
+      }
+    }
+  }
+
   //default
   .dashboard__visitors-chart-title {
 

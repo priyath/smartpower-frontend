@@ -7,10 +7,11 @@ import PropTypes from 'prop-types';
 import Visits from './components/Visits';
 import TotalPageViews from './components/TotalPageViews';
 import NewUsers from './components/NewUsers';
-import ABTestingAnalytics from './components/ABTestingAnalytics';
 import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import HeartBeat from "./components/HeartBeat";
+import CompView from "./components/CompView";
+import CompControl from "./components/CompControl";
 
 const Dashboard = ({ t, rtl }) => (
     <Container className="dashboard">
@@ -29,7 +30,8 @@ const Dashboard = ({ t, rtl }) => (
             <HeartBeat/>
         </Row>
         <Row>
-            <ABTestingAnalytics dir={rtl.direction} />
+            <CompControl/>
+            <CompView/>
         </Row>
     </Container>
 );
