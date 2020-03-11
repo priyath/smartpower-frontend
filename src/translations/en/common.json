@@ -14,7 +14,9 @@
     "goals_completion":  "Goal completion",
     "branch_selection":  "Select Branch or Branches",
     "comp_control":  "Comparison Control",
-    "comp_view":  "Comparison View"
+    "comp_view":  "Comparison View",
+    "main_gauges":  "Main Gauges",
+    "live_heartbeat":  "Live Heart Beat"
   },
   "dashboard_commerce": {
     "page_title": "Dashboard E-commerce",

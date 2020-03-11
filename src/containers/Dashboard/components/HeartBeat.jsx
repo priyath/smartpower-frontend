@@ -22,7 +22,7 @@ const data = [
 ];
 
 const HeartBeat = ({ t, dir, themeName }) => (
-  <Panel md={12} lg={12} xl={6} sm={12} xs={12} title={t('dashboard.bounce_rate')}>
+  <Panel md={12} lg={12} xl={6} sm={12} xs={12} title={t('dashboard.live_heartbeat')}>
     <p className="dashboard__bounce-percent">32%</p>
     <div dir="ltr">
       <ResponsiveContainer height={500} className="dashboard__area">
