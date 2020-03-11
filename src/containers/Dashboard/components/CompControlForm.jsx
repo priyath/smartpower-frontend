@@ -10,6 +10,7 @@ import {
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
+import MonthPicker from '../../../shared/components/MonthPicker';
 
 const CompControlForm = ({ handleSubmit }) => (
   <div className="dashboard__comparison-tab">
@@ -19,29 +20,12 @@ const CompControlForm = ({ handleSubmit }) => (
         <div className="form__form-group-field">
           <UncontrolledDropdown>
             <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-              <p>Dropdown <ChevronDownIcon /></p>
+              <p>Day <ChevronDownIcon /></p>
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another Action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Another Action</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </div>
-      </div>
-      <div className="form__form-group">
-        <span className="form__form-group-label">Year</span>
-        <div className="form__form-group-field">
-          <UncontrolledDropdown>
-            <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-              <p>Dropdown <ChevronDownIcon /></p>
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another Action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Another Action</DropdownItem>
+              <DropdownItem>Day</DropdownItem>
+              <DropdownItem>Week</DropdownItem>
+              <DropdownItem>Month</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
@@ -49,17 +33,7 @@ const CompControlForm = ({ handleSubmit }) => (
       <div className="form__form-group">
         <span className="form__form-group-label">Month</span>
         <div className="form__form-group-field">
-          <UncontrolledDropdown>
-            <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-              <p>Dropdown <ChevronDownIcon /></p>
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another Action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Another Action</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          <MonthPicker/>
         </div>
       </div>
       <div className="form__form-group">
@@ -68,35 +42,9 @@ const CompControlForm = ({ handleSubmit }) => (
         </div>
       </div>
       <div className="form__form-group">
-        <span className="form__form-group-label">Year</span>
-        <div className="form__form-group-field">
-          <UncontrolledDropdown>
-            <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-              <p>Dropdown <ChevronDownIcon /></p>
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another Action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Another Action</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </div>
-      </div>
-      <div className="form__form-group">
         <span className="form__form-group-label">Month</span>
         <div className="form__form-group-field">
-          <UncontrolledDropdown>
-            <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-              <p>Dropdown <ChevronDownIcon /></p>
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another Action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Another Action</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          <MonthPicker/>
         </div>
       </div>
       <ButtonToolbar className="form__button-toolbar">
