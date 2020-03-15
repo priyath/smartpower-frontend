@@ -17,11 +17,16 @@
 @import './component/panel';
 @import './component/radio-btn';
 @import './component/react-datepicker.css';
+@import './component/select-options';
+@import './component/table';
+@import './component/edit-table';
+@import './component/react-select';
 
 //pages...
 @import 'containers/account';
 @import 'containers/dashboard';
 @import 'containers/branches';
+@import 'containers/products-list';
 
 //objects...
 @import 'objects/layout.scss';
