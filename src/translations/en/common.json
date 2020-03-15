@@ -25,6 +25,11 @@
   "branches": {
     "page_title": "Branch Selection"
   },
+  "locations": {
+    "page_title": "Location Status",
+    "geo_map": "Active Locations",
+    "location_info": "Location Info"
+  },
   "dashboard_commerce": {
     "page_title": "Dashboard E-commerce",
     "total_products": "Total products",
