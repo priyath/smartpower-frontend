@@ -1,27 +1,23 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import {
-  BarChart, Bar, Cell, ResponsiveContainer,
-} from 'recharts';
-import TrendingDownIcon from 'mdi-react/TrendingDownIcon';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 const data = [
-  { name: 'Page A', pv: 255 },
-  { name: 'Page B', pv: 452 },
-  { name: 'Page C', pv: 154 },
-  { name: 'Page D', pv: 85 },
-  { name: 'Page E', pv: 545 },
-  { name: 'Page F', pv: 438 },
-  { name: 'Page G', pv: 523 },
-  { name: 'Page H', pv: 226 },
-  { name: 'Page I', pv: 112 },
-  { name: 'Page J', pv: 101 },
+  { name: 'Page A', amt: 2400 },
+  { name: 'Page B', amt: 2210 },
+  { name: 'Page C', amt: 2290 },
+  { name: 'Page D', amt: 2000 },
+  { name: 'Page E', amt: 2181 },
+  { name: 'Page F', amt: 2500 },
+  { name: 'Page G', amt: 2100 },
+  { name: 'Page H', amt: 2290 },
+  { name: 'Page I', amt: 2000 },
+  { name: 'Page J', amt: 2181 },
 ];
 
-class NewUsers extends PureComponent {
+class KWValue extends PureComponent {
   static propTypes = {
     t: PropTypes.func.isRequired,
   };
@@ -50,10 +46,10 @@ class NewUsers extends PureComponent {
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              <h5 className="bold-text">{t('dashboard.cost')}</h5>
+              <h5 className="bold-text">{t('dashboard.current_month_kwh_value')}</h5>
             </div>
             <div className="dashboard__total dashboard__cost">
-              $12,384
+              5000 kW
             </div>
           </CardBody>
         </Card>
@@ -62,4 +58,4 @@ class NewUsers extends PureComponent {
   }
 }
 
-export default withTranslation('common')(NewUsers);
+export default withTranslation('common')(KWValue);

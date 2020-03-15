@@ -4,9 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Visits from './components/Visits';
-import TotalPageViews from './components/TotalPageViews';
-import NewUsers from './components/NewUsers';
+import Visits from './components/BranchSelection';
+import KWValue from './components/KWValue';
+import Cost from './components/Cost';
 import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import HeartBeat from "./components/HeartBeat";
@@ -22,8 +22,8 @@ const Dashboard = ({ t, rtl }) => (
         </Row>
         <Row>
             <Visits />
-            <TotalPageViews />
-            <NewUsers />
+            <KWValue />
+            <Cost />
         </Row>
         <Row>
             <GaugeView/>

@@ -1,24 +1,27 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
+import {
+  BarChart, Bar, Cell, ResponsiveContainer,
+} from 'recharts';
+import TrendingDownIcon from 'mdi-react/TrendingDownIcon';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import MultiSelectDropdown from "../../../shared/components/MultiSelectDropdown";
 
 const data = [
-  { name: 'Page A', uv: 4000 },
-  { name: 'Page B', uv: 3000 },
-  { name: 'Page C', uv: 2000 },
-  { name: 'Page D', uv: 2780 },
-  { name: 'Page E', uv: 1890 },
-  { name: 'Page F', uv: 2390 },
-  { name: 'Page G', uv: 3490 },
-  { name: 'Page H', uv: 2000 },
-  { name: 'Page I', uv: 2780 },
-  { name: 'Page J', uv: 1890 },
+  { name: 'Page A', pv: 255 },
+  { name: 'Page B', pv: 452 },
+  { name: 'Page C', pv: 154 },
+  { name: 'Page D', pv: 85 },
+  { name: 'Page E', pv: 545 },
+  { name: 'Page F', pv: 438 },
+  { name: 'Page G', pv: 523 },
+  { name: 'Page H', pv: 226 },
+  { name: 'Page I', pv: 112 },
+  { name: 'Page J', pv: 101 },
 ];
 
-class Visits extends PureComponent {
+class Cost extends PureComponent {
   static propTypes = {
     t: PropTypes.func.isRequired,
   };
@@ -47,9 +50,11 @@ class Visits extends PureComponent {
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
-              <h5 className="bold-text">{t('dashboard.branch_selection')}</h5>
+              <h5 className="bold-text">{t('dashboard.cost')}</h5>
             </div>
-            <MultiSelectDropdown/>
+            <div className="dashboard__total dashboard__cost">
+              $12,384
+            </div>
           </CardBody>
         </Card>
       </Col>
@@ -57,4 +62,4 @@ class Visits extends PureComponent {
   }
 }
 
-export default withTranslation('common')(Visits);
+export default withTranslation('common')(Cost);
