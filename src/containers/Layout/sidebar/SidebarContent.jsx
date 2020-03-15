@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SidebarLink from './SidebarLink';
+import SidebarCategory from './SidebarCategory';
 
 class SidebarContent extends Component {
   static propTypes = {
@@ -22,9 +23,11 @@ class SidebarContent extends Component {
           <SidebarLink title="Dashboard" icon="home" route="/dashboard" onClick={this.hideSidebar} />
           <SidebarLink title="History" icon="home" route="/history" onClick={this.hideSidebar} />
           <SidebarLink title="Branches" icon="home" route="/branches" onClick={this.hideSidebar} />
-          <SidebarLink title="Control Panel" icon="home" route="/control_panel" onClick={this.hideSidebar} />
           <SidebarLink title="Locations" icon="home" route="/locations" onClick={this.hideSidebar} />
-          <SidebarLink title="Log In" icon="exit" route="/log_in" onClick={this.hideSidebar} />
+          <SidebarCategory title="Control Panel" icon="menu">
+            <SidebarLink title="User Management" route="/user_mgmt" onClick={this.hideSidebar} />
+            <SidebarLink title="Settings" route="/settings" onClick={this.hideSidebar} />
+          </SidebarCategory>
         </ul>
       </div>
     );
