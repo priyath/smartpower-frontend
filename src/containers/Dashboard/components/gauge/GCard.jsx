@@ -9,7 +9,7 @@ import { grey, blue } from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 400,
-    height: 320
+    height: 250
   },
   link:{
     height: 24
@@ -52,11 +52,7 @@ export default function GCard(props) {
     <Card className={classes.card}>
       <CardHeader
         className={classes.header}
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            {props.avatar}
-          </Avatar>
-        }
+        avatar=" "
         title={props.title}
       />
       <CardContent className={classes.content}>

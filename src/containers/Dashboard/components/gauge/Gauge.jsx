@@ -6,9 +6,9 @@ class ReactRadialGauge extends React.Component {
   componentDidMount () {
     const options = Object.assign({}, this.props, {
       renderTo: this.el,
-      width: 200,
+      width: 150,
       title: "Iteq",
-      height: 200,
+      height: 150,
       units:"",
       minValue: 0,
       maxValue: 100,
