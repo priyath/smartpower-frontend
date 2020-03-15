@@ -43,7 +43,7 @@ class BranchSelection extends PureComponent {
     const { t } = this.props;
 
     return (
-      <Col md={12} xl={3} lg={6} xs={12}>
+      <Col md={12} xl={4} lg={6} xs={12}>
         <Card>
           <CardBody className="dashboard__card-widget">
             <div className="card__title">
