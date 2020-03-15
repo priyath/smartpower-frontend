@@ -1,172 +1,133 @@
-import React from 'react';
-import { Button, ButtonToolbar } from 'reactstrap';
+import React, { PureComponent } from 'react';
+import {
+    Card, CardBody, Col, Button, ButtonToolbar,
+} from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import EyeIcon from 'mdi-react/EyeIcon';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import CurrencyUsdIcon from 'mdi-react/CurrencyUsdIcon';
-import TagIcon from 'mdi-react/TagIcon';
 import renderSelectField from '../../../../shared/components/form/Select';
-import UserEditIcon from "mdi-react/UserEditIcon";
 
-const UserEditForm = ({ handleSubmit, reset }) => (
-    <form className="form product-edit" onSubmit={handleSubmit}>
-        <div className="form__half">
-            <div className="form__form-group">
-                <span className="form__form-group-label">Product Name</span>
-                <div className="form__form-group-field">
-                    <Field
-                        name="name"
-                        component="input"
-                        type="text"
-                    />
-                </div>
-            </div>
-            <div className="form__form-group-id-category">
-                <div className="form__form-group form__form-group-id">
-                    <span className="form__form-group-label">ID</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="id"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Category</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="category"
-                            component={renderSelectField}
-                            type="text"
-                            options={[
-                                { value: 'one', label: 'One' },
-                                { value: 'two', label: 'Two' },
-                            ]}
-                        />
-                    </div>
-                </div>
-            </div>
-            <div className="form__form-group">
-                <span className="form__form-group-label">Short description <span dir="ltr">(300 characters max)</span></span>
-                <div className="form__form-group-field">
-                    <Field
-                        name="short_description"
-                        component="input"
-                        type="text"
-                    />
-                </div>
-            </div>
-            <div className="form__form-group">
-                <span className="form__form-group-label">Full description</span>
-                <div className="form__form-group-field">
-                    <Field
-                        name="full_description"
-                        component="textarea"
-                        type="text"
-                    />
-                </div>
-            </div>
+class UserEditForm extends PureComponent {
+    static propTypes = {
+        t: PropTypes.func.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+    };
 
-            <div className="card__title">
-                <h5 className="bold-text">Pricing</h5>
-            </div>
-            <div className="form__form-group-price-discount">
-                <div className="form__form-group form__form-group-price">
-                    <span className="form__form-group-label">Price</span>
-                    <div className="form__form-group-field">
-                        <div className="form__form-group-icon">
-                            <CurrencyUsdIcon />
+    constructor() {
+        super();
+        this.state = {
+            showPassword: false,
+        };
+    }
+
+    showPassword = (e) => {
+        e.preventDefault();
+        this.setState(prevState => ({ showPassword: !prevState.showPassword }));
+    };
+
+
+    render() {
+        const { handleSubmit, reset, t } = this.props;
+        const { showPassword } = this.state;
+
+        return (
+            <Col md={12} lg={12}>
+                <Card>
+                    <CardBody>
+                        <div className="card__title">
+                            <h5 className="bold-text">User Details</h5>
                         </div>
-                        <Field
-                            name="price"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Discount</span>
-                    <div className="form__form-group-field">
-                        <div className="form__form-group-icon">
-                            <TagIcon />
-                        </div>
-                        <Field
-                            name="discount"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div className="card__title">
-                <h5 className="bold-text">General information</h5>
-            </div>
-            <div className="form form--horizontal">
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Brand Name</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="brand"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Category</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="general_category"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Delivery Condition</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="delivery"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Weight</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="weight"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <div className="form__form-group">
-                    <span className="form__form-group-label">Size</span>
-                    <div className="form__form-group-field">
-                        <Field
-                            name="size"
-                            component="input"
-                            type="text"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <ButtonToolbar className="form__button-toolbar">
-            <Button color="primary" type="submit">Save</Button>
-            <Button type="button" onClick={reset}>Cancel</Button>
-        </ButtonToolbar>
-    </form>
-);
-
-UserEditForm.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired,
-};
+                        <form className="form" onSubmit={handleSubmit}>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">First Name</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="defaultInput"
+                                        component="input"
+                                        type="text"
+                                        placeholder="First Name"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">Last Name</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="defaultInput"
+                                        component="input"
+                                        type="text"
+                                        placeholder="Last Name"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">Username</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="defaultInput"
+                                        component="input"
+                                        type="text"
+                                        placeholder="Username"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">Role</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="select"
+                                        component={renderSelectField}
+                                        options={[
+                                            { value: 'one', label: 'Administrator' },
+                                            { value: 'two', label: 'Employee' },
+                                        ]}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">E-mail</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="email"
+                                        component="input"
+                                        type="email"
+                                        placeholder="example@mail.com"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form__form-group">
+                                <span className="form__form-group-label">Password</span>
+                                <div className="form__form-group-field">
+                                    <Field
+                                        name="password"
+                                        component="input"
+                                        type={showPassword ? 'text' : 'password'}
+                                        placeholder="Password"
+                                    />
+                                    <button
+                                        type="button"
+                                        className={`form__form-group-button${showPassword ? ' active' : ''}`}
+                                        onClick={e => this.showPassword(e)}
+                                    ><EyeIcon />
+                                    </button>
+                                </div>
+                            </div>
+                            <ButtonToolbar className="form__button-toolbar">
+                                <Button color="primary" type="submit">Submit</Button>
+                                <Button type="button" onClick={reset}>
+                                    Cancel
+                                </Button>
+                            </ButtonToolbar>
+                        </form>
+                    </CardBody>
+                </Card>
+            </Col>
+        );
+    }
+}
 
 export default reduxForm({
-    form: 'product_edit_form', // a unique identifier for this form
-})(UserEditForm);
+    form: 'vertical_form', // a unique identifier for this form
+})(withTranslation('common')(UserEditForm));
