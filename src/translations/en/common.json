@@ -1,6 +1,6 @@
 {
   "dashboard": {
-    "page_title": "Dashboard Default",
+    "page_title": "Dashboard",
     "visits":  "Visits",
     "current_month_kwh_value":  "1st - 25th Jan 2020",
     "cost":  "Cost",
@@ -17,6 +17,13 @@
     "comp_view":  "Comparison View",
     "main_gauges":  "Main Gauges",
     "live_heartbeat":  "Live Heart Beat"
+  },
+  "history": {
+    "graph_filter": "History Graph Filter",
+    "history_graph": "History Graph"
+  },
+  "branches": {
+    "page_title": "Branch Selection"
   },
   "dashboard_commerce": {
     "page_title": "Dashboard E-commerce",

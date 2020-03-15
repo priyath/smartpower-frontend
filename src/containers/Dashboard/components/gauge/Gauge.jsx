@@ -7,9 +7,9 @@ class ReactRadialGauge extends React.Component {
     const options = Object.assign({}, this.props, {
       renderTo: this.el,
       width: 200,
-      title: "Pressure",
+      title: "Iteq",
       height: 200,
-      units:"psi",
+      units:"",
       minValue: 0,
       maxValue: 100,
       majorTicks: [
