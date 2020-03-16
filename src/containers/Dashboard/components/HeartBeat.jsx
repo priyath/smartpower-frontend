@@ -20,7 +20,7 @@ const getData = () => {
     { name: '3', uv: 500 },
     { name: '4', uv: 500 },
     { name: '5', uv: 500 },
-    { name: '6', uv: -500 },
+    { name: '6', uv: 500 },
     { name: '7', uv: 500 },
     { name: '8', uv: 500 },
     { name: '9', uv: 500 },
@@ -45,7 +45,7 @@ const HeartBeat = ({ t, dir, themeName }) => {
     <button onClick={onClickHandler}>Simulate</button>
     <div dir="ltr">
       <ResponsiveContainer height={500} className="dashboard__area">
-        <LineChart
+        <AreaChart
             data={value}
             margin={{
               top: 0, right: 0, left: -15, bottom: 0,
@@ -55,8 +55,8 @@ const HeartBeat = ({ t, dir, themeName }) => {
           <YAxis tickLine={false} orientation={dir === 'rtl' ? 'right' : 'left'}/>
           <CartesianGrid vertical={false}/>
           <Tooltip {...getTooltipStyles(themeName, 'defaultItems')} />
-          <Line type="monotone" dataKey="uv" stroke="#24d6a3" fill="#4ce1b6" fillOpacity={0.2}/>
-        </LineChart>
+          <Area type="monotone" dataKey="uv" stroke="#24d6a3" fill="#4ce1b6" fillOpacity={0.2}/>
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   </Panel>);

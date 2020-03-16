@@ -5,7 +5,7 @@ import Gauge from './Gauge';
 
 function GaugeGrid(props) {
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className="dashboard__gauge">
             <Grid item xs={12} md={4}>
                 <GCard title="Current Phase 1" avatar="G1" subheader="Current Phase 1">
                     <Gauge value={50.0}>

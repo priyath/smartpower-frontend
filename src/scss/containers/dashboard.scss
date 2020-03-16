@@ -1,5 +1,11 @@
 .dashboard {
 
+  .dashboard__gauge {
+    .active {
+      border: 1px solid #5de2c5;
+    }
+  }
+
   .dashboard__cost {
     font-size: 40px;
     color: #707586;

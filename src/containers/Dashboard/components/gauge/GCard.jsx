@@ -42,14 +42,30 @@ const useStyles = makeStyles(theme => ({
 
 export default function GCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [stateObject, setState] = React.useState({
+    expanded: false,
+    active: false
+  });
+
+  const {expanded, active} = stateObject;
 
   function handleExpandClick() {
-    setExpanded(!expanded);
+    setState({
+      ...stateObject,
+      expanded: !expanded
+    });
   }
 
+  const handleCardClick = (e) => {
+    setState({
+      ...stateObject,
+      active: !active
+    });
+  };
+  const classNames = active ? classes.card + " active" : classes.card;
+
   return (
-    <Card className={classes.card}>
+    <Card tag="a" onClick={handleCardClick} style={{ cursor: "pointer" }} className={classNames}>
       <CardHeader
         className={classes.header}
         avatar=" "
