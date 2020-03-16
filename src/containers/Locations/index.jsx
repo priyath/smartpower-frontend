@@ -7,6 +7,10 @@ import HistoryGraph from './components/LocationInfo';
 import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
 import GeoMap from "./components/GeoMap";
 
+const onMarkerClick = (marker) => {
+        console.log(marker);
+};
+
 class History extends PureComponent {
     static propTypes = {
         t: PropTypes.func.isRequired,

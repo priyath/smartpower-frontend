@@ -22,7 +22,7 @@ class SidebarContent extends Component {
         <ul className="sidebar__block">
           <SidebarLink title="Dashboard" icon="home" route="/dashboard" onClick={this.hideSidebar} />
           <SidebarLink title="History" icon="home" route="/history" onClick={this.hideSidebar} />
-          <SidebarLink title="Branches" icon="home" route="/branches" onClick={this.hideSidebar} />
+          <SidebarLink title="Branch Summary" icon="home" route="/branches" onClick={this.hideSidebar} />
           <SidebarLink title="Locations" icon="home" route="/locations" onClick={this.hideSidebar} />
           <SidebarCategory title="Control Panel" icon="menu">
             <SidebarLink title="User List" route="/control_panel/users" onClick={this.hideSidebar} />

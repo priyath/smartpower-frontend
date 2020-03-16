@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, withStateHandlers } from 'recompose';
 import {
-    GoogleMap, Marker, withGoogleMap, withScriptjs,
+    GoogleMap, Marker, InfoWindow, withGoogleMap, withScriptjs,
 } from 'react-google-maps';
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import Panel from '../../../shared/components/Panel';
@@ -11,21 +11,36 @@ import silverMapStyle from './silverMapStyle.json';
 
 import data from './data.json';
 
+console.log(`${process.env.PUBLIC_URL}/img/map_markers/m1.png`);
 const Map = compose(
     withProps({
         // create your api key
-        googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=&v=3.'
+        googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCQXPcmy5m-eemsBHdCK-fS40kF8hbWPJM&v=3.'
             + 'exp&libraries=geometry,drawing,places',
         loadingElement: <div style={{ height: '100%' }} />,
         containerElement: <div className="map" style={{ height: '700px' }} />,
         mapElement: <div style={{ height: '100%' }} />,
     }),
+    withStateHandlers(() => ({
+        showInfoWindow: true,
+    }), {
+        onMarkerClick: ({ isOpen, infoIndex }) => (index) => ({
+            isOpen: infoIndex !== index || !isOpen,
+            infoIndex: index
+        })
+        // handleMouseOver: ({ isOpen }) => () => ({
+        //     showInfoWindow: true,
+        // }),
+        // handleMouseExit: ({ isOpen }) => () => ({
+        //     showInfoWindow: false,
+        // }),
+    }),
     withScriptjs,
     withGoogleMap,
 )(props => (
     <GoogleMap
-        defaultZoom={3}
-        defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
+        defaultZoom={10}
+        defaultCenter={{ lat: 6.839094, lng: 79.885041 }}
         defaultOptions={{ styles: silverMapStyle }}
     >
         <MarkerClusterer
@@ -60,11 +75,18 @@ const Map = compose(
                 },
             ]}
         >
-            {props.markers.map(marker => (
+            {props.markers.map((marker, index) => (
                 <Marker
+                    idx={index}
                     key={marker.photo_id}
                     position={{ lat: marker.latitude, lng: marker.longitude }}
-                />
+                    onClick={()=>{ props.onMarkerClick(index)} }
+                >
+                    {props.isOpen && props.infoIndex === index && (
+                    <InfoWindow>
+                        <h4>{marker.photo_title}</h4>
+                    </InfoWindow>
+                )}</Marker>
             ))}
         </MarkerClusterer>
     </GoogleMap>
@@ -73,7 +95,7 @@ const Map = compose(
 const GeoMap = ({ t }) => (
     <Panel xs={12} md={12} lg={12} xl={8} title={t('locations.geo_map')}>
         <div dir="ltr">
-            <Map markers={data.photos} />
+            <Map markers={data.photos}/>
         </div>
     </Panel>
 );
