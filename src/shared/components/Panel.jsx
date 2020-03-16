@@ -91,7 +91,7 @@ export default class AlertComponent extends PureComponent {
               <div className="panel__btns">
                 <button className="panel__btn" type="button" onClick={this.onCollapse}><MinusIcon /></button>
                 <button className="panel__btn" type="button" onClick={this.onRefresh}><AutorenewIcon /></button>
-                <button className="panel__btn" type="button" onClick={this.onDismiss}><CloseIcon /></button>
+                {/*<button className="panel__btn" type="button" onClick={this.onDismiss}><CloseIcon /></button>*/}
               </div>
               <div className="panel__title">
                 <h5 className="bold-text">
