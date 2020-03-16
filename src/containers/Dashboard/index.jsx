@@ -11,7 +11,7 @@ import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import HeartBeat from "./components/HeartBeat";
 import CompView from "./components/CompView";
 import CompControl from "./components/CompControl";
-import TodayStatus from "./components/TodayStatus";
+import TodayStats from "./components/TodayStats";
 
 const Dashboard = ({ t, rtl }) => (
     <Container className="dashboard">
@@ -21,7 +21,7 @@ const Dashboard = ({ t, rtl }) => (
             </Col>
         </Row>
         <Row>
-            <TodayStatus />
+            <TodayStats />
             <KWValue />
             <Cost />
         </Row>

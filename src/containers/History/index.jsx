@@ -32,10 +32,6 @@ class History extends PureComponent {
                     </Col>
                 </Row>
                 <Row>
-                    <TodayStatus dir={rtl.direction} />
-                    <LiveVoltageGraph dir={rtl.direction} />
-                </Row>
-                <Row>
                     <GraphFilter/>
                     <HistoryGraph
                         dir={rtl.direction}
