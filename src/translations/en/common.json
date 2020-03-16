@@ -16,7 +16,8 @@
     "comp_control":  "Comparison Control",
     "comp_view":  "Comparison View",
     "main_gauges":  "Main Gauges",
-    "live_heartbeat":  "Live Heart Beat"
+    "live_heartbeat":  "Live Heart Beat",
+    "today_status": "Today's Status"
   },
   "history": {
     "graph_filter": "History Graph Filter",

@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Visits from './components/BranchSelection';
 import KWValue from './components/KWValue';
 import Cost from './components/Cost';
 import GaugeView from './components/GaugeView';
@@ -12,6 +11,7 @@ import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import HeartBeat from "./components/HeartBeat";
 import CompView from "./components/CompView";
 import CompControl from "./components/CompControl";
+import TodayStatus from "./components/TodayStatus";
 
 const Dashboard = ({ t, rtl }) => (
     <Container className="dashboard">
@@ -21,7 +21,7 @@ const Dashboard = ({ t, rtl }) => (
             </Col>
         </Row>
         <Row>
-            <Visits />
+            <TodayStatus />
             <KWValue />
             <Cost />
         </Row>

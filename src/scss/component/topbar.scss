@@ -9,6 +9,16 @@
   @include themify($themes) {
     background: themed('colorBackground');
   }
+
+  .dropdown {
+    padding-top: 10px;
+    padding-left: 30px;
+  }
+
+  .topbar__branch_selection_label {
+    font-weight: 700;
+    color: #646777;
+  }
 }
 
 .topbar__wrapper {
