@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { compose, withProps, withStateHandlers } from 'recompose';
+import { compose, withProps, withStateHandlers, withHandlers } from 'recompose';
 import {
     GoogleMap, Marker, InfoWindow, withGoogleMap, withScriptjs,
 } from 'react-google-maps';
@@ -11,7 +11,6 @@ import silverMapStyle from './silverMapStyle.json';
 
 import data from './data.json';
 
-console.log(`${process.env.PUBLIC_URL}/img/map_markers/m1.png`);
 const Map = compose(
     withProps({
         // create your api key
@@ -23,8 +22,9 @@ const Map = compose(
     }),
     withStateHandlers(() => ({
         showInfoWindow: true,
-    }), {
-        onMarkerClick: ({ isOpen, infoIndex }) => (index) => ({
+    }),
+        {
+        setOnMarkerClick: ({ isOpen, infoIndex }) => (index) => ({
             isOpen: infoIndex !== index || !isOpen,
             infoIndex: index
         })
@@ -35,6 +35,15 @@ const Map = compose(
         //     showInfoWindow: false,
         // }),
     }),
+    withHandlers(
+        {
+            onMarkerClick: (props) => index => {
+                const { setOnMarkerClick } = props;
+                setOnMarkerClick(index);
+                props.markerHandler(props.markers[index]);
+            }
+        }
+    ),
     withScriptjs,
     withGoogleMap,
 )(props => (
@@ -92,10 +101,13 @@ const Map = compose(
     </GoogleMap>
 ));
 
-const GeoMap = ({ t }) => (
+const GeoMap = ({ t, onMarkerClick }) => (
     <Panel xs={12} md={12} lg={12} xl={8} title={t('locations.geo_map')}>
         <div dir="ltr">
-            <Map markers={data.photos}/>
+            <Map
+                markers={data.photos}
+                markerHandler={onMarkerClick}
+            />
         </div>
     </Panel>
 );

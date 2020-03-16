@@ -3,13 +3,9 @@ import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import HistoryGraph from './components/LocationInfo';
+import LocationInfo from './components/LocationInfo';
 import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
 import GeoMap from "./components/GeoMap";
-
-const onMarkerClick = (marker) => {
-        console.log(marker);
-};
 
 class History extends PureComponent {
     static propTypes = {
@@ -19,23 +15,42 @@ class History extends PureComponent {
         theme: ThemeProps.isRequired,
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            branchName: null,
+            consumption: null
+        };
+    }
+
+    onMarkerClick(marker) {
+        this.setState({
+            branchName: marker.photo_title,
+            consumption: marker.consumption
+        })
+    }
+
     render() {
         const {
             t, rtl, theme,
         } = this.props;
 
         return (
-            <Container className="locations">
+            //TODO: classnames should be refactored?
+            <Container className="dashboard">
                 <Row>
                     <Col md={12}>
                         <h3 className="page-title">{t('locations.page_title')}</h3>
                     </Col>
                 </Row>
                 <Row>
-                    <GeoMap/>
-                    <HistoryGraph
+                    <GeoMap
+                        onMarkerClick={this.onMarkerClick.bind(this)}/>
+                    <LocationInfo
                         dir={rtl.direction}
                         theme={theme.className}
+                        branchName={this.state.branchName}
+                        consumption={this.state.consumption}
                     />
                 </Row>
             </Container>
