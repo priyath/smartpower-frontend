@@ -31,21 +31,6 @@ const LoginCard = ({ changeIsOpenModalFireBase }) => {
           onSubmin
           form="log_in_form"
         />
-        <div className="account__or">
-          <p>Or Easily Using</p>
-        </div>
-        <div className="account__social">
-          <FacebookAuthBtn />
-          <GoogleAuthBtn />
-          <Button
-            className="account__social-btn account__social-btn--firebase"
-            onClick={changeIsOpenModalFireBase}
-          ><FirebaseIcon />
-          </Button>
-          <Button className="account__social-btn account__social-btn--auth0" onClick={() => loginWithRedirect({})}>
-            <img className="customizer__btn-icon" src={auth0Icon} alt="icon" />
-          </Button>
-        </div>
       </div>
     </div>
   );

@@ -16,21 +16,6 @@ const LogIn = () => (
           </h3>
         </div>
         <LogInForm onSubmit />
-        <div className="account__or">
-          <p>Or Easily Using</p>
-        </div>
-        <div className="account__social">
-          <Link
-            className="account__social-btn account__social-btn--facebook"
-            to="/pages/one"
-          ><FacebookIcon />
-          </Link>
-          <Link
-            className="account__social-btn account__social-btn--google"
-            to="/pages/one"
-          ><GooglePlusIcon />
-          </Link>
-        </div>
       </div>
     </div>
   </div>
