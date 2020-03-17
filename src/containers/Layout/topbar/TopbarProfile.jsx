@@ -24,15 +24,12 @@ export default class TopbarProfile extends PureComponent {
       <div className="topbar__profile">
         <button type="button" className="topbar__avatar" onClick={this.toggle}>
           <img className="topbar__avatar-img" src={Ava} alt="avatar" />
-          <p className="topbar__avatar-name">Roman Johanson</p>
+          <p className="topbar__avatar-name">Administrator</p>
           <DownIcon className="topbar__icon" />
         </button>
         {collapse && <button type="button" className="topbar__back" onClick={this.toggle} />}
         <Collapse isOpen={collapse} className="topbar__menu-wrap">
           <div className="topbar__menu">
-            <TopbarMenuLink title="Page one" icon="list" path="/pages/one" />
-            <TopbarMenuLink title="Page two" icon="inbox" path="/pages/two" />
-            <div className="topbar__menu-divider" />
             <TopbarMenuLink title="Log Out" icon="exit" path="/" />
           </div>
         </Collapse>
