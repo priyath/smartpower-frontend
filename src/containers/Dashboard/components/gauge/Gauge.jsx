@@ -6,9 +6,9 @@ class ReactRadialGauge extends React.Component {
   componentDidMount () {
     const options = Object.assign({}, this.props, {
       renderTo: this.el,
-      width: 150,
+      width: 140,
       title: "Iteq",
-      height: 150,
+      height: 140,
       units:"",
       minValue: 0,
       maxValue: 100,
@@ -72,7 +72,7 @@ class ReactRadialGauge extends React.Component {
 
   render () {
     return (
-      <canvas ref={(canvas) => {
+      <canvas class="dashboard__gauge-grid-gauge" ref={(canvas) => {
         this.el = canvas
       }} />
     )

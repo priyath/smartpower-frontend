@@ -6,6 +6,14 @@
     }
   }
 
+  .dashboard__gauge-grid-gauge {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .dashboard__cost {
     font-size: 40px;
     color: #707586;
