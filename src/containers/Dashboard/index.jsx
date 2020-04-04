@@ -8,17 +8,12 @@ import KWValue from './components/KWValue';
 import Cost from './components/Cost';
 import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
-import HeartBeat from "./components/HeartBeat";
 import CompView from "./components/CompView";
 import CompControl from "./components/CompControl";
 import TodayStats from "./components/TodayStats";
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
-
-import { onGaugeSelect } from '../../redux/actions/dashboardActions';
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 const Dashboard = ({ t, rtl, dashboard }) => {
-    const { todayStats, consumption, cost, heartbeat } = dashboard;
+    const { todayStats, consumption, cost } = dashboard;
     return (
         <Container className="dashboard">
             <Row>
@@ -31,10 +26,7 @@ const Dashboard = ({ t, rtl, dashboard }) => {
                 <KWValue consumption={consumption} />
                 <Cost cost={cost}/>
             </Row>
-            <Row>
-                <GaugeView/>
-                <HeartBeat heartbeat={heartbeat}/>
-            </Row>
+            <GaugeView/>
             <Row>
                 <CompControl/>
                 <CompView/>
