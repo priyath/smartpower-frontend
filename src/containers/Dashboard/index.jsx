@@ -14,7 +14,7 @@ import CompControl from "./components/CompControl";
 import TodayStats from "./components/TodayStats";
 
 const Dashboard = ({ t, rtl, dashboard }) => {
-    const { todayStats, consumption, cost } = dashboard;
+    const { todayStats, consumption, cost, heartbeat } = dashboard;
     return (
         <Container className="dashboard">
             <Row>
@@ -29,7 +29,7 @@ const Dashboard = ({ t, rtl, dashboard }) => {
             </Row>
             <Row>
                 <GaugeView/>
-                <HeartBeat/>
+                <HeartBeat heartbeat={heartbeat}/>
             </Row>
             <Row>
                 <CompControl/>
