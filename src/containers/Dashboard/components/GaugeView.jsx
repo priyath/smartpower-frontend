@@ -19,11 +19,14 @@ const GaugeView = ({ t, gauges, heartbeat, onGaugeSelect }) => {
     );
 };
 
-export default compose(withTranslation('common'), connect((state) => ({
+const mapStateToProps = (state) => ({
     rtl: state.rtl,
     gauges: state.dashboard.gauges,
     heartbeat: state.dashboard.heartbeat
-}), dispatch => {
-    return {
-        onGaugeSelect: (selected) => dispatch(onGaugeSelect(selected)),
-    }}))(GaugeView);
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onGaugeSelect: (selected) => dispatch(onGaugeSelect(selected)),
+});
+
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(GaugeView);
