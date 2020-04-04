@@ -43,7 +43,7 @@ class Cost extends PureComponent {
   render() {
     const { activeIndex } = this.state;
     const activeItem = data[activeIndex];
-    const { t } = this.props;
+    const { t, cost } = this.props;
 
     return (
       <Col md={12} xl={3} lg={6} xs={12}>
@@ -53,7 +53,7 @@ class Cost extends PureComponent {
               <h5 className="bold-text">{t('dashboard.cost')}</h5>
             </div>
             <div className="dashboard__total dashboard__cost">
-              $12,384
+              {cost}
             </div>
           </CardBody>
         </Card>

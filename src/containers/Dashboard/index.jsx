@@ -13,28 +13,31 @@ import CompView from "./components/CompView";
 import CompControl from "./components/CompControl";
 import TodayStats from "./components/TodayStats";
 
-const Dashboard = ({ t, rtl }) => (
-    <Container className="dashboard">
-        <Row>
-            <Col md={12}>
-                <h3 className="page-title">{t('dashboard.page_title')}</h3>
-            </Col>
-        </Row>
-        <Row>
-            <TodayStats />
-            <KWValue />
-            <Cost />
-        </Row>
-        <Row>
-            <GaugeView/>
-            <HeartBeat/>
-        </Row>
-        <Row>
-            <CompControl/>
-            <CompView/>
-        </Row>
-    </Container>
-);
+const Dashboard = ({ t, rtl, dashboard }) => {
+    const { todayStats, consumption, cost } = dashboard;
+    return (
+        <Container className="dashboard">
+            <Row>
+                <Col md={12}>
+                    <h3 className="page-title">{t('dashboard.page_title')}</h3>
+                </Col>
+            </Row>
+            <Row>
+                <TodayStats todayStats={todayStats} />
+                <KWValue consumption={consumption} />
+                <Cost cost={cost}/>
+            </Row>
+            <Row>
+                <GaugeView/>
+                <HeartBeat/>
+            </Row>
+            <Row>
+                <CompControl/>
+                <CompView/>
+            </Row>
+        </Container>
+    )
+};
 
 Dashboard.propTypes = {
     t: PropTypes.func.isRequired,
@@ -43,4 +46,5 @@ Dashboard.propTypes = {
 
 export default compose(withTranslation('common'), connect(state => ({
     rtl: state.rtl,
+    dashboard: state.dashboard
 })))(Dashboard);
