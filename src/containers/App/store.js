@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 import { sidebarReducer, themeReducer, rtlReducer, dashboardReducer } from '../../redux/reducers/index';
 

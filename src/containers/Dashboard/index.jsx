@@ -12,6 +12,10 @@ import HeartBeat from "./components/HeartBeat";
 import CompView from "./components/CompView";
 import CompControl from "./components/CompControl";
 import TodayStats from "./components/TodayStats";
+import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
+
+import { onGaugeSelect } from '../../redux/actions/dashboardActions';
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 const Dashboard = ({ t, rtl, dashboard }) => {
     const { todayStats, consumption, cost, heartbeat } = dashboard;
@@ -44,7 +48,9 @@ Dashboard.propTypes = {
     rtl: RTLProps.isRequired,
 };
 
-export default compose(withTranslation('common'), connect(state => ({
+export default compose(withTranslation('common'), connect((state) => ({
     rtl: state.rtl,
     dashboard: state.dashboard
-})))(Dashboard);
+}), dispatch => {
+    return {
+    }}))(Dashboard);
