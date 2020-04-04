@@ -6,10 +6,10 @@ const initialState = {
     todayStats: {
         peak: 250,
         low: 140.5,
-        high: 250
+        high: 250,
+        consumption: 500,
+        cost: 14500,
     },
-    consumption: 500,
-    cost: 14500,
     heartbeat: {
         data:[
             { name: '1', uv: 500 },

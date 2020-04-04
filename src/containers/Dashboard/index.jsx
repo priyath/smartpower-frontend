@@ -4,16 +4,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import KWValue from './components/KWValue';
-import Cost from './components/Cost';
 import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
-import CompControl from "./components/CompControl";
-import TodayStats from "./components/TodayStats";
+import TodayView from "./components/TodayView";
 
-const Dashboard = ({ t, rtl, dashboard }) => {
-    const { todayStats, consumption, cost } = dashboard;
+const Dashboard = ({ t, rtl }) => {
     return (
         <Container className="dashboard">
             <Row>
@@ -21,16 +17,9 @@ const Dashboard = ({ t, rtl, dashboard }) => {
                     <h3 className="page-title">{t('dashboard.page_title')}</h3>
                 </Col>
             </Row>
-            <Row>
-                <TodayStats todayStats={todayStats} />
-                <KWValue consumption={consumption} />
-                <Cost cost={cost}/>
-            </Row>
+            <TodayView/>
             <GaugeView/>
-            <Row>
-                <CompControl/>
-                <CompView/>
-            </Row>
+            <CompView/>
         </Container>
     )
 };
@@ -41,8 +30,7 @@ Dashboard.propTypes = {
 };
 
 export default compose(withTranslation('common'), connect((state) => ({
-    rtl: state.rtl,
-    dashboard: state.dashboard
+    rtl: state.rtl
 }), dispatch => {
     return {
     }}))(Dashboard);
