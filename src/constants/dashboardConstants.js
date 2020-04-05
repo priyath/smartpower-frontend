@@ -1,1 +1,1 @@
-export const heartbeatInitializationData = [100,200,0,0,0,0,0,0,0,0];
+export const heartbeatInitializationData = [0,0,0,0,0,0,0,0,0,0];

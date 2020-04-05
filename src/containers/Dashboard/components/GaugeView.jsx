@@ -19,12 +19,31 @@ class GaugeView extends Component {
         this.childRef = input;
     }
 
-    updateChartRef(selectedGaugeObject){
+    updateChartRef(idx, selectedGaugeObject){
         const realtimeData = selectedGaugeObject.realtimeData;
         let chart = this.childRef.chart;
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 1]], true, true);
+        const selectedGaugeIdx = chart.userOptions.selectedGaugeIdx;
+
+        //initial scenario
+        if (selectedGaugeIdx === undefined){
+            chart.update({selectedGaugeIdx: idx}, false);
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 1]], true, true);
+        }
+        //unchanged updates
+        else if(selectedGaugeIdx === idx) {
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
+            chart.series[0].addPoint([realtimeData[realtimeData.length - 1]], true, true);
+        }
+        else {
+            chart.update({selectedGaugeIdx: idx}, false);
+            chart.series[0].update({
+                data: realtimeData
+            }, false);
+            chart.redraw();
+        }
     }
 
     componentDidMount() {
@@ -40,7 +59,7 @@ class GaugeView extends Component {
         const { gauges, heartbeat, selectedGaugeIdx, t, onGaugeSelect } = this.props;
 
         if (this.childRef) {
-            this.updateChartRef(gauges[selectedGaugeIdx]);
+            this.updateChartRef(selectedGaugeIdx, gauges[selectedGaugeIdx]);
         }
 
         return (
