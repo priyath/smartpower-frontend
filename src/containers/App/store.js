@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { reducer as reduxFormReducer } from 'redux-form';
 import { sidebarReducer, themeReducer, rtlReducer, dashboardReducer } from '../../redux/reducers/index';
 
@@ -10,6 +11,6 @@ const reducer = combineReducers({
   dashboard: dashboardReducer,
 });
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 export default store;

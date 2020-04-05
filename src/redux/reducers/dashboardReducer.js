@@ -1,4 +1,4 @@
-import { ON_GAUGE_SELECT } from '../actions/dashboardActions';
+import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA} from '../actions/dashboardActions';
 import { updateGaugeSelection } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 
@@ -25,12 +25,12 @@ const initialState = {
         ]
     },
     gauges: [
-        {id: 0, selected: true, title: 'Current Phase 1', avatar:'G1', value:55.6},
-        {id: 1, selected: false, title: 'Current Phase 2', avatar:'G2', value:34.6},
-        {id: 2, selected: false, title: 'Current Phase 3', avatar:'G3', value:25.6},
-        {id: 3, selected: false, title: 'Voltage Phase 1', avatar:'G4', value:1.6},
-        {id: 4, selected: false, title: 'Voltage Phase 2', avatar:'G5', value:5.6},
-        {id: 5, selected: false, title: 'Voltage Phase 3', avatar:'G6', value:55.6},
+        {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:55.6},
+        {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:34.6},
+        {id: 3, selected: false, title: 'Voltage L N avg', avatar:'G3', value:25.6},
+        {id: 4, selected: false, title: 'Power Factor Average', avatar:'G4', value:1.6},
+        {id: 5, selected: false, title: 'Power Factor Phase 1', avatar:'G5', value:5.6},
+        {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:55.6},
     ]
 };
 
@@ -43,6 +43,8 @@ export default function (state = initialState, action) {
             return state
                 .set('gauges', updateGaugeSelection(gauges, selectedGaugeId))
                 .toJS();
+        case UPDATE_REALTIME_DATA:
+            return state.toJS();
         default:
             return state.toJS();
     }

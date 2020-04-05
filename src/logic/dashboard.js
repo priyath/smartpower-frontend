@@ -12,3 +12,13 @@ export const updateGaugeSelection = (gauges, selectedGauge) => {
 
     return gauges;
 };
+
+//test function
+export const randomizeData = (data) => {
+    data.map(row => {
+        row.uv = 250*(2 + Math.round(Math.random()));
+        console.log(row.uv);
+        return row;
+    });
+    return data;
+};
