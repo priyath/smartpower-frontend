@@ -14,6 +14,21 @@ export const updateGaugeSelection = (gauges, selectedGauge) => {
     return gauges;
 };
 
+// function to update all guages with real-time data
+export const updateGaugeRealtimeData = (gauges, realtimeData) => {
+    realtimeData.slice().reverse().map((data) => {
+        const gaugeIdx = data.controlid - 1;
+        const gauge = gauges[gaugeIdx];
+
+        gauge.realtimeData.shift();
+        gauge.realtimeData.push(data.readingvalue);
+        gauge.value = data.readingvalue;
+
+        return gauge;
+    });
+    return gauges;
+};
+
 //test function
 export const randomizeData = (data) => {
     data.map(row => {

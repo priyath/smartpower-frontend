@@ -1,6 +1,7 @@
 import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA} from '../actions/dashboardActions';
-import { updateGaugeSelection } from '../../logic/dashboard';
+import { updateGaugeSelection, updateGaugeRealtimeData } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
+import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
 
 const initialState = {
     todayStats: {
@@ -12,39 +13,44 @@ const initialState = {
     },
     heartbeat: {
         data:[
-            { name: '1', uv: 500 },
-            { name: '2', uv: 500 },
-            { name: '3', uv: 500 },
-            { name: '4', uv: 500 },
-            { name: '5', uv: 500 },
-            { name: '6', uv: 500 },
-            { name: '7', uv: 500 },
-            { name: '8', uv: 500 },
-            { name: '9', uv: 500 },
-            { name: '10', uv: 2 },
+            { name: 1, uv: 500 },
+            { name: 2, uv: 500 },
+            { name: 3, uv: 500 },
+            { name: 4, uv: 500 },
+            { name: 5, uv: 500 },
+            { name: 6, uv: 500 },
+            { name: 7, uv: 500 },
+            { name: 8, uv: 500 },
+            { name: 9, uv: 500 },
+            { name: 10, uv: 2 },
         ]
     },
     gauges: [
-        {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:55.6},
-        {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:34.6},
-        {id: 3, selected: false, title: 'Voltage L N avg', avatar:'G3', value:25.6},
-        {id: 4, selected: false, title: 'Power Factor Average', avatar:'G4', value:1.6},
-        {id: 5, selected: false, title: 'Power Factor Phase 1', avatar:'G5', value:5.6},
-        {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:55.6},
-    ]
+        {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:0, realtimeData},
+        {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:0, realtimeData},
+        {id: 3, selected: false, title: 'Voltage L N avg', avatar:'G3', value:0, realtimeData},
+        {id: 4, selected: false, title: 'Power Factor Average', avatar:'G4', value:0, realtimeData},
+        {id: 5, selected: false, title: 'Power Factor Phase 1', avatar:'G5', value:0, realtimeData},
+        {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:0, realtimeData},
+    ],
+    selectedGaugeIdx: 0
 };
 
 export default function (state = initialState, action) {
     state = fromJS(state);
+    const gauges = state.get('gauges').toJS();
     switch (action.type) {
         case ON_GAUGE_SELECT:
             const selectedGaugeId = action.payload.selectedGaugeId;
-            const gauges = state.get('gauges').toJS();
             return state
                 .set('gauges', updateGaugeSelection(gauges, selectedGaugeId))
+                .set('selectedGaugeIdx', selectedGaugeId-1)
                 .toJS();
         case UPDATE_REALTIME_DATA:
-            return state.toJS();
+            const realtimeData = action.payload.data;
+            return state
+                .set('gauges', updateGaugeRealtimeData(gauges, realtimeData))
+                .toJS();
         default:
             return state.toJS();
     }
