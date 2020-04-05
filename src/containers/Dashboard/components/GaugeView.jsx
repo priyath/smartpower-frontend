@@ -19,7 +19,6 @@ class GaugeView extends Component {
     }
 
     componentWillUnmount() {
-        console.log('unmounted');
         clearInterval(this.timer);
         this.timer = null;
     }
