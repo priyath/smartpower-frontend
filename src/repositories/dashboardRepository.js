@@ -2,15 +2,26 @@ import axios from 'axios';
 
 const REALTIME_API_ENDPOINT = 'http://54.146.53.76:80/api';
 
-export const fetchRealtimeData = () => {
-    let formData = {calltype: 'Real Time', filter: 'LOLC Head Office -01'};
-
-    return axios(REALTIME_API_ENDPOINT, {
-        method: 'POST',
+const axiosFetch = (endpoint, method, data) => {
+    return axios(endpoint, {
+        method: method,
         headers: {
             'Content-Type': 'Application/x-www-form-urlencoded'
         },
-        data: 'json='+JSON.stringify(formData)
-    })
-    .then(response => response);
+        data: 'json='+JSON.stringify(data)
+    });
+};
+
+export const fetchRealtimeData = () => {
+    let formData = {calltype: 'Real Time', filter: 'LOLC Head Office -01'};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};
+
+export const fetchBranchList = () => {
+    let formData = {calltype: 'User-Locations', filter: 'Vajira'};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
 };
