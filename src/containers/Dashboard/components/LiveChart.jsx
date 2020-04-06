@@ -3,9 +3,10 @@ import HighchartsReact from 'highcharts-react-official';
 import Panel from "../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
 
-export default class HighChart extends React.Component {
+export default class LiveChart extends React.Component {
     chartComponent;
     options;
+    timer;
 
     constructor () {
         super();
@@ -62,8 +63,43 @@ export default class HighChart extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.timer = setInterval(() =>  this.props.getRealTimeData(), 5000);
+    }
+
+    addPointToSeries (chart, realtimeData) {
+        chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
+        chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
+        chart.series[0].addPoint([realtimeData[realtimeData.length - 1]], false, true);
+    }
+
     //returning false here prevents react from manipulating the DOM
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps) {
+        if (!this.chartComponent.current){
+            return false;
+        }
+        const chart = this.chartComponent.current.chart;
+
+        const realtimeData = nextProps.data;
+        const selectedGaugeIdx = nextProps.selectedGaugeIdx;
+        const previousSelectedGaugeIdx = chart.userOptions.selectedGaugeIdx;
+
+        //initial scenario
+        if (selectedGaugeIdx === undefined){
+            chart.update({selectedGaugeIdx: previousSelectedGaugeIdx}, false);
+            this.addPointToSeries(chart, realtimeData);
+        }
+        //unchanged updates
+        else if(selectedGaugeIdx === previousSelectedGaugeIdx) {
+            this.addPointToSeries(chart, realtimeData);
+        }
+        else {
+            chart.update({selectedGaugeIdx: previousSelectedGaugeIdx}, false);
+            chart.series[0].update({
+                data: realtimeData
+            }, false);
+        }
+        chart.redraw();
         return false;
     }
 
@@ -75,7 +111,7 @@ export default class HighChart extends React.Component {
                         <HighchartsReact
                             containerProps={{style: {height: "100%"}}}
                             options={this.options.chartOptions}
-                            ref={this.props.setRef}
+                            ref={this.chartComponent}
                         />
                     </ResponsiveContainer>
                 </div>

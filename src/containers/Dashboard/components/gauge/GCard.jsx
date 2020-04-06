@@ -8,8 +8,14 @@ export default function GCard({ id, selected, title, children, onGaugeSelect }) 
   const classes = useStyles();
   const classNames = selected ? classes.card + " active" : classes.card;
 
+  const handleGaugeClick = (id) => {
+    if (!selected){
+        return onGaugeSelect(id);
+    }
+  };
+
   return (
-    <Card tag="a" onClick={() => onGaugeSelect(id)} style={{ cursor: "pointer" }} className={classNames}>
+    <Card tag="a" onClick={() => handleGaugeClick(id)} style={{ cursor: "pointer" }} className={classNames}>
       <CardHeader
         className={classes.header}
         avatar=" "
