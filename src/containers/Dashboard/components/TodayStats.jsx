@@ -17,11 +17,11 @@ const TodayStats = ({ t, todayStats }) => (
             </div>
             <div className="progress-wrap progress-wrap--small progress-wrap--pink">
                 <p className="dashboard__sales-report-title">Low Voltage</p>
-                <p className="dashboard__sales-report-now">{todayStats.low}</p>
+                <p className="dashboard__sales-report-now">{todayStats.minVoltage}</p>
             </div>
             <div className="progress-wrap progress-wrap--small progress-wrap--pink">
                 <p className="dashboard__sales-report-title">High Voltage</p>
-                <p className="dashboard__sales-report-now">{todayStats.high}</p>
+                <p className="dashboard__sales-report-now">{todayStats.maxVoltage}</p>
             </div>
         </div>
             </CardBody>

@@ -1,15 +1,15 @@
-import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA} from '../actions/dashboardActions';
-import { updateGaugeSelection, updateGaugeRealtimeData } from '../../logic/dashboard';
+import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from '../actions/dashboardActions';
+import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
 import { CHANGE_SIDEBAR_VISIBILITY } from "../actions/sidebarActions";
-import { UPDATE_BRANCH_SELECTION } from "../actions/topbarActions";
+import { UPDATE_BRANCH_SELECTION, LOAD_BRANCH_DETAILS } from "../actions/topbarActions";
 
 const initialState = {
     todayStats: {
         peak: 250,
-        low: 140.5,
-        high: 250,
+        minVoltage: 0,
+        maxVoltage: 0,
         consumption: 500,
         cost: 14500,
     },
@@ -37,6 +37,8 @@ const initialState = {
     ],
     selectedGaugeIdx: 0,
     redraw: false,
+    initialLoad: false,
+    dashboardLoad: false,
 };
 
 export default function (state = initialState, action) {
@@ -63,6 +65,18 @@ export default function (state = initialState, action) {
         case CHANGE_SIDEBAR_VISIBILITY:
             return state
                 .set('redraw', true)
+                .toJS();
+        case UPDATE_TODAY_STATS:
+            const todayStats = state.get('todayStats').toJS();
+            const rawStats = action.payload.data[0];
+            const updatedStats = getTodayStats(todayStats,rawStats);
+            return state
+                .set('todayStats', updatedStats)
+                .set('dashboardLoad', true)
+                .toJS();
+        case LOAD_BRANCH_DETAILS:
+            return state
+                .set('initialLoad', true)
                 .toJS();
         default:
             return state.toJS();

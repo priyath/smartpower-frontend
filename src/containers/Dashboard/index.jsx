@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -8,20 +8,43 @@ import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
 import TodayView from "./components/TodayView";
+import { loadTodayStats } from "../../redux/actions/dashboardActions";
 
-const Dashboard = ({ t, rtl }) => {
-    return (
-        <Container className="dashboard">
-            <Row>
-                <Col md={12}>
-                    <h3 className="page-title">{t('dashboard.page_title')}</h3>
-                </Col>
-            </Row>
-            <TodayView/>
-            <GaugeView/>
-            <CompView/>
-        </Container>
-    )
+class Dashboard extends Component {
+    constructor() {
+        super();
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.initialLoad && !nextProps.dashboardLoad){
+            this.props.loadTodayStats();
+            return false;
+        }
+        return true;
+    }
+
+    render() {
+        const { t, initialLoad } = this.props;
+        return (
+            <Container className="dashboard">
+                <Row>
+                    <Col md={12}>
+                        <h3 className="page-title">{t('dashboard.page_title')}</h3>
+                    </Col>
+                </Row>
+                <div>
+                {
+                    initialLoad ?
+                    <div>
+                        <TodayView/>
+                        <GaugeView/>
+                        <CompView/>
+                    </div> : <div class="loader"><p>Loading..</p></div>
+                }
+                </div>
+            </Container>
+        )
+    }
 };
 
 Dashboard.propTypes = {
@@ -29,8 +52,14 @@ Dashboard.propTypes = {
     rtl: RTLProps.isRequired,
 };
 
-export default compose(withTranslation('common'), connect((state) => ({
-    rtl: state.rtl
-}), dispatch => {
-    return {
-    }}))(Dashboard);
+const mapStateToProps = (state) => ({
+    rtl: state.rtl,
+    initialLoad: state.dashboard.initialLoad,
+    dashboardLoad: state.dashboard.dashboardLoad,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    loadTodayStats: () => dispatch(loadTodayStats()),
+});
+
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Dashboard);

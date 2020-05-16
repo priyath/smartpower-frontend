@@ -1,3 +1,5 @@
+import { extend } from 'lodash';
+
 export const updateGaugeSelection = (gauges, selectedGauge) => {
     const gaugeIndex = selectedGauge - 1;
     const currentSelection = gauges[gaugeIndex].selected;
@@ -37,4 +39,11 @@ export const randomizeData = (data) => {
         return row;
     });
     return data;
+};
+
+//test function
+export const getTodayStats = (existing, updated) => {
+    updated.minVoltage = updated.minVoltage ? updated.minVoltage : 0;
+    updated.maxVoltage = updated.maxVoltage ? updated.maxVoltage : 0;
+    return extend({},existing,updated);
 };
