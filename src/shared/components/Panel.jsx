@@ -25,6 +25,7 @@ export default class AlertComponent extends PureComponent {
     xs: PropTypes.number,
     before: PropTypes.element,
     panelClass: PropTypes.string,
+    cb: PropTypes.func,
   };
 
   static defaultProps = {
@@ -63,6 +64,8 @@ export default class AlertComponent extends PureComponent {
 
   onCollapse = () => {
     this.setState(prevState => ({ collapse: !prevState.collapse }));
+    if (this.props.cb && !this.state.collapse)
+      this.props.cb();
   };
 
   onRefresh = () => {

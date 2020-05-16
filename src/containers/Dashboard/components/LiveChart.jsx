@@ -14,7 +14,7 @@ export default class LiveChart extends React.Component {
         this.options = {
             chartOptions: {
                 title: {
-                    text: 'Frequency'
+                    text: ''
                 },
                 time: {
                     useUTC: false
@@ -79,6 +79,14 @@ export default class LiveChart extends React.Component {
         clearInterval(this.timer);
     }
 
+    redrawChart() {
+        const chart = this.chartComponent.current.chart;
+        if (chart) {
+            chart.update({selectedGaugeIdx: -1}, false);
+            chart.showLoading();
+        }
+    }
+
     addPointToSeries (chart, realtimeData) {
         chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
         chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
@@ -90,6 +98,12 @@ export default class LiveChart extends React.Component {
         if (!this.chartComponent.current){
             return false;
         }
+
+        if (nextProps.redraw){
+            this.redrawChart();
+            return false;
+        }
+
         const chart = this.chartComponent.current.chart;
 
         const selectedGauge = nextProps.data;
@@ -116,7 +130,7 @@ export default class LiveChart extends React.Component {
 
     render() {
         return (
-            <Panel md={12} lg={12} xl={7} sm={12} xs={12} title='LIVE'>
+            <Panel md={12} lg={12} xl={7} sm={12} xs={12} title='LIVE' cb={this.redrawChart.bind(this)}>
                 <div dir="ltr">
                     <ResponsiveContainer height={500} className="dashboard__area">
                         <HighchartsReact

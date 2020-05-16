@@ -14,7 +14,7 @@ class GaugeView extends Component {
     }
 
     render() {
-        const { gauges, selectedGaugeIdx, t, onGaugeSelect } = this.props;
+        const { gauges, redraw, selectedGaugeIdx, t, onGaugeSelect } = this.props;
 
         return (
             <Row>
@@ -23,6 +23,7 @@ class GaugeView extends Component {
                 </Panel>
                 <LiveChart
                     data={gauges[selectedGaugeIdx]}
+                    redraw={redraw}
                     getRealTimeData={this.props.getRealTimeData}
                     selectedGaugeIdx={selectedGaugeIdx} // TODO: read this from the selected gauge itself
                 />
@@ -36,6 +37,7 @@ const mapStateToProps = (state) => ({
     gauges: state.dashboard.gauges,
     heartbeat: state.dashboard.heartbeat,
     selectedGaugeIdx: state.dashboard.selectedGaugeIdx,
+    redraw: state.dashboard.redraw,
 });
 
 const mapDispatchToProps = (dispatch) => ({
