@@ -18,3 +18,10 @@ export const fetchRealtimeData = (location) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const fetchTodayStats = (location) => {
+    let formData = {calltype: 'Today-Stats', filter: location};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};
