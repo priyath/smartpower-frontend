@@ -37,7 +37,7 @@ export default class LiveChart extends React.Component {
                 yAxis: {
                     labels: {
                         formatter: function () {
-                            return this.value / 1000 + 'k';
+                            return this.value;
                         }
                     }
                 },
