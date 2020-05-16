@@ -22,9 +22,9 @@ class GaugeView extends Component {
                     <GaugeGrid gauges={gauges} onGaugeSelect={onGaugeSelect}/>
                 </Panel>
                 <LiveChart
-                    data={gauges[selectedGaugeIdx].realtimeData}
+                    data={gauges[selectedGaugeIdx]}
                     getRealTimeData={this.props.getRealTimeData}
-                    selectedGaugeIdx={selectedGaugeIdx}
+                    selectedGaugeIdx={selectedGaugeIdx} // TODO: read this from the selected gauge itself
                 />
             </Row>
         );

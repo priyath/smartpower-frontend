@@ -13,16 +13,21 @@ export default class LiveChart extends React.Component {
         this.chartComponent = React.createRef();
         this.options = {
             chartOptions: {
+                title: {
+                    text: 'Frequency'
+                },
+                time: {
+                    useUTC: false
+                },
                 chart: {
                     type: 'area',
                 },
                 xAxis: {
-                    allowDecimals: false,
-                    labels: {
-                        formatter: function () {
-                            return this.value; // clean, unformatted number for year
-                        }
-                    }
+                    title: {
+                        enabled: true,
+                        text: 'Time'
+                    },
+                    type: 'datetime'
                 },
                 yAxis: {
                     labels: {
@@ -32,11 +37,11 @@ export default class LiveChart extends React.Component {
                     }
                 },
                 tooltip: {
-                    pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                    pointFormat: 'Value: <b>{point.y:,.0f}</b>'
                 },
                 plotOptions: {
                     area: {
-                        pointStart: 1940,
+                        pointStart: Date.now(),
                         marker: {
                             enabled: false,
                             symbol: 'circle',
@@ -50,21 +55,23 @@ export default class LiveChart extends React.Component {
                     }
                 },
                 series: [{
-                    name: 'Points',
+                    showInLegend: false,
                     data: [
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0
-                    ]
-                }]
-            }
+                    ],
+                    pointStart: Date.now(),
+                    pointInterval: 1000*5
+                }],
+                selectedGaugeIdx: null,
+            },
         }
     }
 
     componentDidMount() {
         this.timer = setInterval(() =>  this.props.getRealTimeData(), 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 
     addPointToSeries (chart, realtimeData) {
@@ -74,27 +81,25 @@ export default class LiveChart extends React.Component {
     }
 
     //returning false here prevents react from manipulating the DOM
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (!this.chartComponent.current){
             return false;
         }
         const chart = this.chartComponent.current.chart;
 
-        const realtimeData = nextProps.data;
+        const selectedGauge = nextProps.data;
+        const realtimeData = selectedGauge.realtimeData;
         const selectedGaugeIdx = nextProps.selectedGaugeIdx;
         const previousSelectedGaugeIdx = chart.userOptions.selectedGaugeIdx;
 
-        //initial scenario
-        if (selectedGaugeIdx === undefined){
-            chart.update({selectedGaugeIdx: previousSelectedGaugeIdx}, false);
-            this.addPointToSeries(chart, realtimeData);
-        }
         //unchanged updates
-        else if(selectedGaugeIdx === previousSelectedGaugeIdx) {
+        if(selectedGaugeIdx === previousSelectedGaugeIdx) {
             this.addPointToSeries(chart, realtimeData);
         }
+        //gauge changed
         else {
-            chart.update({selectedGaugeIdx: previousSelectedGaugeIdx}, false);
+            chart.update({selectedGaugeIdx: selectedGaugeIdx}, false);
+            chart.setTitle({text: selectedGauge.title});
             chart.series[0].update({
                 data: realtimeData
             }, false);
@@ -118,4 +123,13 @@ export default class LiveChart extends React.Component {
             </Panel>
         )
     }
+}
+
+//util functions
+function timeNow() {
+    let d = new Date(),
+        h = (d.getHours()<10?'0':'') + d.getHours(),
+        m = (d.getMinutes()<10?'0':'') + d.getMinutes(),
+        s = (d.getSeconds()<10?'0':'') + d.getSeconds();
+    return h + ':' + m + ':' + s;
 }
