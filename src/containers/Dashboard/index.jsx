@@ -18,13 +18,12 @@ class Dashboard extends Component {
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (nextProps.initialLoad && !nextProps.dashboardLoad){
             this.props.loadTodayStats();
-            return false;
         }
         return true;
     }
 
     render() {
-        const { t, initialLoad } = this.props;
+        const { t, initialLoad, dashboardLoad } = this.props;
         return (
             <Container className="dashboard">
                 <Row>
@@ -34,7 +33,7 @@ class Dashboard extends Component {
                 </Row>
                 <div>
                 {
-                    initialLoad ?
+                    initialLoad && dashboardLoad ?
                     <div>
                         <TodayView/>
                         <GaugeView/>

@@ -60,6 +60,7 @@ export default function (state = initialState, action) {
         case UPDATE_BRANCH_SELECTION:
             return state
                 .set('gauges', initialState.gauges)
+                .set('dashboardLoad', false)
                 .set('redraw', true)
                 .toJS();
         case CHANGE_SIDEBAR_VISIBILITY:
