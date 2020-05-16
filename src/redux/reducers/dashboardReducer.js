@@ -2,7 +2,8 @@ import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA} from '../actions/dashboardActions
 import { updateGaugeSelection, updateGaugeRealtimeData } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
-import {CHANGE_SIDEBAR_VISIBILITY} from "../actions/sidebarActions";
+import { CHANGE_SIDEBAR_VISIBILITY } from "../actions/sidebarActions";
+import { UPDATE_BRANCH_SELECTION } from "../actions/topbarActions";
 
 const initialState = {
     todayStats: {
@@ -53,6 +54,11 @@ export default function (state = initialState, action) {
             return state
                 .set('gauges', updateGaugeRealtimeData(gauges, realtimeData))
                 .set('redraw', false)
+                .toJS();
+        case UPDATE_BRANCH_SELECTION:
+            return state
+                .set('gauges', initialState.gauges)
+                .set('redraw', true)
                 .toJS();
         case CHANGE_SIDEBAR_VISIBILITY:
             return state

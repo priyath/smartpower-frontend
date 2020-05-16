@@ -20,8 +20,10 @@ export function updateRealtimeData(realtimeData) {
 }
 
 export function getRealTimeData() {
-    return (dispatch) => {
-        fetchRealtimeData().then((response) => {
+    return (dispatch, getState) => {
+        const selectedBranchIdx = getState().topbar.selectedBranchIdx;
+        const location = getState().topbar.branchDetails[selectedBranchIdx].location;
+        fetchRealtimeData(location).then((response) => {
             dispatch(updateRealtimeData(response));
         })
     }

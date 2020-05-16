@@ -12,8 +12,8 @@ const axiosFetch = (endpoint, method, data) => {
     });
 };
 
-export const fetchRealtimeData = () => {
-    let formData = {calltype: 'Real Time', filter: 'LOLC Head Office -01'};
+export const fetchRealtimeData = (location) => {
+    let formData = {calltype: 'Real Time', filter: location};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
