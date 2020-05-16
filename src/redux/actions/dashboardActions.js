@@ -33,7 +33,10 @@ export function getRealTimeData() {
         const selectedBranchIdx = getState().topbar.selectedBranchIdx;
         const location = getState().topbar.branchDetails[selectedBranchIdx].location;
         fetchRealtimeData(location).then((response) => {
-            dispatch(updateRealtimeData(response));
+            const currentSelectedBranchIdx = getState().topbar.selectedBranchIdx;
+            if (currentSelectedBranchIdx === selectedBranchIdx) {
+                dispatch(updateRealtimeData(response));
+            }
         })
     }
 }
