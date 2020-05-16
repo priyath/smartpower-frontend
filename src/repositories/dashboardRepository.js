@@ -18,10 +18,3 @@ export const fetchRealtimeData = (location) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
-
-export const fetchBranchList = () => {
-    let formData = {calltype: 'User-Locations', filter: 'Vajira'};
-
-    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
-        .then(response => response);
-};
