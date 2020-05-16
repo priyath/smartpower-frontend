@@ -12,13 +12,14 @@ class Topbar extends PureComponent {
     changeSidebarVisibility: PropTypes.func.isRequired,
   };
 
-  changeSelectedBranch(e) {
-    console.log(e.currentTarget);
+  changeSelectedBranch(e, idx) {
+    this.props.updateBranchSelection(idx);
   }
 
   render() {
     const { topbar, changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
     const branchDetails = topbar.branchDetails;
+    const selectedBranchIdx = topbar.selectedBranchIdx;
 
     return (
       <div className="topbar">
@@ -34,13 +35,13 @@ class Topbar extends PureComponent {
                 branchDetails ?
                   <div>
                     <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-                      <p className="topbar__branch_selection_label">SELECT BRANCH <ChevronDownIcon /></p>
+                      <p className="topbar__branch_selection_label">{branchDetails[selectedBranchIdx].location}<ChevronDownIcon /></p>
                     </DropdownToggle>
                     <DropdownMenu>
                       {
-                        branchDetails ? branchDetails.map(branch => {
+                        branchDetails ? branchDetails.map((branch, idx)=> {
                           return (
-                              <DropdownItem onClick={(e)=>this.changeSelectedBranch(e)}>{branch.location}</DropdownItem>
+                              <DropdownItem key={idx} onClick={(e)=>this.changeSelectedBranch(e, idx)}>{branch.location}</DropdownItem>
                           )
                         }) :  <DropdownItem>Loading</DropdownItem>
                       }

@@ -60,6 +60,7 @@ class Layout extends Component {
           topbar={topbar}
           changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
           changeSidebarVisibility={this.changeSidebarVisibility}
+          updateBranchSelection={this.updateBranchSelection}
         />
         <Sidebar
           sidebar={sidebar}
