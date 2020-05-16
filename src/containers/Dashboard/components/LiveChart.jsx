@@ -21,6 +21,11 @@ export default class LiveChart extends React.Component {
                 },
                 chart: {
                     type: 'area',
+                    events: {
+                        load() {
+                            this.showLoading();
+                        }
+                    }
                 },
                 xAxis: {
                     title: {
@@ -98,6 +103,7 @@ export default class LiveChart extends React.Component {
         }
         //gauge changed
         else {
+            chart.hideLoading();
             chart.update({selectedGaugeIdx: selectedGaugeIdx}, false);
             chart.setTitle({text: selectedGauge.title});
             chart.series[0].update({
