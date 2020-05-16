@@ -130,12 +130,3 @@ export default class LiveChart extends React.Component {
         )
     }
 }
-
-//util functions
-function timeNow() {
-    let d = new Date(),
-        h = (d.getHours()<10?'0':'') + d.getHours(),
-        m = (d.getMinutes()<10?'0':'') + d.getMinutes(),
-        s = (d.getSeconds()<10?'0':'') + d.getSeconds();
-    return h + ':' + m + ':' + s;
-}

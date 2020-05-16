@@ -12,8 +12,13 @@ class Topbar extends PureComponent {
     changeSidebarVisibility: PropTypes.func.isRequired,
   };
 
+  changeSelectedBranch(e) {
+    console.log(e.currentTarget);
+  }
+
   render() {
-    const { changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
+    const { topbar, changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
+    const branchDetails = topbar.branchDetails;
 
     return (
       <div className="topbar">
@@ -25,14 +30,26 @@ class Topbar extends PureComponent {
             />
             <Link className="topbar__logo" to="/dashboard" />
             <UncontrolledDropdown>
-              <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-                <p className="topbar__branch_selection_label">SELECT BRANCH <ChevronDownIcon /></p>
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Biyagama LOLC 1</DropdownItem>
-                <DropdownItem>LOLC Head Office - 01</DropdownItem>
-                <DropdownItem>LOLC Head Office - 02</DropdownItem>
-              </DropdownMenu>
+              {
+                branchDetails ?
+                  <div>
+                    <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
+                      <p className="topbar__branch_selection_label">SELECT BRANCH <ChevronDownIcon /></p>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      {
+                        branchDetails ? branchDetails.map(branch => {
+                          return (
+                              <DropdownItem onClick={(e)=>this.changeSelectedBranch(e)}>{branch.location}</DropdownItem>
+                          )
+                        }) :  <DropdownItem>Loading</DropdownItem>
+                      }
+                    </DropdownMenu>
+                  </div> :
+                  <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
+                    <p className="topbar__branch_selection_label">LOADING BRANCHES ...</p>
+                  </DropdownToggle>
+              }
             </UncontrolledDropdown>
           </div>
           <div className="topbar__right">

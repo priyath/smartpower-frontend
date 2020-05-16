@@ -8,6 +8,7 @@ import Sidebar from './sidebar/Sidebar';
 
 import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
 import { changeMobileSidebarVisibility, changeSidebarVisibility } from '../../redux/actions/sidebarActions';
+import { loadBranchDetails, updateBranchSelection } from '../../redux/actions/topbarActions';
 import { SidebarProps } from '../../shared/prop-types/ReducerProps';
 
 class Layout extends Component {
@@ -36,9 +37,18 @@ class Layout extends Component {
     dispatch(changeThemeToLight());
   };
 
-  render() {
-    const { sidebar } = this.props;
+  updateBranchSelection = (idx) => {
+    const { dispatch } = this.props;
+    dispatch(updateBranchSelection(idx));
+  }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(loadBranchDetails());
+  }
+
+  render() {
+    const { sidebar, topbar } = this.props;
     const layoutClass = classNames({
       layout: true,
       'layout--collapse': sidebar.collapse,
@@ -47,6 +57,7 @@ class Layout extends Component {
     return (
       <div className={layoutClass}>
         <Topbar
+          topbar={topbar}
           changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
           changeSidebarVisibility={this.changeSidebarVisibility}
         />
@@ -63,4 +74,5 @@ class Layout extends Component {
 
 export default withRouter(connect(state => ({
   sidebar: state.sidebar,
+  topbar: state.topbar,
 }))(Layout));
