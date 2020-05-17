@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
 import Layout from '../../../Layout/index';
-import Dashboard from '../../../Dashboard/DashboardContainer';
+import Dashboard from '../../../Dashboard/index';
 import History from '../../../History/index';
 import Branches from '../../../Branches/index';
 import Locations from '../../../Locations/index';
