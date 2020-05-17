@@ -19,6 +19,13 @@ class Dashboard extends Component {
         this.props.initDashboardData();
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        //handle branch change
+        if (!nextProps.dashboardLoad){
+            this.props.initDashboardData();
+        }
+    }
+
     render() {
         const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx, todayStats, getRealTimeData, onGaugeSelect  } = this.props;
         return (

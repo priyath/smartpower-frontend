@@ -44,7 +44,6 @@ export default function (state = initialState, action) {
             return fromJS(state)
                 .set('gauges', initialState.gauges)
                 .set('dashboardLoad', false)
-                .set('redraw', true)
                 .toJS();
         case UPDATE_TODAY_STATS:
             state = fromJS(state);
