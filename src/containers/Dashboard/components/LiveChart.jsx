@@ -64,7 +64,7 @@ export default class LiveChart extends React.Component {
                     data: [
                     ],
                     pointStart: Date.now(),
-                    pointInterval: 1000*5
+                    pointInterval: 1666
                 }],
                 selectedGaugeIdx: null,
             },
