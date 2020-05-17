@@ -18,17 +18,21 @@ export const updateGaugeSelection = (gauges, selectedGauge) => {
 
 // function to update all guages with real-time data
 export const updateGaugeRealtimeData = (gauges, realtimeData) => {
-    realtimeData.slice().reverse().map((data) => {
-        const gaugeIdx = data.controlid - 1;
-        const gauge = gauges[gaugeIdx];
+    const realtimeDateUnique = realtimeData.filter((el,idx,arr) => {
+        return arr.findIndex(arrEl=>{
+            return (arrEl.controlid === el.controlid)
+        }) === idx
+    })
 
+    return gauges.map((gauge) => {
+        const realtimeData = realtimeDateUnique.filter(obj => {
+            return parseInt(obj.controlid) === gauge.id;
+        })[0];
+        const readingValue = realtimeData ? realtimeData.readingvalue : 0;
+        gauge.realtimeData.push(readingValue);
         gauge.realtimeData.shift();
-        gauge.realtimeData.push(data.readingvalue);
-        gauge.value = data.readingvalue;
-
         return gauge;
     });
-    return gauges;
 };
 
 //test function

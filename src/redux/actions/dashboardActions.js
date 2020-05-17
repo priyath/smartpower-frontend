@@ -2,7 +2,6 @@ import { fetchRealtimeData, fetchTodayStats } from "../../repositories/dashboard
 
 export const ON_GAUGE_SELECT = 'ON_GAUGE_SELECT';
 export const UPDATE_REALTIME_DATA = 'UPDATE_REALTIME_DATA';
-export const LOAD_TODAY_STATS = 'LOAD_TODAY_STATS';
 export const UPDATE_TODAY_STATS = 'UPDATE_TODAY_STATS';
 
 export function onGaugeSelect(selectedGaugeId) {
@@ -41,7 +40,7 @@ export function getRealTimeData() {
     }
 }
 
-export function loadTodayStats() {
+export function initDashboardData() {
     return (dispatch, getState) => {
         const selectedBranchIdx = getState().topbar.selectedBranchIdx;
         const location = getState().topbar.branchDetails[selectedBranchIdx].location;

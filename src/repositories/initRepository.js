@@ -13,7 +13,6 @@ const axiosFetch = (endpoint, method, data) => {
 };
 
 export const fetchBranchList = () => {
-    console.log('fetch branch list');
     let formData = {calltype: 'User-Locations', filter: 'Vajira'};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)

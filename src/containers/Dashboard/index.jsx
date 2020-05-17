@@ -8,22 +8,19 @@ import GaugeView from './components/GaugeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
 import TodayView from "./components/TodayView";
-import { loadTodayStats } from "../../redux/actions/dashboardActions";
+import {getRealTimeData, initDashboardData, onGaugeSelect} from "../../redux/actions/dashboardActions";
 
 class Dashboard extends Component {
     constructor() {
         super();
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.initialLoad && !nextProps.dashboardLoad){
-            this.props.loadTodayStats();
-        }
-        return true;
+    componentDidMount() {
+        this.props.initDashboardData();
     }
 
     render() {
-        const { t, initialLoad, dashboardLoad } = this.props;
+        const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx, todayStats, getRealTimeData, onGaugeSelect  } = this.props;
         return (
             <Container className="dashboard">
                 <Row>
@@ -35,8 +32,15 @@ class Dashboard extends Component {
                 {
                     initialLoad && dashboardLoad ?
                     <div>
-                        <TodayView/>
-                        <GaugeView/>
+                        <TodayView
+                            todayStats={todayStats}
+                        />
+                        <GaugeView
+                            gauges={gauges}
+                            selectedGaugeIdx={selectedGaugeIdx}
+                            onGaugeSelect={onGaugeSelect}
+                            getRealTimeData={getRealTimeData}
+                        />
                         <CompView/>
                     </div> : <div class="loader"><p>Loading..</p></div>
                 }
@@ -55,10 +59,17 @@ const mapStateToProps = (state) => ({
     rtl: state.rtl,
     initialLoad: state.dashboard.initialLoad,
     dashboardLoad: state.dashboard.dashboardLoad,
+    selectedBranchIdx: state.topbar.selectedBranchIdx,
+    branchDetails: state.topbar.branchDetails,
+    gauges: state.dashboard.gauges,
+    selectedGaugeIdx: state.dashboard.selectedGaugeIdx,
+    todayStats: state.dashboard.todayStats
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadTodayStats: () => dispatch(loadTodayStats()),
+    initDashboardData: () => dispatch(initDashboardData()),
+    onGaugeSelect: (selected) => dispatch(onGaugeSelect(selected)),
+    getRealTimeData: () => dispatch(getRealTimeData()),
 });
 
 export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Dashboard);

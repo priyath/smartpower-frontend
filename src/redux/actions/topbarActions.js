@@ -18,9 +18,7 @@ export function updateBranchSelection(payload) {
 }
 
 export function loadBranchDetails() {
-    console.log('loading branch details');
     return (dispatch) => {
-        console.log('loading branch details');
         fetchBranchList().then((response) => {
             dispatch(updateBranchDetails(response));
         })

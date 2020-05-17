@@ -19,7 +19,6 @@ const CompView = ({ t, dir, themeName, todayStats }) => {
 };
 
 const mapStateToProps = (state) => ({
-    todayStats: state.dashboard.todayStats
 });
 
 const mapDispatchToProps = (dispatch) => ({

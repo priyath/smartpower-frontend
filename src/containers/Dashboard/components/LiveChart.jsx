@@ -8,7 +8,7 @@ export default class LiveChart extends React.Component {
     options;
     timer;
 
-    constructor () {
+    constructor (props) {
         super();
         this.chartComponent = React.createRef();
         this.options = {
@@ -23,7 +23,6 @@ export default class LiveChart extends React.Component {
                     type: 'area',
                     events: {
                         load() {
-                            this.showLoading();
                         }
                     }
                 },
@@ -61,36 +60,25 @@ export default class LiveChart extends React.Component {
                 },
                 series: [{
                     showInLegend: false,
-                    data: [
-                    ],
+                    data: [0,0,0,0,0,0,0,0,0,0],
                     pointStart: Date.now(),
                     pointInterval: 1666
                 }],
                 selectedGaugeIdx: null,
+                selectedBranchIdx: null,
             },
+            timer: null
         }
     }
 
     componentDidMount() {
-        this.timer = setInterval(() =>  this.props.getRealTimeData(), 5000);
+        this.timer = setInterval(() =>  {
+            this.props.getRealTimeData();
+        }, 5000);
     }
 
     componentWillUnmount() {
         clearInterval(this.timer);
-    }
-
-    redrawChart() {
-        const chart = this.chartComponent.current.chart;
-        if (chart) {
-            chart.update({selectedGaugeIdx: -1}, false);
-            chart.showLoading();
-        }
-    }
-
-    addPointToSeries (chart, realtimeData) {
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 3]], false, true);
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 2]], false, true);
-        chart.series[0].addPoint([realtimeData[realtimeData.length - 1]], false, true);
     }
 
     //returning false here prevents react from manipulating the DOM
@@ -98,12 +86,6 @@ export default class LiveChart extends React.Component {
         if (!this.chartComponent.current){
             return false;
         }
-
-        if (nextProps.redraw){
-            this.redrawChart();
-            return false;
-        }
-
         const chart = this.chartComponent.current.chart;
 
         const selectedGauge = nextProps.data;
@@ -113,24 +95,21 @@ export default class LiveChart extends React.Component {
 
         //unchanged updates
         if(selectedGaugeIdx === previousSelectedGaugeIdx) {
-            this.addPointToSeries(chart, realtimeData);
+            const y = realtimeData[realtimeData.length - 1];
+            chart.series[0].addPoint(y, true, true);
         }
         //gauge changed
         else {
-            chart.hideLoading();
             chart.update({selectedGaugeIdx: selectedGaugeIdx}, false);
             chart.setTitle({text: selectedGauge.title});
-            chart.series[0].update({
-                data: realtimeData
-            }, false);
+            chart.series[0].setData(realtimeData);
         }
-        chart.redraw();
         return false;
     }
 
     render() {
         return (
-            <Panel md={12} lg={12} xl={7} sm={12} xs={12} title='LIVE' cb={this.redrawChart.bind(this)}>
+            <Panel md={12} lg={12} xl={7} sm={12} xs={12} title='LIVE'>
                 <div dir="ltr">
                     <ResponsiveContainer height={500} className="dashboard__area">
                         <HighchartsReact

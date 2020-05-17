@@ -1,4 +1,5 @@
 import React from 'react';
+//import './wdyr';
 import { render } from 'react-dom';
 import App from './containers/App/App';
 
