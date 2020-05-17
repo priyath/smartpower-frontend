@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import CompPanel from "./CompPanel";
-import Panel from "../../../shared/components/Panel";
+import Panel from "../../../../shared/components/Panel";
 
 class CompControl extends PureComponent {
     static propTypes = {

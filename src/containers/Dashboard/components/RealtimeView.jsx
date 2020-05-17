@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import Panel from "../../../shared/components/Panel";
-import GaugeGrid from "./gauge/GaugeGrid";
+import GaugeGrid from "./realtime/GaugeGrid";
 import {withTranslation} from "react-i18next";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import { Row } from 'reactstrap';
-import LiveChart from "./LiveChart";
+import LiveChart from "./realtime/LiveChart";
 
-class GaugeView extends Component {
+class RealtimeView extends Component {
     constructor() {
         super();
     }
@@ -37,4 +37,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(GaugeView);
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(RealtimeView);

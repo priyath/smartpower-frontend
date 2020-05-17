@@ -1,6 +1,6 @@
 import React from 'react';
 import HighchartsReact from 'highcharts-react-official';
-import Panel from "../../../shared/components/Panel";
+import Panel from "../../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
 
 export default class LiveChart extends React.Component {

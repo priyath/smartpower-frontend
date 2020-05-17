@@ -10,7 +10,7 @@ import {
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
-import MonthPicker from '../../../shared/components/MonthPicker';
+import MonthPicker from '../../../../shared/components/MonthPicker';
 
 const CompControlForm = ({ handleSubmit }) => (
   <div className="dashboard__comparison-tab">

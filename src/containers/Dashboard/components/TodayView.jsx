@@ -2,9 +2,9 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import {connect} from "react-redux";
 import { Row} from 'reactstrap';
-import TodayStats from "./TodayStats";
-import KWValue from "./KWValue";
-import Cost from "./Cost";
+import TodayStats from "./stats/TodayStats";
+import KWValue from "./stats/KWValue";
+import Cost from "./stats/Cost";
 import {compose} from "redux";
 
 const CompView = ({ t, dir, themeName, todayStats }) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import Panel from "../../../shared/components/Panel";
-import CompBar from "./CompBar";
+import CompBar from "./comparison/CompBar";
 import {ResponsiveContainer} from "recharts";
 import { withTranslation } from 'react-i18next';
 import {connect} from "react-redux";
-import CompControl from "./CompControl";
+import CompControl from "./comparison/CompControl";
 import { Row } from 'reactstrap';
 
 const CompView = ({ t, dir, themeName }) => {

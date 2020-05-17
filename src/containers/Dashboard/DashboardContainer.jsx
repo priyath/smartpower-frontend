@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import GaugeView from './components/GaugeView';
+import RealtimeView from './components/RealtimeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
 import TodayView from "./components/TodayView";
@@ -35,7 +35,7 @@ class Dashboard extends Component {
                         <TodayView
                             todayStats={todayStats}
                         />
-                        <GaugeView
+                        <RealtimeView
                             gauges={gauges}
                             selectedGaugeIdx={selectedGaugeIdx}
                             onGaugeSelect={onGaugeSelect}
