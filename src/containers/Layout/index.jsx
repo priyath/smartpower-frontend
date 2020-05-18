@@ -9,6 +9,7 @@ import Sidebar from './sidebar/Sidebar';
 import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
 import { changeMobileSidebarVisibility, changeSidebarVisibility } from '../../redux/actions/sidebarActions';
 import { loadBranchDetails, updateBranchSelection } from '../../redux/actions/topbarActions';
+import { onDismissAlert } from '../../redux/actions/alertActions';
 import { SidebarProps } from '../../shared/prop-types/ReducerProps';
 
 class Layout extends Component {
@@ -42,6 +43,11 @@ class Layout extends Component {
     dispatch(updateBranchSelection(idx));
   }
 
+  dismissAlert = (idx) => {
+    const { dispatch } = this.props;
+    dispatch(onDismissAlert(idx));
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(loadBranchDetails());
@@ -62,6 +68,7 @@ class Layout extends Component {
           changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
           changeSidebarVisibility={this.changeSidebarVisibility}
           updateBranchSelection={this.updateBranchSelection}
+          dismissAlert={this.dismissAlert}
         />
         <Sidebar
           sidebar={sidebar}

@@ -13,12 +13,12 @@ export default class TopbarNotification extends PureComponent {
         this.setState(prevState => ({ collapse: !prevState.collapse }));
     };
 
-    removeNotification = () => {
-        console.log('removing notification');
+    removeAlert = (index) => {
+        this.props.dismissAlert(index);
     }
 
     render() {
-        const { notifications } = this.props.alert;
+        const { alerts } = this.props.alert;
         const { collapse } = this.state;
         return (
             <div className="topbar__collapse">
@@ -30,13 +30,12 @@ export default class TopbarNotification extends PureComponent {
                     isOpen={collapse}
                     className="topbar__collapse-content"
                 >
-                >
                     <div className="topbar__collapse-title-wrap">
                         <p className="topbar__collapse-title">Notifications</p>
                         <button className="topbar__collapse-button" type="button">Mark all as read</button>
                     </div>
-                    {notifications.map((notification, index) => (
-                        <div className="topbar__collapse-item" key={index} onClick={this.removeNotification}>
+                    {alerts.map((notification, index) => (
+                        <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(index)}>
                             <div className="topbar__collapse-img-wrap">
                                 <img className="topbar__collapse-img" src={notification.ava} alt="" />
                             </div>

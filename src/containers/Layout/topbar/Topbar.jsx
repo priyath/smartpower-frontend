@@ -18,7 +18,7 @@ class Topbar extends PureComponent {
   }
 
   render() {
-    const { topbar, alert, changeMobileSidebarVisibility, changeSidebarVisibility } = this.props;
+    const { topbar, alert, changeMobileSidebarVisibility, changeSidebarVisibility, dismissAlert } = this.props;
     const branchDetails = topbar.branchDetails;
     const selectedBranchIdx = topbar.selectedBranchIdx;
 
@@ -55,7 +55,7 @@ class Topbar extends PureComponent {
             </UncontrolledDropdown>
           </div>
           <div className="topbar__right">
-            <TopbarNotification alert={alert} />
+            <TopbarNotification alert={alert} dismissAlert={dismissAlert} />
             <TopbarProfile />
           </div>
         </div>
