@@ -7,6 +7,14 @@ import {UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from "../actions/dashboardActi
 
 const initialState = {
     alerts: [],
+    timeSinceLastAlert: {
+        'Frequency': 0,
+        'Current Average': 0,
+        'Voltage L N avg': 0,
+        'Power Factor Average': 0,
+        'Active Power Phase 1': 0,
+        'Power Factor Phase 1': 0,
+    },
     thresholds: null,
 };
 
@@ -21,9 +29,12 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             const alerts = state.get('alerts').toJS();
             const thresholds = state.get('thresholds').toJS();
+            const timeSinceLastAlert = state.get('timeSinceLastAlert').toJS();
             const realtimeData = action.payload.data;
+            const alertObject = addAlerts(alerts, thresholds, realtimeData, timeSinceLastAlert);
             return state
-                .set('alerts', addAlerts(alerts, thresholds, realtimeData))
+                .set('alerts', alertObject.alerts)
+                .set('timeSinceLastAlert', alertObject.timeSinceLastAlert)
                 .toJS();
         case UPDATE_TODAY_STATS:
             state = fromJS(state);

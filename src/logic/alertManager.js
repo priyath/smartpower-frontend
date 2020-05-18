@@ -1,6 +1,8 @@
 import {getUniqueDataPoints} from "./dashboard";
 import { v4 as uuidv4 } from 'uuid';
 
+const ALERT_INTERVAL = 10;
+
 export const removeAlert = (alerts, id) => {
     return alerts.filter(alert => {
         return alert.id !== id;
@@ -67,14 +69,27 @@ export const buildNotification = (datapoint, scantype) => {
     }
 }
 
-export const addAlerts = (alerts, thresholds, realtimeData) => {
+const isDiffGreaterThanXmins = (currentTimestamp, lastAlertTimestamp) => {
+    const diff = currentTimestamp - lastAlertTimestamp;
+    return diff/60000 > ALERT_INTERVAL;
+}
+
+export const addAlerts = (alerts, thresholds, realtimeData, timeSinceLastAlert) => {
     const dataPoints = getUniqueDataPoints(realtimeData);
+    let newAlerts = false;
 
     dataPoints.forEach((datapoint) => {
-        const threshold = retrieveThresholdsBasedOnScanType(thresholds, datapoint.scantype);
-        if (datapoint.readingvalue > threshold.upperthreshold){
-            alerts.push(buildNotification(datapoint, datapoint.scantype));
+        const scantype = datapoint.scantype;
+        const lastAlertTimestamp = timeSinceLastAlert[scantype];
+
+        if (isDiffGreaterThanXmins(Date.now(), lastAlertTimestamp)){
+            const threshold = retrieveThresholdsBasedOnScanType(thresholds, datapoint.scantype);
+            if (datapoint.readingvalue > threshold.upperthreshold){
+                newAlerts = true;
+                alerts.push(buildNotification(datapoint, datapoint.scantype));
+                timeSinceLastAlert[scantype] = Date.now();
+            }
         }
     })
-    return alerts;
+    return {newAlerts, alerts, timeSinceLastAlert};
 }
