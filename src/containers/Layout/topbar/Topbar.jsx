@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TopbarSidebarButton from './TopbarSidebarButton';
 import TopbarProfile from './TopbarProfile';
+import TopbarNotification from './TopbarNotification';
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
 import ChevronDownIcon from "mdi-react/ChevronDownIcon";
 
@@ -54,6 +55,7 @@ class Topbar extends PureComponent {
             </UncontrolledDropdown>
           </div>
           <div className="topbar__right">
+            <TopbarNotification />
             <TopbarProfile />
           </div>
         </div>
