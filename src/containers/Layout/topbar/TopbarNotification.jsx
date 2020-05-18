@@ -4,33 +4,6 @@ import { Collapse } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import NotificationsIcon from 'mdi-react/NotificationsIcon';
 
-const notifications = [
-    {
-        ava: `${process.env.PUBLIC_URL}/img/topbar/ava.png`,
-        name: 'Cristopher Changer',
-        message: ' has started a new project',
-        date: '09:02',
-    },
-    {
-        ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.png`,
-        name: 'Sveta Narry',
-        message: ' has closed a project',
-        date: '09:00',
-    },
-    {
-        ava: `${process.env.PUBLIC_URL}/img/topbar/ava3.png`,
-        name: 'Lory McQueen',
-        message: ' has started a new project as a Project Managert',
-        date: '08:43',
-    },
-    {
-        ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.png`,
-        name: 'Cristopher Changer',
-        message: ' has closed a project',
-        date: '08:43',
-    },
-];
-
 export default class TopbarNotification extends PureComponent {
     state = {
         collapse: false,
@@ -40,7 +13,12 @@ export default class TopbarNotification extends PureComponent {
         this.setState(prevState => ({ collapse: !prevState.collapse }));
     };
 
+    removeNotification = () => {
+        console.log('removing notification');
+    }
+
     render() {
+        const { notifications } = this.props.alert;
         const { collapse } = this.state;
         return (
             <div className="topbar__collapse">
@@ -58,7 +36,7 @@ export default class TopbarNotification extends PureComponent {
                         <button className="topbar__collapse-button" type="button">Mark all as read</button>
                     </div>
                     {notifications.map((notification, index) => (
-                        <div className="topbar__collapse-item" key={index}>
+                        <div className="topbar__collapse-item" key={index} onClick={this.removeNotification}>
                             <div className="topbar__collapse-img-wrap">
                                 <img className="topbar__collapse-img" src={notification.ava} alt="" />
                             </div>

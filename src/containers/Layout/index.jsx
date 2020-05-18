@@ -48,7 +48,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { sidebar, topbar } = this.props;
+    const { sidebar, topbar, alert } = this.props;
     const layoutClass = classNames({
       layout: true,
       'layout--collapse': sidebar.collapse,
@@ -58,6 +58,7 @@ class Layout extends Component {
       <div className={layoutClass}>
         <Topbar
           topbar={topbar}
+          alert={alert}
           changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
           changeSidebarVisibility={this.changeSidebarVisibility}
           updateBranchSelection={this.updateBranchSelection}
@@ -73,7 +74,13 @@ class Layout extends Component {
   }
 }
 
-export default withRouter(connect(state => ({
+const mapStateToProps = (state) => ({
   sidebar: state.sidebar,
   topbar: state.topbar,
-}))(Layout));
+  alert: state.alert,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default withRouter(connect(mapStateToProps)(Layout));
