@@ -12,6 +12,7 @@ const initialState = {
         consumption: 500,
         cost: 14500,
     },
+    thresholds: null,
     gauges: [
         {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:0, realtimeData},
         {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:0, realtimeData},
@@ -48,11 +49,14 @@ export default function (state = initialState, action) {
         case UPDATE_TODAY_STATS:
             state = fromJS(state);
             const todayStats = state.get('todayStats').toJS();
-            const rawStats = action.payload.data[0];
+            const thresholdResponse = action.payload.thresholdResponse;
+            const statsResponse = action.payload.statsResponse;
+            const rawStats = statsResponse.data[0];
             const updatedStats = getTodayStats(todayStats,rawStats);
             return state
                 .set('todayStats', updatedStats)
                 .set('dashboardLoad', true)
+                .set('thresholds', thresholdResponse.data)
                 .toJS();
         case LOAD_BRANCH_DETAILS:
             return fromJS(state)

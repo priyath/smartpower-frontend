@@ -27,7 +27,8 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx, todayStats, getRealTimeData, onGaugeSelect  } = this.props;
+        const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx,
+            todayStats, getRealTimeData, onGaugeSelect, thresholds  } = this.props;
         return (
             <Container className="dashboard">
                 <Row>
@@ -47,6 +48,7 @@ class Dashboard extends Component {
                             selectedGaugeIdx={selectedGaugeIdx}
                             onGaugeSelect={onGaugeSelect}
                             getRealTimeData={getRealTimeData}
+                            thresholds={thresholds}
                         />
                         <CompView/>
                     </div> : <div class="loader"><p>Loading..</p></div>
@@ -70,7 +72,8 @@ const mapStateToProps = (state) => ({
     branchDetails: state.topbar.branchDetails,
     gauges: state.dashboard.gauges,
     selectedGaugeIdx: state.dashboard.selectedGaugeIdx,
-    todayStats: state.dashboard.todayStats
+    todayStats: state.dashboard.todayStats,
+    thresholds: state.dashboard.thresholds,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,4 @@
-import { fetchRealtimeData, fetchTodayStats } from "../../repositories/dashboardRepository";
+import { fetchRealtimeData, fetchTodayStats, loadThresholds } from "../../repositories/dashboardRepository";
 
 export const ON_GAUGE_SELECT = 'ON_GAUGE_SELECT';
 export const UPDATE_REALTIME_DATA = 'UPDATE_REALTIME_DATA';
@@ -20,10 +20,10 @@ export function updateRealtimeData(realtimeData) {
     };
 }
 
-export function updateTodayStats(todayStats) {
+export function updateTodayStats(payload) {
     return {
         type: UPDATE_TODAY_STATS,
-        payload: todayStats
+        payload: payload
     };
 }
 
@@ -44,8 +44,10 @@ export function initDashboardData() {
     return (dispatch, getState) => {
         const selectedBranchIdx = getState().topbar.selectedBranchIdx;
         const location = getState().topbar.branchDetails[selectedBranchIdx].location;
-        fetchTodayStats(location).then((response) => {
-            dispatch(updateTodayStats(response));
+        loadThresholds().then((thresholdResponse) => {
+            fetchTodayStats(location).then((statsResponse) => {
+                dispatch(updateTodayStats({thresholdResponse, statsResponse}));
+            })
         })
     }
 }

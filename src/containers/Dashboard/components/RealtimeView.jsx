@@ -14,7 +14,6 @@ class RealtimeView extends Component {
 
     render() {
         const { gauges, selectedGaugeIdx, t, onGaugeSelect } = this.props;
-
         return (
             <Row>
                 <Panel md={12} lg={12} xl={5} sm={12} xs={12}  title={t('dashboard.main_gauges')}>
