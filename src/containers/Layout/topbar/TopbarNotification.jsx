@@ -20,10 +20,14 @@ export default class TopbarNotification extends PureComponent {
     render() {
         const { alerts } = this.props.alert;
         const { collapse } = this.state;
+        const newNotificationClass = alerts.length > 0 ? "topbar__btn topbar__btn--new" : "topbar__btn";
         return (
             <div className="topbar__collapse">
-                <button className="topbar__btn" type="button" onClick={this.toggle}>
+                <button className={newNotificationClass} type="button" onClick={this.toggle}>
                     <NotificationsIcon />
+                    <div className="topbar__btn-new-label">
+                        <div/>
+                    </div>
                 </button>
                 {collapse && <button className="topbar__back" type="button" onClick={this.toggle} />}
                 <Collapse
