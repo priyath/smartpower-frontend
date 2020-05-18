@@ -1,40 +1,13 @@
 import {
     DISMISS_ALERT
 } from '../actions/alertActions';
-import {removeAlert} from '../../logic/alertManager';
+import {removeAlert, addAlerts} from '../../logic/alertManager';
 import { fromJS } from 'immutable';
+import {UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from "../actions/dashboardActions";
 
 const initialState = {
-    alerts: [
-        {
-            id: 0,
-            ava: `${process.env.PUBLIC_URL}/img/topbar/ava.png`,
-            name: 'Cristopher Changer',
-            message: ' has started a new project',
-            date: '09:02',
-        },
-        {
-            id: 1,
-            ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.png`,
-            name: 'Sveta Narry',
-            message: ' has closed a project',
-            date: '09:00',
-        },
-        {
-            id: 2,
-            ava: `${process.env.PUBLIC_URL}/img/topbar/ava3.png`,
-            name: 'Lory McQueen',
-            message: ' has started a new project as a Project Managert',
-            date: '08:43',
-        },
-        {
-            id: 3,
-            ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.png`,
-            name: 'Cristopher Changer',
-            message: ' has closed a project',
-            date: '08:43',
-        },
-    ]
+    alerts: [],
+    thresholds: null,
 };
 
 export default function (state = initialState, action) {
@@ -43,6 +16,20 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             return state
                 .set('alerts', removeAlert(state.get('alerts').toJS(), action.payload.alertId))
+                .toJS();
+        case UPDATE_REALTIME_DATA:
+            state = fromJS(state);
+            const alerts = state.get('alerts').toJS();
+            const thresholds = state.get('thresholds').toJS();
+            const realtimeData = action.payload.data;
+            return state
+                .set('alerts', addAlerts(alerts, thresholds, realtimeData))
+                .toJS();
+        case UPDATE_TODAY_STATS:
+            state = fromJS(state);
+            const thresholdResponse = action.payload.thresholdResponse;
+            return state
+                .set('thresholds', thresholdResponse.data)
                 .toJS();
         default:
             return state;

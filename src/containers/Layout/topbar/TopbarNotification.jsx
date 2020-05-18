@@ -19,6 +19,11 @@ export default class TopbarNotification extends PureComponent {
 
     render() {
         const { alerts } = this.props.alert;
+
+        //avoid state mutation
+        const clonedAlerts = alerts.slice();
+        clonedAlerts.reverse();
+
         const { collapse } = this.state;
         const newNotificationClass = alerts.length > 0 ? "topbar__btn topbar__btn--new" : "topbar__btn";
         return (
@@ -38,8 +43,8 @@ export default class TopbarNotification extends PureComponent {
                         <p className="topbar__collapse-title">Notifications</p>
                         <button className="topbar__collapse-button" type="button">Mark all as read</button>
                     </div>
-                    {alerts.map((notification, index) => (
-                        <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(index)}>
+                    {clonedAlerts.map((notification, index) => (
+                        <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(notification.id)}>
                             <div className="topbar__collapse-img-wrap">
                                 <img className="topbar__collapse-img" src={notification.ava} alt="" />
                             </div>

@@ -16,13 +16,17 @@ export const updateGaugeSelection = (gauges, selectedGauge) => {
     return gauges;
 };
 
-// function to update all guages with real-time data
-export const updateGaugeRealtimeData = (gauges, realtimeData) => {
-    const realtimeDateUnique = realtimeData.filter((el,idx,arr) => {
+export const getUniqueDataPoints = (realtimeData) => {
+    return realtimeData.filter((el,idx,arr) => {
         return arr.findIndex(arrEl=>{
             return (arrEl.controlid === el.controlid)
         }) === idx
-    })
+    });
+}
+
+// function to update all guages with real-time data
+export const updateGaugeRealtimeData = (gauges, realtimeData) => {
+    const realtimeDateUnique = getUniqueDataPoints(realtimeData);
 
     return gauges.map((gauge) => {
         const realtimeData = realtimeDateUnique.filter(obj => {
