@@ -74,9 +74,9 @@ const isDiffGreaterThanXmins = (currentTimestamp, lastAlertTimestamp) => {
     return diff/60000 > ALERT_INTERVAL;
 }
 
-export const addAlerts = (alerts, thresholds, realtimeData, timeSinceLastAlert) => {
+export const retrieveNewAlerts = (thresholds, realtimeData, timeSinceLastAlert) => {
     const dataPoints = getUniqueDataPoints(realtimeData);
-    let newAlerts = false;
+    let newAlerts = [];
 
     dataPoints.forEach((datapoint) => {
         const scantype = datapoint.scantype;
@@ -85,11 +85,31 @@ export const addAlerts = (alerts, thresholds, realtimeData, timeSinceLastAlert) 
         if (isDiffGreaterThanXmins(Date.now(), lastAlertTimestamp)){
             const threshold = retrieveThresholdsBasedOnScanType(thresholds, datapoint.scantype);
             if (datapoint.readingvalue > threshold.upperthreshold){
-                newAlerts = true;
-                alerts.push(buildNotification(datapoint, datapoint.scantype));
+                newAlerts.push(buildNotification(datapoint, datapoint.scantype));
                 timeSinceLastAlert[scantype] = Date.now();
             }
         }
     })
-    return {newAlerts, alerts, timeSinceLastAlert};
+    return {newAlerts, timeSinceLastAlert};
+}
+
+// {
+//     "alerthour": "10",
+//     "alertminute": "9",
+//     "alertdate": "2020-05-19 04:39:49",
+//     "alertdescription": "Power analyzer indicates an alert at LOLC Head Office -01 -Voltage L N avg is 231.61 upper thresould is :230 and lower thresould is :210",
+//     "alertstatus": "Active",
+//     "location": "LOLC Head Office -01",
+//     "scantype": "Voltage L N avg",
+//     "readingvalue": 231.61,
+//     "primarycontact": "",
+//     "primaryemail": "",
+//     "secondarycontact": "",
+//     "secondaryemail": "",
+//     "cameraurl": ""
+// }
+
+
+export const transformAlertToPersist = (alert) => {
+    console.log('ALERT: ', alert);
 }

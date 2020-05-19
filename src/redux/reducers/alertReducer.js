@@ -1,9 +1,7 @@
-import {
-    DISMISS_ALERT
-} from '../actions/alertActions';
-import {removeAlert, addAlerts} from '../../logic/alertManager';
+import {DISMISS_ALERT, ADD_NEW_ALERTS} from '../actions/alertActions';
+import {removeAlert} from '../../logic/alertManager';
 import { fromJS } from 'immutable';
-import {UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from "../actions/dashboardActions";
+import {UPDATE_TODAY_STATS} from "../actions/dashboardActions";
 
 const initialState = {
     alerts: [],
@@ -25,16 +23,11 @@ export default function (state = initialState, action) {
             return state
                 .set('alerts', removeAlert(state.get('alerts').toJS(), action.payload.alertId))
                 .toJS();
-        case UPDATE_REALTIME_DATA:
+        case ADD_NEW_ALERTS:
             state = fromJS(state);
-            const alerts = state.get('alerts').toJS();
-            const thresholds = state.get('thresholds').toJS();
-            const timeSinceLastAlert = state.get('timeSinceLastAlert').toJS();
-            const realtimeData = action.payload.data;
-            const alertObject = addAlerts(alerts, thresholds, realtimeData, timeSinceLastAlert);
             return state
-                .set('alerts', alertObject.alerts)
-                .set('timeSinceLastAlert', alertObject.timeSinceLastAlert)
+                .set('alerts', action.payload.newAlerts)
+                .set('timeSinceLastAlert', action.payload.timeSinceLastAlert)
                 .toJS();
         case UPDATE_TODAY_STATS:
             state = fromJS(state);
@@ -46,3 +39,4 @@ export default function (state = initialState, action) {
             return state;
     }
 }
+

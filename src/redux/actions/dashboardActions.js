@@ -1,4 +1,5 @@
 import { fetchRealtimeData, fetchTodayStats, loadThresholds } from "../../repositories/dashboardRepository";
+import { checkAlerts } from "./alertActions";
 
 export const ON_GAUGE_SELECT = 'ON_GAUGE_SELECT';
 export const UPDATE_REALTIME_DATA = 'UPDATE_REALTIME_DATA';
@@ -35,6 +36,7 @@ export function getRealTimeData() {
             const currentSelectedBranchIdx = getState().topbar.selectedBranchIdx;
             if (currentSelectedBranchIdx === selectedBranchIdx) {
                 dispatch(updateRealtimeData(response));
+                dispatch(checkAlerts(response));
             }
         })
     }
