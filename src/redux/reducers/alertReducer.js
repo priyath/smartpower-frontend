@@ -15,6 +15,7 @@ const initialState = {
     },
     thresholds: null,
     persistedAlertList: [],
+    alertsLoaded: false,
 };
 
 export default function (state = initialState, action) {
@@ -40,6 +41,7 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             return state
                 .set('persistedAlertList', action.payload.data)
+                .set('alertsLoaded', true)
                 .toJS();
         default:
             return state;

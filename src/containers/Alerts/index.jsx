@@ -17,7 +17,7 @@ class Alerts extends Component {
     }
 
     render() {
-        const { t, alertList } = this.props;
+        const { t, alertList, alertsLoaded } = this.props;
         return (
             <Container>
                 <Row>
@@ -29,7 +29,7 @@ class Alerts extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <AlertTable/>
+                    {alertsLoaded ? <AlertTable/> : <div className="loader"><p>Loading..</p></div>}
                 </Row>
             </Container>
     )
@@ -41,7 +41,8 @@ Alerts.propTypes = {
 
 const mapStateToProps = (state) => ({
     rtl: state.rtl,
-    alertList: state.alert.persistedAlertList
+    alertList: state.alert.persistedAlertList,
+    alertsLoaded: state.alert.alertsLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({
