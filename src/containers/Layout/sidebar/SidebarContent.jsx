@@ -24,6 +24,7 @@ class SidebarContent extends Component {
           <SidebarLink title="History" icon="home" route="/history" onClick={this.hideSidebar} />
           <SidebarLink title="Branch Summary" icon="home" route="/branches" onClick={this.hideSidebar} />
           <SidebarLink title="Locations" icon="home" route="/locations" onClick={this.hideSidebar} />
+          <SidebarLink title="Alerts" icon="home" route="/alerts" onClick={this.hideSidebar} />
           <SidebarCategory title="Control Panel" icon="menu">
             <SidebarLink title="User List" route="/control_panel/users" onClick={this.hideSidebar} />
             <SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />

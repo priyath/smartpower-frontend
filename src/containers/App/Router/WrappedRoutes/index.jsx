@@ -7,6 +7,7 @@ import Branches from '../../../Branches/index';
 import Locations from '../../../Locations/index';
 import UserList from '../../../ControlPanel/UserList/index';
 import UserAdd from '../../../ControlPanel/Add/index';
+import Alerts from '../../../Alerts/index';
 import {compose} from "redux";
 import {withTranslation} from "react-i18next";
 import {connect} from "react-redux";
@@ -30,6 +31,7 @@ class WrappedRoutes extends Component {
                         <Route path="/history" component={History}/>
                         <Route path="/branches" component={Branches}/>
                         <Route path="/locations" component={Locations}/>
+                        <Route path="/alerts" component={Alerts}/>
                         <Route path="/control_panel/users" component={UserList}/>
                         <Route path="/control_panel/users_add" component={UserAdd}/>
                     </div>

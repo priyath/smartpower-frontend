@@ -65,7 +65,8 @@
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "url-loader": "1.1.2",
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "lodash.range": "^3.2.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
