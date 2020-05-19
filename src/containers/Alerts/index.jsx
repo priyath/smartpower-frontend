@@ -6,6 +6,7 @@ import AlertTable from './components/AlertTable';
 import {fetchAlerts} from "../../redux/actions/alertActions";
 import {compose} from "redux";
 import {connect} from "react-redux";
+import WithLoading from "../App/Router/WrappedRoutes/HOCLoader";
 
 class Alerts extends Component {
     constructor() {
@@ -18,6 +19,7 @@ class Alerts extends Component {
 
     render() {
         const { t, alertList, alertsLoaded } = this.props;
+        const AlertWithLoading = WithLoading(AlertTable);
         return (
             <Container>
                 <Row>
@@ -29,7 +31,7 @@ class Alerts extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    {alertsLoaded ? <AlertTable/> : <div className="loader"><p>Loading..</p></div>}
+                    <AlertWithLoading isLoading={!(alertsLoaded)}/>
                 </Row>
             </Container>
     )
