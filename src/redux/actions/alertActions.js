@@ -1,8 +1,9 @@
 import {retrieveNewAlerts, transformAlertToPersist} from '../../logic/alertManager';
-import {persistAlertToDatabase} from '../../repositories/alertRepository';
+import {persistAlertToDatabase, fetchAlertsFromDatabase} from '../../repositories/alertRepository';
 
 export const DISMISS_ALERT = 'DISMISS_ALERT';
 export const ADD_NEW_ALERTS = 'ADD_NEW_ALERTS';
+export const SET_PERSISTED_ALERTS = 'SET_PERSISTED_ALERTS';
 
 export function onDismissAlert(alertId) {
     return {
@@ -37,5 +38,22 @@ export function checkAlerts(realtimeDataResponse) {
                 });
             })
         }
+    }
+}
+
+export function setPersistedAlerts(alertListResponse) {
+    return {
+        type: SET_PERSISTED_ALERTS,
+        payload: alertListResponse,
+    };
+}
+
+export function fetchAlerts() {
+    return (dispatch, getState) => {
+        const selectedBranchIdx = getState().topbar.selectedBranchIdx;
+        const location = getState().topbar.branchDetails[selectedBranchIdx].location;
+        fetchAlertsFromDatabase(location).then((response) => {
+            dispatch(setPersistedAlerts(response))
+        })
     }
 }

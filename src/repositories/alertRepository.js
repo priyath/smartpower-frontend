@@ -20,3 +20,10 @@ export const persistAlertToDatabase = (filter) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const fetchAlertsFromDatabase = (filter) => {
+    let formData = {calltype: 'Alerts-Log-CP', filter: filter};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};

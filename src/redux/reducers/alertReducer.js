@@ -1,4 +1,4 @@
-import {DISMISS_ALERT, ADD_NEW_ALERTS} from '../actions/alertActions';
+import {DISMISS_ALERT, ADD_NEW_ALERTS, SET_PERSISTED_ALERTS} from '../actions/alertActions';
 import {removeAlert} from '../../logic/alertManager';
 import { fromJS } from 'immutable';
 import {UPDATE_TODAY_STATS} from "../actions/dashboardActions";
@@ -14,6 +14,7 @@ const initialState = {
         'Power Factor Phase 1': 0,
     },
     thresholds: null,
+    persistedAlertList: [],
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +35,11 @@ export default function (state = initialState, action) {
             const thresholdResponse = action.payload.thresholdResponse;
             return state
                 .set('thresholds', thresholdResponse.data)
+                .toJS();
+        case SET_PERSISTED_ALERTS:
+            state = fromJS(state);
+            return state
+                .set('persistedAlertList', action.payload.data)
                 .toJS();
         default:
             return state;
