@@ -59,6 +59,7 @@ export const buildNotification = (datapoint, scantype) => {
     let d = new Date();
     let h = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
     let m = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+    let s = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
     return {
         id: uuidv4(),
         ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.jpg`,

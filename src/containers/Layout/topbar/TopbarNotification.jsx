@@ -57,7 +57,7 @@ export default class TopbarNotification extends PureComponent {
                             <p className="topbar__collapse-date">{notification.date}</p>
                         </div>
                     ))}
-                    <Link className="topbar__collapse-link" to="/dashboard" onClick={this.toggle}>
+                    <Link className="topbar__collapse-link" to="/alerts" onClick={this.toggle}>
                         See all notifications
                     </Link>
                 </Collapse>

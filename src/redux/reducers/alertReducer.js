@@ -27,8 +27,9 @@ export default function (state = initialState, action) {
                 .toJS();
         case ADD_NEW_ALERTS:
             state = fromJS(state);
+            const alerts = state.get('alerts').toJS();
             return state
-                .set('alerts', action.payload.newAlerts)
+                .set('alerts', alerts.concat(action.payload.newAlerts))
                 .set('timeSinceLastAlert', action.payload.timeSinceLastAlert)
                 .toJS();
         case UPDATE_TODAY_STATS:
