@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  console.log('sider bar reduer');
   switch (action.type) {
     case CHANGE_SIDEBAR_VISIBILITY:
       return { ...state, collapse: !state.collapse };
