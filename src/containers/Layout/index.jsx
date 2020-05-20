@@ -53,6 +53,13 @@ class Layout extends Component {
     dispatch(loadBranchDetails());
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (!nextProps.topbar.initialLoad){
+      const { dispatch } = this.props;
+      dispatch(loadBranchDetails());
+    }
+  }
+
   render() {
     const { sidebar, topbar, alert } = this.props;
     const layoutClass = classNames({

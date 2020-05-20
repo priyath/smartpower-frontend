@@ -62,7 +62,7 @@ export const buildNotification = (datapoint, scantype) => {
     let s = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
     return {
         id: uuidv4(),
-        ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.png`,
+        ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.jpg`,
         name: scantype,
         message: ' has exceeded threshold.',
         date: h + ":" + m + ":" + s,
