@@ -31,7 +31,7 @@ class Alerts extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <AlertWithLoading isLoading={!(alertsLoaded)}/>
+                    <AlertWithLoading isLoading={!(alertsLoaded)} alertList={alertList}/>
                 </Row>
             </Container>
     )

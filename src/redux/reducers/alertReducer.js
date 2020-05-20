@@ -2,6 +2,7 @@ import {DISMISS_ALERT, ADD_NEW_ALERTS, SET_PERSISTED_ALERTS} from '../actions/al
 import {removeAlert} from '../../logic/alertManager';
 import { fromJS } from 'immutable';
 import {UPDATE_TODAY_STATS} from "../actions/dashboardActions";
+import {UPDATE_BRANCH_SELECTION} from "../actions/topbarActions";
 
 const initialState = {
     alerts: [],
@@ -43,6 +44,10 @@ export default function (state = initialState, action) {
             return state
                 .set('persistedAlertList', action.payload.data)
                 .set('alertsLoaded', true)
+                .toJS();
+        case UPDATE_BRANCH_SELECTION:
+            return fromJS(state)
+                .set('alertsLoaded', false)
                 .toJS();
         default:
             return state;
