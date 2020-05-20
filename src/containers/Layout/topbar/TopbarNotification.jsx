@@ -18,7 +18,8 @@ export default class TopbarNotification extends PureComponent {
     }
 
     render() {
-        const { alerts } = this.props.alert;
+        const { alert, location } = this.props;
+        const alerts = alert.alerts;
 
         //avoid state mutation
         const clonedAlerts = alerts.slice();
@@ -49,8 +50,9 @@ export default class TopbarNotification extends PureComponent {
                                 <img className="topbar__collapse-img" src={notification.ava} alt="" />
                             </div>
                             <p className="topbar__collapse-message">
-                                <span className="topbar__collapse-name">{notification.name}</span>
-                                {notification.message}
+                                <span className="topbar__collapse-name">{location}</span>&nbsp;|&nbsp;
+                                <span className="topbar__collapse-name">{notification.name}</span>&nbsp;|&nbsp;
+                                <span className="topbar__collapse-name-reading">{notification.reading}</span>
                             </p>
                             <p className="topbar__collapse-date">{notification.date}</p>
                         </div>

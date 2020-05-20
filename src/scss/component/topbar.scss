@@ -271,7 +271,7 @@
 }
 
 .topbar__collapse-content {
-  width: 270px;
+  width: 475px;
   position: absolute;
   right: 0;
   bottom: 20px;
@@ -295,7 +295,7 @@
   }
 
   @media screen and (min-width: 520px) {
-    width: 330px;
+    width: 475px;
   }
 }
 
@@ -399,7 +399,14 @@
   margin: 0;
   font-size: 12px;
   line-height: 16px;
-  color: $color-accent;
+  color: $color-gray;
+}
+
+.topbar__collapse-name-reading {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #992e2e;
 }
 
 .topbar__collapse-date {
@@ -415,7 +422,7 @@
   display: block;
   padding: 10px;
   text-transform: uppercase;
-  color: $color-accent;
+  color: $color-gray;
   transition: 0.3s;
   text-align: center;
   font-weight: 500;

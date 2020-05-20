@@ -21,6 +21,7 @@ class Topbar extends PureComponent {
     const { topbar, alert, changeMobileSidebarVisibility, changeSidebarVisibility, dismissAlert } = this.props;
     const branchDetails = topbar.branchDetails;
     const selectedBranchIdx = topbar.selectedBranchIdx;
+    const location = branchDetails ? branchDetails[selectedBranchIdx].location : '';
 
     return (
       <div className="topbar">
@@ -36,7 +37,7 @@ class Topbar extends PureComponent {
                 branchDetails ?
                   <div>
                     <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-                      <p className="topbar__branch_selection_label">{branchDetails[selectedBranchIdx].location}<ChevronDownIcon /></p>
+                      <p className="topbar__branch_selection_label">{location}<ChevronDownIcon /></p>
                     </DropdownToggle>
                     <DropdownMenu>
                       {
@@ -55,7 +56,7 @@ class Topbar extends PureComponent {
             </UncontrolledDropdown>
           </div>
           <div className="topbar__right">
-            <TopbarNotification alert={alert} dismissAlert={dismissAlert} />
+            <TopbarNotification alert={alert} dismissAlert={dismissAlert} location={location} />
             <TopbarProfile />
           </div>
         </div>
