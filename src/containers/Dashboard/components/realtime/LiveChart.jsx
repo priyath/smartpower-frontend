@@ -9,7 +9,7 @@ export default class LiveChart extends React.Component {
     timer;
 
     constructor (props) {
-        super();
+        super(props);
         this.chartComponent = React.createRef();
         this.options = {
             chartOptions: {
@@ -60,7 +60,7 @@ export default class LiveChart extends React.Component {
                 },
                 series: [{
                     showInLegend: false,
-                    data: [0,0,0,0,0,0,0,0,0,0],
+                    data: props.data.realtimeData,
                     pointStart: Date.now(),
                     pointInterval: 1666
                 }],
