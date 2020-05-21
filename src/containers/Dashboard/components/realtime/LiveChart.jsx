@@ -38,10 +38,10 @@ export default class LiveChart extends React.Component {
                         formatter: function () {
                             return this.value;
                         }
-                    }
+                    },
                 },
                 tooltip: {
-                    pointFormat: 'Value: <b>{point.y:,.0f}</b>'
+                    pointFormat: 'Value: <b>{point.y:,.2f}</b>'
                 },
                 plotOptions: {
                     area: {
@@ -56,14 +56,41 @@ export default class LiveChart extends React.Component {
                                 }
                             }
                         }
+                    },
+                    line: {
+                        pointStart: Date.now(),
+                        marker: {
+                            enabled: false,
+                            symbol: 'circle',
+                            radius: 1,
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
+                            }
+                        }
                     }
                 },
-                series: [{
-                    showInLegend: false,
-                    data: props.data.realtimeData,
-                    pointStart: Date.now(),
-                    pointInterval: 1666
-                }],
+                series: [
+                    {
+                        showInLegend: false,
+                        data: props.data.realtimeData,
+                        pointStart: Date.now(),
+                        pointInterval: 1666
+                    },
+                    {
+                        type: 'line',
+                        data: [250,250,250,250,250,250,250,250,250,250],
+                        pointStart: Date.now(),
+                        pointInterval: 1666,
+                    },
+                    {
+                        type: 'line',
+                        data: [200,200,200,200,200,200,200,200,200,200],
+                        pointStart: Date.now(),
+                        pointInterval: 1666,
+                    }
+                ],
                 selectedGaugeIdx: null,
                 selectedBranchIdx: null,
             },
@@ -97,6 +124,8 @@ export default class LiveChart extends React.Component {
         if(selectedGaugeIdx === previousSelectedGaugeIdx) {
             const y = realtimeData[realtimeData.length - 1];
             chart.series[0].addPoint(y, true, true);
+            chart.series[1].addPoint(250, true, true);
+            chart.series[2].addPoint(200, true, true);
         }
         //gauge changed
         else {

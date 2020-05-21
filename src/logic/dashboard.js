@@ -55,3 +55,27 @@ export const getTodayStats = (existing, updated) => {
     updated.maxVoltage = updated.maxVoltage ? updated.maxVoltage : 0;
     return extend({},existing,updated);
 };
+
+export const getThresholdFromScantype = (thresholdData, scanType) => {
+    for(let i=0; i < thresholdData.length; i++){
+        if (thresholdData[i].scantypeid === scanType){
+            return thresholdData[i];
+        }
+    }
+    return null;
+}
+
+export const updateGaugesWithThresholdInfo = (gauges, thresholdData) => {
+    return gauges.map(gauge => {
+        const threshold = getThresholdFromScantype(thresholdData, gauge.title);
+        if (threshold) {
+            gauge.upperThreshold = threshold.upperthreshold;
+            gauge.lowerThreshold = threshold.lowerthreshold;
+        }
+        return gauge;
+    })
+};
+
+export const getScaleValues = (min, max) => {
+
+}

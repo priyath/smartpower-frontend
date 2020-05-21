@@ -1,5 +1,5 @@
 import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from '../actions/dashboardActions';
-import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats } from '../../logic/dashboard';
+import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats, updateGaugesWithThresholdInfo } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
 import { UPDATE_BRANCH_SELECTION, LOAD_BRANCH_DETAILS } from "../actions/topbarActions";
@@ -13,13 +13,14 @@ const initialState = {
         cost: 14500,
     },
     thresholds: null,
+    //TODO load gauges from backend
     gauges: [
-        {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:0, realtimeData},
-        {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:0, realtimeData},
-        {id: 3, selected: false, title: 'Voltage L N avg', avatar:'G3', value:0, realtimeData},
-        {id: 4, selected: false, title: 'Power Factor Average', avatar:'G4', value:0, realtimeData},
-        {id: 5, selected: false, title: 'Power Factor Phase 1', avatar:'G5', value:0, realtimeData},
-        {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:0, realtimeData},
+        {id: 1, selected: true, title: 'Frequency', avatar:'G1', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
+        {id: 2, selected: false, title: 'Active Power Phase 1', avatar:'G2', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
+        {id: 3, selected: false, title: 'Voltage L N avg', avatar:'G3', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
+        {id: 4, selected: false, title: 'Power Factor Average', avatar:'G4', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
+        {id: 5, selected: false, title: 'Power Factor Phase 1', avatar:'G5', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
+        {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
     ],
     selectedGaugeIdx: 0,
     initialLoad: false,
@@ -49,14 +50,19 @@ export default function (state = initialState, action) {
         case UPDATE_TODAY_STATS:
             state = fromJS(state);
             const todayStats = state.get('todayStats').toJS();
-            const thresholdResponse = action.payload.thresholdResponse;
+            const gauges = state.get('gauges').toJS();
+
+            const thresholdData = action.payload.thresholdResponse.data;
             const statsResponse = action.payload.statsResponse;
             const rawStats = statsResponse.data[0];
+
             const updatedStats = getTodayStats(todayStats,rawStats);
+            const updatedGauges = updateGaugesWithThresholdInfo(gauges, thresholdData);
             return state
                 .set('todayStats', updatedStats)
                 .set('dashboardLoad', true)
-                .set('thresholds', thresholdResponse.data)
+                .set('thresholds', thresholdData)
+                .set('gauges', updatedGauges)
                 .toJS();
         case LOAD_BRANCH_DETAILS:
             return fromJS(state)

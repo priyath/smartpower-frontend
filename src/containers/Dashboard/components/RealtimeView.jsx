@@ -13,7 +13,7 @@ class RealtimeView extends Component {
     }
 
     render() {
-        const { gauges, selectedGaugeIdx, t, onGaugeSelect } = this.props;
+        const { gauges, thresholds, selectedGaugeIdx, t, onGaugeSelect } = this.props;
         return (
             <Row>
                 <Panel md={12} lg={12} xl={5} sm={12} xs={12}  title={t('dashboard.main_gauges')}>
@@ -23,6 +23,7 @@ class RealtimeView extends Component {
                     data={gauges[selectedGaugeIdx]}
                     getRealTimeData={this.props.getRealTimeData}
                     selectedGaugeIdx={selectedGaugeIdx} // TODO: read this from the selected gauge itself
+                    thresholds={thresholds}
                 />
             </Row>
         );

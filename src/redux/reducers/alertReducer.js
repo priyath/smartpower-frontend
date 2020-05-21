@@ -1,5 +1,5 @@
 import {DISMISS_ALERT, ADD_NEW_ALERTS, SET_PERSISTED_ALERTS} from '../actions/alertActions';
-import {removeAlert} from '../../logic/alertManager';
+import {removeAlert, getThresholdMap} from '../../logic/alertManager';
 import { fromJS } from 'immutable';
 import {UPDATE_TODAY_STATS} from "../actions/dashboardActions";
 import {UPDATE_BRANCH_SELECTION} from "../actions/topbarActions";
@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             const thresholdResponse = action.payload.thresholdResponse;
             return state
-                .set('thresholds', thresholdResponse.data)
+                .set('thresholds', getThresholdMap(thresholdResponse.data))
                 .toJS();
         case SET_PERSISTED_ALERTS:
             state = fromJS(state);

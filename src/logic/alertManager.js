@@ -114,3 +114,7 @@ export const retrieveNewAlerts = (thresholds, realtimeData, timeSinceLastAlert) 
 export const transformAlertToPersist = (alert) => {
     console.log('ALERT: ', alert);
 }
+
+export const getThresholdMap = (data) => {
+    return data;
+}
