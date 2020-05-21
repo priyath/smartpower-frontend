@@ -2,6 +2,7 @@ import React from 'react';
 import HighchartsReact from 'highcharts-react-official';
 import Panel from "../../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
+import {getThresholdData} from "../../../../logic/dashboard";
 
 export default class LiveChart extends React.Component {
     chartComponent;
@@ -80,13 +81,13 @@ export default class LiveChart extends React.Component {
                     },
                     {
                         type: 'line',
-                        data: [250,250,250,250,250,250,250,250,250,250],
+                        data: getThresholdData(props.data.upperThreshold),
                         pointStart: Date.now(),
                         pointInterval: 1666,
                     },
                     {
                         type: 'line',
-                        data: [200,200,200,200,200,200,200,200,200,200],
+                        data: getThresholdData(props.data.lowerThreshold),
                         pointStart: Date.now(),
                         pointInterval: 1666,
                     }
@@ -123,15 +124,18 @@ export default class LiveChart extends React.Component {
         //unchanged updates
         if(selectedGaugeIdx === previousSelectedGaugeIdx) {
             const y = realtimeData[realtimeData.length - 1];
-            chart.series[0].addPoint(y, true, true);
-            chart.series[1].addPoint(250, true, true);
-            chart.series[2].addPoint(200, true, true);
+            chart.series[0].addPoint(y, false, true);
+            chart.series[1].addPoint(selectedGauge.upperThreshold, false, true);
+            chart.series[2].addPoint(selectedGauge.lowerThreshold, false, true);
+            chart.redraw();
         }
         //gauge changed
         else {
             chart.update({selectedGaugeIdx: selectedGaugeIdx}, false);
             chart.setTitle({text: selectedGauge.title});
             chart.series[0].setData(realtimeData);
+            chart.series[1].setData(getThresholdData(selectedGauge.upperThreshold));
+            chart.series[2].setData(getThresholdData(selectedGauge.lowerThreshold));
         }
         return false;
     }

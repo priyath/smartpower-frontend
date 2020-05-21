@@ -76,6 +76,14 @@ export const updateGaugesWithThresholdInfo = (gauges, thresholdData) => {
     })
 };
 
+export const getThresholdData = (value) => {
+    let data = [];
+    for (let i=0; i < 10; i++){
+        data.push(value);
+    }
+    return data;
+}
+
 export const getScaleValues = (min, max) => {
 
 }
