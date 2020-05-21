@@ -110,8 +110,8 @@ export default class AlertTable extends PureComponent {
                 location: item.location,
                 scanType: item.scantype,
                 readingValue: item.readingvalue,
-                upperThreshold: 200,
-                lowerThreshold: 0,
+                upperThreshold: item.upperthreshold,
+                lowerThreshold: item.lowerthreshold,
             };
         })
     };
@@ -172,8 +172,8 @@ export default class AlertTable extends PureComponent {
                 <Card>
                     <CardBody>
                         <div className="card__title">
-                            <h5 className="bold-text">data table</h5>
-                            <h5 className="subhead">Use table with column's option <span className="red-text">sortable</span></h5>
+                            <h5 className="bold-text">Alert Details</h5>
+                            {/*<h5 className="subhead">Use table with column's option <span className="red-text">sortable</span></h5>*/}
                         </div>
                         <DataPaginationTable
                             heads={this.heads}
