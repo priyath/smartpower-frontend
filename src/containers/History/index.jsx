@@ -3,11 +3,8 @@ import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import TodayStatus from './components/TodayStatus';
-import LiveVoltageGraph from './components/LiveVoltageGraph';
-import GraphFilter from './components/GraphFilter';
-import HistoryGraph from './components/HistoryGraph';
-import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
+import TestGraph from './components/TestGraph';
+import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
 
 const branchName = "Biyagama Branch";
 
@@ -32,11 +29,7 @@ class History extends PureComponent {
                     </Col>
                 </Row>
                 <Row>
-                    <GraphFilter/>
-                    <HistoryGraph
-                        dir={rtl.direction}
-                        theme={theme.className}
-                    />
+                    <TestGraph/>
                 </Row>
             </Container>
         );
