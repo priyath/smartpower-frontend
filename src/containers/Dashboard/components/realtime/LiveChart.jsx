@@ -2,7 +2,6 @@ import React from 'react';
 import HighchartsReact from 'highcharts-react-official';
 import Panel from "../../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
-import {getThresholdData} from "../../../../logic/dashboard";
 
 export default class LiveChart extends React.Component {
     chartComponent;
@@ -40,53 +39,6 @@ export default class LiveChart extends React.Component {
                             return this.value;
                         }
                     },
-                    plotLines: [{
-                        color: 'rgba(255,0,0,0.37)', // Color value
-                        dashStyle: 'solid', // Style of the plot line. Default to solid
-                        value: props.data.upperThreshold, // Value of where the line will appear
-                        width: 1.5, // Width of the line
-                        zIndex: 5,
-                        // style: {
-                        //     display: 'none'
-                        // },
-                        // label: {
-                        //     text: 'Upper Threshold',
-                        //     align: 'left',
-                        //     y: 20
-                        // },
-                        // events: {
-                        //     mouseover: function (e) {
-                        //         this.label.element.style.display='block';
-                        //     },
-                        //     mouseout: function (e) {
-                        //         this.label.element.style.display='none';
-                        //     }
-                        // }
-                    },
-                    {
-                        color: 'rgba(255,0,0,0.37)', // Color value
-                        dashStyle: 'solid', // Style of the plot line. Default to solid
-                        value: props.data.lowerThreshold, // Value of where the line will appear
-                        width: 1.5, // Width of the line
-                        zIndex: 5,
-                        // style: {
-                        //     display: 'none'
-                        // },
-                        // label: {
-                        //     text: 'Upper Threshold',
-                        //     align: 'left',
-                        //     y: 20
-                        // },
-                        // events: {
-                        //     mouseover: function (e) {
-                        //         this.label.element.style.display='block';
-                        //     },
-                        //     mouseout: function (e) {
-                        //         this.label.element.style.display='none';
-                        //     }
-                        // }
-                    }
-                    ]
                 },
                 tooltip: {
                     pointFormat: 'Value: <b>{point.y:,.2f}</b>'
@@ -112,10 +64,12 @@ export default class LiveChart extends React.Component {
                         data: props.data.realtimeData,
                         pointStart: Date.now(),
                         pointInterval: 1666,
+                        color: 'rgba(91,169,222,0.73)'
                     }
                 ],
                 selectedGaugeIdx: null,
                 selectedBranchIdx: null,
+                thresholdBreached: null,
             },
             timer: null
         }
@@ -142,10 +96,34 @@ export default class LiveChart extends React.Component {
         const realtimeData = selectedGauge.realtimeData;
         const selectedGaugeIdx = nextProps.selectedGaugeIdx;
         const previousSelectedGaugeIdx = chart.userOptions.selectedGaugeIdx;
+        const thresholdBreached = chart.userOptions.thresholdBreached;
+
+        const minRealtime = Math.min(...realtimeData);
+        const maxRealtime = Math.max(...realtimeData);
+
+        const y = realtimeData[realtimeData.length - 1];
+
+        chart.series[0].yAxis.update({
+            min: minRealtime - 1,
+            max: maxRealtime + 1,
+        }, false, false);
+
+        if (y > selectedGauge.upperThreshold || y < selectedGauge.lowerThreshold) {
+            chart.series[0].update({
+                color: 'rgb(187,62,62, 0.6)',
+            }, false);
+            chart.update({thresholdBreached: true}, false);
+        } else {
+            if (thresholdBreached) {
+                chart.series[0].update({
+                    color: 'rgba(91,169,222,0.73)',
+                }, false);
+                chart.update({thresholdBreached: false}, false);
+            }
+        }
 
         //unchanged updates
         if(selectedGaugeIdx === previousSelectedGaugeIdx) {
-            const y = realtimeData[realtimeData.length - 1];
             chart.series[0].addPoint(y, true, true);
         }
         //gauge changed
@@ -153,10 +131,6 @@ export default class LiveChart extends React.Component {
             chart.update({selectedGaugeIdx: selectedGaugeIdx}, false);
             chart.setTitle({text: selectedGauge.title});
             chart.series[0].setData(realtimeData);
-            chart.yAxis[0].options.plotLines[0].value = selectedGauge.upperThreshold;
-            chart.yAxis[0].options.plotLines[1].value = selectedGauge.lowerThreshold;
-            chart.yAxis[0].update();
-
         }
         return false;
     }
