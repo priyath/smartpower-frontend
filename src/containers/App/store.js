@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as reduxFormReducer } from 'redux-form';
-import { sidebarReducer, themeReducer, rtlReducer, dashboardReducer, topbarReducer, alertReducer } from '../../redux/reducers/index';
+import { sidebarReducer, themeReducer, rtlReducer, dashboardReducer, topbarReducer, alertReducer, historyReducer } from '../../redux/reducers/index';
 
 const reducer = combineReducers({
   form: reduxFormReducer, // mounted under "form",
@@ -11,6 +11,7 @@ const reducer = combineReducers({
   dashboard: dashboardReducer,
   topbar: topbarReducer,
   alert: alertReducer,
+  history: historyReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));

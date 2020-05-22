@@ -4,6 +4,7 @@ import rtlReducer from './rtlReducer';
 import dashboardReducer from './dashboardReducer';
 import topbarReducer from './topbarReducer';
 import alertReducer from './alertReducer';
+import historyReducer from './historyReducer';
 
 export {
   themeReducer,
@@ -12,4 +13,5 @@ export {
   dashboardReducer,
   topbarReducer,
   alertReducer,
+  historyReducer,
 };

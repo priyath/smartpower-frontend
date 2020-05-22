@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TestGraph from './components/TestGraph';
 import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
+import WithLoading from "../App/Router/WrappedRoutes/HOCLoader";
+import {loadHistoryData} from "../../redux/actions/historyActions";
+import {compose} from "redux";
 
 const branchName = "Biyagama Branch";
 
@@ -16,10 +19,13 @@ class History extends PureComponent {
         theme: ThemeProps.isRequired,
     };
 
+    componentDidMount() {
+        this.props.loadHistoryData();
+    }
+
     render() {
-        const {
-            t, rtl, theme,
-        } = this.props;
+        const { t, historyData, historyLoaded } = this.props;
+        const HistoryWithLoading = WithLoading(TestGraph);
 
         return (
             <Container className="history">
@@ -29,14 +35,22 @@ class History extends PureComponent {
                     </Col>
                 </Row>
                 <Row>
-                    <TestGraph/>
+                    <HistoryWithLoading historyData={historyData} isLoading={!historyLoaded}/>
                 </Row>
             </Container>
         );
     }
 }
 
-export default connect(state => ({
+const mapStateToProps = (state) => ({
     rtl: state.rtl,
+    historyLoaded: state.history.historyLoaded,
+    historyData: state.history.historyData,
     theme: state.theme,
-}))(withTranslation('common')(History));
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    loadHistoryData: () => dispatch(loadHistoryData())
+});
+
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(History);

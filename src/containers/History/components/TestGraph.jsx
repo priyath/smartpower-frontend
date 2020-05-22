@@ -1,5 +1,4 @@
 import React from 'react';
-//import HighchartsReact from 'highcharts-react-official';
 import Highcharts from "highcharts/highstock";
 import Panel from "../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
@@ -25,9 +24,15 @@ export default class LiveChart extends React.Component {
                 {
                     showInLegend: true,
                     name: 'Value',
-                    data: data,
+                    data: props.historyData,
                     tooltip: {
                         valueDecimals: 2
+                    },
+                    dataGrouping: {
+                        forced: true,
+                        units: [
+                            ['day', [1]]
+                        ]
                     }
                 },
             ]
