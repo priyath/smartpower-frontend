@@ -14,6 +14,7 @@ class ModalComponent extends PureComponent {
     header: PropTypes.bool,
     btn: PropTypes.string.isRequired,
     rtl: RTLProps.isRequired,
+    modalToggle: PropTypes.func,
   };
 
   static defaultProps = {
@@ -25,22 +26,17 @@ class ModalComponent extends PureComponent {
 
   constructor() {
     super();
-    this.state = {
-      modal: false,
-    };
-
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-    this.setState(prevState => ({ modal: !prevState.modal }));
+    this.props.modalToggle();
   }
 
   render() {
     const {
-      color, btn, title, message, colored, header, rtl,
+      color, title, message, colored, header, rtl, showModal
     } = this.props;
-    const { modal } = this.state;
     let Icon;
 
     switch (color) {
@@ -66,9 +62,8 @@ class ModalComponent extends PureComponent {
 
     return (
       <div>
-        <Button color={color} onClick={this.toggle}>{btn}</Button>
         <Modal
-          isOpen={modal}
+          isOpen={showModal}
           toggle={this.toggle}
           modalClassName={`${rtl.direction}-support`}
           className={`modal-dialog--${color} ${modalClass}`}

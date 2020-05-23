@@ -85,7 +85,7 @@ export const retrieveNewAlerts = (thresholds, realtimeData, timeSinceLastAlert) 
 
         if (isDiffGreaterThanXmins(Date.now(), lastAlertTimestamp)){
             const threshold = retrieveThresholdsBasedOnScanType(thresholds, datapoint.scantype);
-            if (datapoint.readingvalue > threshold.upperthreshold){
+            if (datapoint.readingvalue > threshold.upperthreshold || datapoint.readingvalue < threshold.lowerthreshold){
                 newAlerts.push(buildNotification(datapoint, datapoint.scantype));
                 timeSinceLastAlert[scantype] = Date.now();
             }

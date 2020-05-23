@@ -17,6 +17,7 @@ const initialState = {
     thresholds: null,
     persistedAlertList: [],
     alertsLoaded: false,
+    showModal: false,
 };
 
 export default function (state = initialState, action) {

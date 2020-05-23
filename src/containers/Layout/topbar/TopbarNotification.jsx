@@ -3,18 +3,25 @@ import React, { PureComponent } from 'react';
 import { Collapse } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import NotificationsIcon from 'mdi-react/NotificationsIcon';
+import Modal from '../../../../src/shared/components/Modal';
 
 export default class TopbarNotification extends PureComponent {
     state = {
         collapse: false,
+        modal: false,
     };
 
     toggle = () => {
         this.setState(prevState => ({ collapse: !prevState.collapse }));
     };
 
+    modalToggle() {
+        this.setState(prevState => ({ modal: !prevState.modal }));
+    }
+
     removeAlert = (index) => {
         this.props.dismissAlert(index);
+        this.modalToggle();
     }
 
     render() {
@@ -42,7 +49,6 @@ export default class TopbarNotification extends PureComponent {
                 >
                     <div className="topbar__collapse-title-wrap">
                         <p className="topbar__collapse-title">Notifications</p>
-                        <button className="topbar__collapse-button" type="button">Mark all as read</button>
                     </div>
                     {clonedAlerts.map((notification, index) => (
                         <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(notification.id)}>
@@ -57,6 +63,15 @@ export default class TopbarNotification extends PureComponent {
                             <p className="topbar__collapse-date">{notification.date}</p>
                         </div>
                     ))}
+                    <Modal
+                        color="danger"
+                        title="Stop!"
+                        colored
+                        showModal={this.state.modal}
+                        modalToggle={this.modalToggle.bind(this)}
+                        message="Expect warmly its tended garden him esteem had remove off. Effects dearest staying
+                   now sixteen nor improve."
+                    />
                     <Link className="topbar__collapse-link" to="/alerts" onClick={this.toggle}>
                         See all notifications
                     </Link>
