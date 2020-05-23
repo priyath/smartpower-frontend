@@ -8,6 +8,7 @@ const initialState = {
     branchDetails: null,
     selectedBranchIdx: 0,
     initialLoad: false,
+    selectedBranchName: ''
 };
 
 export default function (state = initialState, action) {
@@ -16,9 +17,14 @@ export default function (state = initialState, action) {
             return fromJS(state)
                 .set('branchDetails', action.payload.data)
                 .set('initialLoad', true)
+                .set('selectedBranchName', action.payload.data[0].location)
                 .toJS();
         case UPDATE_BRANCH_SELECTION:
-            return fromJS(state).set('selectedBranchIdx', action.payload).toJS();
+            state = fromJS(state);
+            return state
+                .set('selectedBranchIdx', action.payload)
+                .set('selectedBranchName', state.get('branchDetails')[action.payload].location)
+                .toJS();
         default:
             return state;
     }

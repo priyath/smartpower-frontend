@@ -9,8 +9,6 @@ import WithLoading from "../App/Router/WrappedRoutes/HOCLoader";
 import {loadHistoryData} from "../../redux/actions/historyActions";
 import {compose} from "redux";
 
-const branchName = "Biyagama Branch";
-
 class History extends PureComponent {
     static propTypes = {
         t: PropTypes.func.isRequired,
@@ -24,14 +22,14 @@ class History extends PureComponent {
     }
 
     render() {
-        const { t, historyData, historyLoaded } = this.props;
+        const { t, historyData, historyLoaded, selectedBranchName } = this.props;
         const HistoryWithLoading = WithLoading(TestGraph);
 
         return (
             <Container className="history">
                 <Row>
                     <Col md={12}>
-                        <h3 className="page-title">{branchName}</h3>
+                        <h3 className="page-title">{selectedBranchName}</h3>
                     </Col>
                 </Row>
                 <Row>
@@ -47,6 +45,7 @@ const mapStateToProps = (state) => ({
     historyLoaded: state.history.historyLoaded,
     historyData: state.history.historyData,
     theme: state.theme,
+    selectedBranchName: state.topbar.selectedBranchName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
