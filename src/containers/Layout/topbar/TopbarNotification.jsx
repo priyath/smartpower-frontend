@@ -4,24 +4,31 @@ import { Collapse } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import NotificationsIcon from 'mdi-react/NotificationsIcon';
 import Modal from '../../../../src/shared/components/Modal';
+import {buildModalMessage} from '../../../../src/logic/alertManager';
 
 export default class TopbarNotification extends PureComponent {
     state = {
         collapse: false,
         modal: false,
+        modalMessage: '',
     };
 
     toggle = () => {
         this.setState(prevState => ({ collapse: !prevState.collapse }));
     };
 
-    modalToggle() {
-        this.setState(prevState => ({ modal: !prevState.modal }));
+    modalToggle(notification) {
+        this.setState(prevState => (
+            {
+                modal: !prevState.modal,
+                modalMessage: notification ? buildModalMessage(notification) : ''
+
+            }));
     }
 
-    removeAlert = (index) => {
-        this.props.dismissAlert(index);
-        this.modalToggle();
+    removeAlert = (notification) => {
+        this.props.dismissAlert(notification.id);
+        this.modalToggle(notification);
     }
 
     render() {
@@ -51,7 +58,7 @@ export default class TopbarNotification extends PureComponent {
                         <p className="topbar__collapse-title">Notifications</p>
                     </div>
                     {clonedAlerts.map((notification, index) => (
-                        <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(notification.id)}>
+                        <div className="topbar__collapse-item" key={index} onClick={() => this.removeAlert(notification)}>
                             <div className="topbar__collapse-img-wrap">
                                 <img className="topbar__collapse-img" src={notification.ava} alt="" />
                             </div>
@@ -65,12 +72,11 @@ export default class TopbarNotification extends PureComponent {
                     ))}
                     <Modal
                         color="danger"
-                        title="Stop!"
+                        title="Threshold Breached"
                         colored
                         showModal={this.state.modal}
                         modalToggle={this.modalToggle.bind(this)}
-                        message="Expect warmly its tended garden him esteem had remove off. Effects dearest staying
-                   now sixteen nor improve."
+                        message={this.state.modalMessage}
                     />
                     <Link className="topbar__collapse-link" to="/alerts" onClick={this.toggle}>
                         See all notifications

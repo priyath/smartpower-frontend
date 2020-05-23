@@ -77,7 +77,6 @@ class ModalComponent extends PureComponent {
             {message}
           </div>
           <ButtonToolbar className="modal__footer">
-            <Button className="modal_cancel" onClick={this.toggle}>Cancel</Button>{' '}
             <Button className="modal_ok" outline={colored} color={color} onClick={this.toggle}>Ok</Button>
           </ButtonToolbar>
         </Modal>

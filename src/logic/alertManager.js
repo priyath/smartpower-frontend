@@ -55,7 +55,7 @@ export const retrieveThresholdsBasedOnScanType = (thresholds, scantype) => {
 // secondaryemail: ""
 // cameraurl: ""
 
-export const buildNotification = (datapoint, scantype) => {
+export const buildNotification = (datapoint) => {
     let d = new Date();
     let h = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
     let m = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
@@ -63,10 +63,13 @@ export const buildNotification = (datapoint, scantype) => {
     return {
         id: uuidv4(),
         ava: `${process.env.PUBLIC_URL}/img/topbar/ava2.jpg`,
-        name: scantype,
+        name: datapoint.scantype,
         reading: datapoint.readingvalue,
         message: ' has exceeded threshold.',
         date: h + ":" + m,
+        upperThreshold: datapoint.upperthreshold,
+        lowerThreshold: datapoint.lowerthreshold,
+        location: datapoint.location,
     }
 }
 
@@ -86,7 +89,7 @@ export const retrieveNewAlerts = (thresholds, realtimeData, timeSinceLastAlert) 
         if (isDiffGreaterThanXmins(Date.now(), lastAlertTimestamp)){
             const threshold = retrieveThresholdsBasedOnScanType(thresholds, datapoint.scantype);
             if (datapoint.readingvalue > threshold.upperthreshold || datapoint.readingvalue < threshold.lowerthreshold){
-                newAlerts.push(buildNotification(datapoint, datapoint.scantype));
+                newAlerts.push(buildNotification(datapoint));
                 timeSinceLastAlert[scantype] = Date.now();
             }
         }
@@ -117,4 +120,8 @@ export const transformAlertToPersist = (alert) => {
 
 export const getThresholdMap = (data) => {
     return data;
+}
+
+export const buildModalMessage = (notification) => {
+    return `${notification.name} reading is ${notification.reading} at ${notification.location}. Upper Threshold: ${notification.upperThreshold} Lower Threshold: ${notification.lowerThreshold}`
 }
