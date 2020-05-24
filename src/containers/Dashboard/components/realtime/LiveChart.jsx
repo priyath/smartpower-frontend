@@ -104,7 +104,7 @@ export default class LiveChart extends React.Component {
         const y = realtimeData[realtimeData.length - 1];
 
         chart.series[0].yAxis.update({
-            min: minRealtime - 1,
+            min: minRealtime === 0 ? minRealtime : minRealtime - 1,
             max: maxRealtime + 1,
         }, false, false);
 
