@@ -27,6 +27,13 @@ export const fetchTodayStats = (location) => {
         .then(response => response);
 };
 
+export const fetchTodayConsumption = (location) => {
+    let formData = {calltype: 'Today-Data', filter: location};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};
+
 export const loadThresholds = (location) => {
     let formData = {calltype: 'Load-Thresholds', filter: ''};
 

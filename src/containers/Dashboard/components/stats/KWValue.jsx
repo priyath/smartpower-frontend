@@ -49,7 +49,7 @@ class KWValue extends PureComponent {
               <h5 className="bold-text">{t('dashboard.current_month_kwh_value')}</h5>
             </div>
             <div className="dashboard__total dashboard__cost">
-              {consumption}
+              {consumption} kWh
             </div>
           </CardBody>
         </Card>

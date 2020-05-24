@@ -53,6 +53,8 @@ export const randomizeData = (data) => {
 export const getTodayStats = (existing, updated) => {
     updated.minVoltage = updated.minVoltage ? updated.minVoltage : 0;
     updated.maxVoltage = updated.maxVoltage ? updated.maxVoltage : 0;
+    updated.peak = updated.todayPeakKW ? updated.todayPeakKW : 0;
+    updated.consumption = updated.todayEnergy ? updated.todayEnergy : 0;
     return extend({},existing,updated);
 };
 

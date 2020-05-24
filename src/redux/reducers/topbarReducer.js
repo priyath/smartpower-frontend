@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             return state
                 .set('selectedBranchIdx', action.payload)
-                .set('selectedBranchName', state.get('branchDetails')[action.payload].location)
+                .set('selectedBranchName', state.get('branchDetails').get(action.payload).location)
                 .toJS();
         default:
             return state;

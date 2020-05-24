@@ -2,8 +2,8 @@
   "dashboard": {
     "page_title": "Dashboard",
     "visits":  "Visits",
-    "current_month_kwh_value":  "1st - 25th Jan 2020",
-    "cost":  "Cost",
+    "current_month_kwh_value":  "month Consumption",
+    "cost":  "Month Cost",
     "bounce_rate":  "Bounce rate",
     "ab_testing":  "A/B testing analytics",
     "visitors_sessions":  "Visitor sessions",

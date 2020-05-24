@@ -10,7 +10,7 @@ const initialState = {
         minVoltage: 0,
         maxVoltage: 0,
         consumption: 500,
-        cost: 14500,
+        cost: 0,
     },
     thresholds: null,
     //TODO load gauges from backend
@@ -54,9 +54,11 @@ export default function (state = initialState, action) {
 
             const thresholdData = action.payload.thresholdResponse.data;
             const statsResponse = action.payload.statsResponse;
+            const dataResponse = action.payload.dataResponse;
             const rawStats = statsResponse.data[0];
+            const rawData = dataResponse.data[0];
 
-            const updatedStats = getTodayStats(todayStats,rawStats);
+            const updatedStats = getTodayStats(todayStats,rawStats, rawData);
             const updatedGauges = updateGaugesWithThresholdInfo(gauges, thresholdData);
             return state
                 .set('todayStats', updatedStats)
