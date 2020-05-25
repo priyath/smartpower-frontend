@@ -104,8 +104,8 @@ export default class LiveChart extends React.Component {
         const y = realtimeData[realtimeData.length - 1];
 
         chart.series[0].yAxis.update({
-            min: minRealtime === 0 ? minRealtime : minRealtime - 1,
-            max: maxRealtime + 1,
+            min: minRealtime === 0 ? minRealtime : minRealtime - 0.1,
+            max: maxRealtime + 0.1,
         }, false, false);
 
         if (y > selectedGauge.upperThreshold || y < selectedGauge.lowerThreshold) {
