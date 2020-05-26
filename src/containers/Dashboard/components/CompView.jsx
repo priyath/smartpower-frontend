@@ -11,7 +11,7 @@ const CompView = ({ t, dir, themeName }) => {
     return (
         <Row>
             <CompControl/>
-            <Panel md={12} lg={12} xl={8} sm={12} xs={12} title={t('dashboard.comp_view')}>
+            <Panel md={12} lg={12} xl={12} sm={12} xs={12} title={t('dashboard.comp_view')}>
                 <ResponsiveContainer height={500}>
                     <CompBar/>
                 </ResponsiveContainer>

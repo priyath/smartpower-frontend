@@ -2,20 +2,15 @@ import React from "react";
 import DatePicker from "react-datepicker";
 
 class MonthPicker extends React.Component {
-    state = {
-        startDate: new Date()
-    };
 
     handleChange = date => {
-        this.setState({
-            startDate: date
-        });
+        this.props.onChangeDate(date);
     };
 
     render() {
         return (
             <DatePicker
-                selected={this.state.startDate}
+                selected={this.props.startDate}
                 onChange={this.handleChange}
                 dateFormat="MM/yyyy"
                 showMonthYearPicker
