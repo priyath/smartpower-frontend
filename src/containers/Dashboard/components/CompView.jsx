@@ -1,6 +1,7 @@
 import React from 'react';
 import Panel from "../../../shared/components/Panel";
 import CompBar from "./comparison/CompBar";
+import HighComp from "./comparison/HighComp";
 import {ResponsiveContainer} from "recharts";
 import { withTranslation } from 'react-i18next';
 import {connect} from "react-redux";
@@ -12,8 +13,8 @@ const CompView = ({ t, dir, themeName }) => {
         <Row>
             <CompControl/>
             <Panel md={12} lg={12} xl={12} sm={12} xs={12} title={t('dashboard.comp_view')}>
-                <ResponsiveContainer height={500}>
-                    <CompBar/>
+                <ResponsiveContainer height={600}>
+                    <HighComp/>
                 </ResponsiveContainer>
             </Panel>
         </Row>
