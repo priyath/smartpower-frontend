@@ -17,7 +17,7 @@ class CompControl extends PureComponent {
         super();
         this.state = {
             activeTab: '1',
-            granularity: 'month',
+            granularity: 'week',
             compareOne: new Date(),
             compareTwo: new Date(),
             type: 'kwh',
@@ -58,6 +58,10 @@ class CompControl extends PureComponent {
             granularity: this.state.granularity,
         };
         this.props.getComparisonData(comparisonFilters);
+    }
+
+    componentDidMount() {
+        this.onSubmitFilters();
     }
 
 

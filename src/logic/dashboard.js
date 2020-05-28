@@ -114,3 +114,9 @@ export const getCompKeys = (data) => {
         return keys;
     }
 }
+
+export const getCompData = (data) => {
+    return data.map(el => {
+        return el.startTime;
+    });
+}
