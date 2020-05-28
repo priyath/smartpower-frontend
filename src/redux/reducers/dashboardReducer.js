@@ -1,5 +1,5 @@
 import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS, UPDATE_COMPARISON_DATA} from '../actions/dashboardActions';
-import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats, updateGaugesWithThresholdInfo } from '../../logic/dashboard';
+import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats, updateGaugesWithThresholdInfo, getCompKeys } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
 import { UPDATE_BRANCH_SELECTION, LOAD_BRANCH_DETAILS } from "../actions/topbarActions";
@@ -25,6 +25,9 @@ const initialState = {
     selectedGaugeIdx: 0,
     initialLoad: false,
     dashboardLoad: false,
+    compKeys: [],
+    compFromData: [],
+    compToData: [],
 };
 
 export default function (state = initialState, action) {
@@ -71,8 +74,10 @@ export default function (state = initialState, action) {
                 .set('initialLoad', true)
                 .toJS();
         case UPDATE_COMPARISON_DATA:
-            console.log('COMPARISON PAYLOAD: ', action.payload);
-            return state;
+            const compKeys = getCompKeys(action.payload.data);
+            return fromJS(state)
+                .set('compKeys', compKeys)
+                .toJS();
         default:
             return state;
     }

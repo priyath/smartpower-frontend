@@ -8,7 +8,7 @@ import RealtimeView from './components/RealtimeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
 import TodayView from "./components/TodayView";
-import {getRealTimeData, initDashboardData, onGaugeSelect, getComparisonData} from "../../redux/actions/dashboardActions";
+import {initDashboardData, getComparisonData} from "../../redux/actions/dashboardActions";
 
 class Dashboard extends Component {
     constructor() {
@@ -27,8 +27,8 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx,
-            todayStats, getRealTimeData, onGaugeSelect, thresholds, getComparisonData  } = this.props;
+        const { t, initialLoad, compKeys, dashboardLoad,
+            todayStats, getComparisonData  } = this.props;
         return (
             <Container className="dashboard">
                 <Row>
@@ -43,14 +43,11 @@ class Dashboard extends Component {
                         <TodayView
                             todayStats={todayStats}
                         />
-                        <RealtimeView
-                            gauges={gauges}
-                            selectedGaugeIdx={selectedGaugeIdx}
-                            onGaugeSelect={onGaugeSelect}
-                            getRealTimeData={getRealTimeData}
-                            thresholds={thresholds}
+                        <RealtimeView/>
+                        <CompView
+                            getComparisonData={getComparisonData}
+                            compKeys={compKeys}
                         />
-                        <CompView getComparisonData={getComparisonData}/>
                     </div> : <div class="loader"><p>Loading..</p></div>
                 }
                 </div>
@@ -70,16 +67,12 @@ const mapStateToProps = (state) => ({
     dashboardLoad: state.dashboard.dashboardLoad,
     selectedBranchIdx: state.topbar.selectedBranchIdx,
     branchDetails: state.topbar.branchDetails,
-    gauges: state.dashboard.gauges,
-    selectedGaugeIdx: state.dashboard.selectedGaugeIdx,
     todayStats: state.dashboard.todayStats,
-    thresholds: state.dashboard.thresholds,
+    compKeys: state.dashboard.compKeys,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     initDashboardData: () => dispatch(initDashboardData()),
-    onGaugeSelect: (selected) => dispatch(onGaugeSelect(selected)),
-    getRealTimeData: () => dispatch(getRealTimeData()),
     getComparisonData: (comparisonFilters) => dispatch(getComparisonData(comparisonFilters)),
 });
 

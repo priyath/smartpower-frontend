@@ -97,3 +97,20 @@ export const getYearMonth = (date) => {
 
     return year + '-' + month;
 }
+
+export const getCompKeys = (data) => {
+    let keys = [];
+    try {
+        const fromDataSet = data.fromDateEnergyData;
+        const toDataSet = data.toDateEnergyData;
+
+        const arraySize = fromDataSet.length > toDataSet.length ? fromDataSet.length : toDataSet.length;
+        for (let i = 0; i < arraySize; i++) {
+            keys[i] = i + 1;
+        }
+        return keys;
+    } catch (e){
+        console.log('Something went wrong during key generation. ', e);
+        return keys;
+    }
+}

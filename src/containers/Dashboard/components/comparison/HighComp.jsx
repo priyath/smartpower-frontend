@@ -1,7 +1,4 @@
 import React from 'react';
-import Highcharts from "highcharts/highstock";
-import Panel from "../../../../shared/components/Panel";
-import {ResponsiveContainer} from "recharts";
 import HighchartsReact from "highcharts-react-official";
 
 export default class HighComp extends React.Component {
@@ -56,11 +53,22 @@ export default class HighComp extends React.Component {
         };
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (!this.chartComponent.current){
+            return false;
+        }
+        const chart = this.chartComponent.current.chart;
+        chart.xAxis[0].setCategories(nextProps.compKeys, true, false);
+
+        return false;
+    }
+
     render() {
         return (
             <HighchartsReact
                 containerProps={{style: {height: "100%"}}}
                 options={this.options}
+                ref={this.chartComponent}
             />
         )
     }
