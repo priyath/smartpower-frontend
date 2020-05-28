@@ -2,16 +2,11 @@ import React, { PureComponent } from 'react';
 import {
     Button, Card, CardBody, Col, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown,
 } from 'reactstrap';
-import classnames from 'classnames';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import CompPanel from "./CompPanel";
-import Panel from "../../../../shared/components/Panel";
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import ReloadIcon from 'mdi-react/ReloadIcon';
-import CheckIcon from 'mdi-react/CheckIcon';
-import MagnifyIcon from 'mdi-react/MagnifyIcon';
 import MonthPicker from "../../../../shared/components/MonthPicker";
+import { getYearMonth } from "../../../../logic/dashboard";
 
 class CompControl extends PureComponent {
     static propTypes = {
@@ -22,7 +17,7 @@ class CompControl extends PureComponent {
         super();
         this.state = {
             activeTab: '1',
-            granularity: 'Month',
+            granularity: 'month',
             compareOne: new Date(),
             compareTwo: new Date(),
             type: 'kwh',
@@ -55,7 +50,14 @@ class CompControl extends PureComponent {
     }
 
     onSubmitFilters = () => {
-        console.log('APPLIED');
+        const fromDate = getYearMonth(this.state.compareOne);
+        const toDate = getYearMonth(this.state.compareTwo);
+        const comparisonFilters = {
+            fromDate: fromDate,
+            toDate: toDate,
+            granularity: this.state.granularity,
+        };
+        this.props.getComparisonData(comparisonFilters);
     }
 
 
@@ -77,9 +79,9 @@ class CompControl extends PureComponent {
                                         <p>{granularity}<MenuDownIcon /></p>
                                     </DropdownToggle>
                                     <DropdownMenu className="dropdown__menu">
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'Month')}>Month</DropdownItem>
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'Week')}>Week</DropdownItem>
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'Day')}>Day</DropdownItem>
+                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'month')}>Month</DropdownItem>
+                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'week')}>Week</DropdownItem>
+                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'day')}>Day</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             </div>

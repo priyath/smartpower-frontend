@@ -1,4 +1,4 @@
-import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS} from '../actions/dashboardActions';
+import {ON_GAUGE_SELECT, UPDATE_REALTIME_DATA, UPDATE_TODAY_STATS, UPDATE_COMPARISON_DATA} from '../actions/dashboardActions';
 import { updateGaugeSelection, updateGaugeRealtimeData, getTodayStats, updateGaugesWithThresholdInfo } from '../../logic/dashboard';
 import { fromJS } from 'immutable';
 import { heartbeatInitializationData as realtimeData } from '../../constants/dashboardConstants';
@@ -70,6 +70,9 @@ export default function (state = initialState, action) {
             return fromJS(state)
                 .set('initialLoad', true)
                 .toJS();
+        case UPDATE_COMPARISON_DATA:
+            console.log('COMPARISON PAYLOAD: ', action.payload);
+            return state;
         default:
             return state;
     }

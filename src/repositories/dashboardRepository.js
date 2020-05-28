@@ -40,3 +40,10 @@ export const loadThresholds = (location) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const fetchComparisonData = ({location, fromDate, toDate, granularity}) => {
+    let formData = {calltype: 'Comparison-Data', filter: location, fromDate: fromDate, toDate: toDate, granularity: granularity};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};

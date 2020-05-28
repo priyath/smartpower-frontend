@@ -89,3 +89,11 @@ export const getThresholdData = (value) => {
 export const getScaleValues = (min, max) => {
 
 }
+
+export const getYearMonth = (date) => {
+    const year = date && date.getFullYear() ? date.getFullYear() : '2020';
+    let month = date&& date.getMonth() ? (parseInt(date.getMonth())+1) : 1;
+    month = month < 10 ? '0' + month : month;
+
+    return year + '-' + month;
+}

@@ -8,7 +8,7 @@ import RealtimeView from './components/RealtimeView';
 import { RTLProps } from '../../shared/prop-types/ReducerProps';
 import CompView from "./components/CompView";
 import TodayView from "./components/TodayView";
-import {getRealTimeData, initDashboardData, onGaugeSelect} from "../../redux/actions/dashboardActions";
+import {getRealTimeData, initDashboardData, onGaugeSelect, getComparisonData} from "../../redux/actions/dashboardActions";
 
 class Dashboard extends Component {
     constructor() {
@@ -28,7 +28,7 @@ class Dashboard extends Component {
 
     render() {
         const { t, initialLoad, dashboardLoad, gauges, selectedGaugeIdx,
-            todayStats, getRealTimeData, onGaugeSelect, thresholds  } = this.props;
+            todayStats, getRealTimeData, onGaugeSelect, thresholds, getComparisonData  } = this.props;
         return (
             <Container className="dashboard">
                 <Row>
@@ -50,7 +50,7 @@ class Dashboard extends Component {
                             getRealTimeData={getRealTimeData}
                             thresholds={thresholds}
                         />
-                        <CompView/>
+                        <CompView getComparisonData={getComparisonData}/>
                     </div> : <div class="loader"><p>Loading..</p></div>
                 }
                 </div>
@@ -80,6 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
     initDashboardData: () => dispatch(initDashboardData()),
     onGaugeSelect: (selected) => dispatch(onGaugeSelect(selected)),
     getRealTimeData: () => dispatch(getRealTimeData()),
+    getComparisonData: (comparisonFilters) => dispatch(getComparisonData(comparisonFilters)),
 });
 
 export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Dashboard);

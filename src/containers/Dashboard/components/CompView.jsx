@@ -8,10 +8,10 @@ import {connect} from "react-redux";
 import CompControl from "./comparison/CompControl";
 import { Row } from 'reactstrap';
 
-const CompView = ({ t, dir, themeName }) => {
+const CompView = ({ t, dir, themeName, getComparisonData }) => {
     return (
         <Row>
-            <CompControl/>
+            <CompControl getComparisonData={getComparisonData}/>
             <Panel md={12} lg={12} xl={12} sm={12} xs={12} title={t('dashboard.comp_view')}>
                 <ResponsiveContainer height={600}>
                     <HighComp/>
