@@ -63,7 +63,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
     rtl: state.rtl,
-    initialLoad: state.dashboard.initialLoad,
+    initialLoad: state.topbar.initialLoad,
     dashboardLoad: state.dashboard.dashboardLoad,
     selectedBranchIdx: state.topbar.selectedBranchIdx,
     branchDetails: state.topbar.branchDetails,

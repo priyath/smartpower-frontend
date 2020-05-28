@@ -23,7 +23,6 @@ const initialState = {
         {id: 6, selected: false, title: 'Current Average', avatar:'G6', value:0, upperThreshold:0, lowerThreshold: 0, realtimeData},
     ],
     selectedGaugeIdx: 0,
-    initialLoad: false,
     dashboardLoad: false,
     compKeys: [],
     compFromData: [],
@@ -68,10 +67,6 @@ export default function (state = initialState, action) {
                 .set('dashboardLoad', true)
                 .set('thresholds', thresholdData)
                 .set('gauges', updatedGauges)
-                .toJS();
-        case LOAD_BRANCH_DETAILS:
-            return fromJS(state)
-                .set('initialLoad', true)
                 .toJS();
         case UPDATE_COMPARISON_DATA:
             const compKeys = getCompKeys(action.payload.data);

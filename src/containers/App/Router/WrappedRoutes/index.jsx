@@ -45,7 +45,7 @@ class WrappedRoutes extends Component {
 
 const mapStateToProps = (state) => ({
     rtl: state.rtl,
-    initialLoad: state.dashboard.initialLoad,
+    initialLoad: state.topbar.initialLoad,
 });
 
 const mapDispatchToProps = (dispatch) => ({
