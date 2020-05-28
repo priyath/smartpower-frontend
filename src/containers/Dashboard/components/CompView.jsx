@@ -40,12 +40,6 @@ class CompView extends React.Component {
         return {
             chart: {
                 type: 'column',
-                events: {
-                    load: function(event) {
-                        console.log(event);
-                        event.userOptions.chart.showLoading();
-                    }
-                }
             },
             title: {
                 text: 'Historical Data'
