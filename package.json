@@ -29,8 +29,10 @@
     "jest-pnp-resolver": "^1.2.1",
     "jest-resolve": "^24.3.1",
     "lodash": "^4.17.15",
+    "lodash.range": "^3.2.0",
     "mdi-react": "^5.3.0",
     "mini-css-extract-plugin": "^0.5.0",
+    "moment": "^2.26.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pnp-webpack-plugin": "^1.4.1",
     "postcss-flexbugs-fixes": "^4.1.0",
@@ -65,14 +67,14 @@
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
     "url-loader": "1.1.2",
-    "uuid": "^8.0.0",
-    "lodash.range": "^3.2.0"
+    "uuid": "^8.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "deploy": "aws s3 sync build/ s3://iteq-smartpower-demo --acl public-read",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "func-test": "mocha"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
@@ -95,6 +97,7 @@
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
     "gh-pages": "^2.2.0",
+    "mocha": "^7.2.0",
     "node-sass": "^4.11.0",
     "react-hot-loader": "^4.8.0",
     "sass-loader": "7.1.0",
