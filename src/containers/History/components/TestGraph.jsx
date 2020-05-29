@@ -57,7 +57,7 @@ export default class LiveChart extends React.Component {
         this.chartComponent = React.createRef();
         this.options = {
             chart: {
-                zoomType: 'x',
+                zoomType: 'xy',
                 events: {
                     drilldown: (e) => {
                         const chart = this.chartComponent.current.chart;
@@ -68,6 +68,7 @@ export default class LiveChart extends React.Component {
                             from: e.point.from,
                             to: e.point.to,
                         }
+                        chart.showLoading('Retrieving Data...');
                         fetchHistoryDrilldownData(getHistoryFilters(metaData)).then((resp) => {
                             const transformedData = transformHistoryResponse(resp.data, metaData);
                             chart.hideLoading();
