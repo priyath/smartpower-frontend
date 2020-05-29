@@ -4,6 +4,8 @@ import drilldown from "highcharts/modules/drilldown.js";
 import Panel from "../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
 import HighchartsReact from "highcharts-react-official";
+import {transformHistoryResponse, getHistoryFilters} from "../../../logic/historyManager";
+import {fetchHistoryDrilldownData} from "../../../repositories/historyRepository";
 
 drilldown(Highcharts);
 
@@ -32,13 +34,7 @@ const getDrilldownSeries = (data) => {
     return {
         showInLegend: true,
         name: 'Value',
-        data: data.map((el)=>{
-            return {
-                x: el[0],
-                y: el[1],
-                drilldown: true,
-            }
-        }),
+        data: data,
         tooltip: {
             valueDecimals: 2
         },
@@ -64,15 +60,19 @@ export default class LiveChart extends React.Component {
                 zoomType: 'x',
                 events: {
                     drilldown: (e) => {
-                        console.log('drilldown ', e);
                         const chart = this.chartComponent.current.chart;
-                        // Show the loading label
-                        chart.showLoading('Simulating Ajax ...');
-
-                        setTimeout(function () {
+                        const metaData = {
+                            month: e.point.name,
+                            drilldown: true,
+                            step: e.point.step,
+                            from: e.point.from,
+                            to: e.point.to,
+                        }
+                        fetchHistoryDrilldownData(getHistoryFilters(metaData)).then((resp) => {
+                            const transformedData = transformHistoryResponse(resp.data, metaData);
                             chart.hideLoading();
-                            chart.addSeriesAsDrilldown(e.point, getDrilldownSeries(data2));
-                        }, 1000);
+                            chart.addSeriesAsDrilldown(e.point, getDrilldownSeries(transformedData));
+                        });
                     }
                 }
             },

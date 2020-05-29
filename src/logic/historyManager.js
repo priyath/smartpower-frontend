@@ -6,14 +6,39 @@ const comparator = (a, b) => {
     return 0;
 }
 
+const steps = {
+    'day': 86400000,
+    'hour': 3600000,
+    'min': 60000,
+}
+
+const nextStep = {
+    'month': 'day',
+    'day': 'hour',
+    'hour': 'min',
+}
+
 export const getMonthDateRange = (year, month) => {
-    return moment([year, month]).valueOf();
+    const startDate = moment([year, month]).valueOf();
+    const endDate = moment(startDate).endOf('month').valueOf();
+
+    return {startDate, endDate};
 }
 
 const createMonthBuckets = () => {
     let buckets = [];
     for (let i=0; i<12; i++){
-        buckets.push(getMonthDateRange(moment().year(), i));
+        const {startDate, endDate} = getMonthDateRange(moment().year(), i);
+        buckets.push({val: startDate, end: endDate, type: 'day'});
+    }
+    return buckets;
+}
+
+const createStepBuckets = (start, end, step, type) => {
+    let buckets = [];
+    while(start < end) {
+        buckets.push({val: start, type: type, end: (start+step)});
+        start = start + step;
     }
     return buckets;
 }
@@ -33,23 +58,48 @@ const getDataMap = (data) => {
 }
 
 
-export const transformHistoryResponse = (data) => {
+export const transformHistoryResponse = (data, meta) => {
     const historyDataMap = getDataMap(data);
-    const buckets = createMonthBuckets();
+    let buckets;
+    if (meta && meta.drilldown) {
+        //const {startDate, endDate} = getMonthDateRange(moment().year(), meta.month);
+        buckets = createStepBuckets(meta.from, meta.to, steps[meta.step], nextStep[meta.step]);
+    } else {
+        buckets = createMonthBuckets();
+    }
 
-    return buckets.map((bucket) => {
-        const dataPoint = historyDataMap[bucket];
+    return buckets.map((bucket, idx) => {
+        const dataPoint = historyDataMap[bucket.val];
         if (dataPoint) {
             return {
-                x: bucket,
+                name: idx,
+                x: bucket.val,
                 y: dataPoint.voltage_ln_average,
                 drilldown: true,
+                step: bucket.type,
+                from: bucket.val,
+                to: bucket.end,
             }
         }
         return {
-            x: bucket,
+            name: idx,
+            x: bucket.val,
             y: 0,
             drilldown: false,
+            step: bucket.type,
+            from: bucket.val,
+            to: bucket.end,
         }
     });
+    //return t;
+}
+
+export const getHistoryFilters = (meta) => {
+    return {
+        calltype: 'History-Data',
+        filter: 'LOLC Head Office -01',
+        granularity: meta.step,
+        fromDate: meta.from,
+        toDate: meta.to,
+    }
 }

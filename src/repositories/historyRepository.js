@@ -18,3 +18,8 @@ export const fetchHistoryData = (filter) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const fetchHistoryDrilldownData = (formData) => {
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};
