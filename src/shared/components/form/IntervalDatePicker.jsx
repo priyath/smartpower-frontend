@@ -2,8 +2,8 @@
 import React, { PureComponent } from 'react';
 import DatePicker from 'react-datepicker';
 import { isMobileOnly } from 'react-device-detect';
-import MinusIcon from 'mdi-react/MinusIcon';
 import PropTypes from 'prop-types';
+import {Button, Col, Row} from "reactstrap";
 
 class IntervalDatePickerField extends PureComponent {
     static propTypes = {
@@ -39,19 +39,21 @@ class IntervalDatePickerField extends PureComponent {
         const { startDate, endDate } = this.state;
 
         return (
-            <div className="date-picker date-picker--interval">
-                <DatePicker
-                    selected={startDate}
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={this.handleChangeStart}
-                    dateFormat="yyyy/MM/dd"
-                    placeholderText="From"
-                    dropDownMode="select"
-                    withPortal={isMobileOnly}
-                />
-                <MinusIcon className="date-picker__svg" />
+            <Row>
+                <Col md={3} class="text-center" align="right">
+                    <DatePicker
+                        selected={startDate}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={this.handleChangeStart}
+                        dateFormat="yyyy/MM/dd"
+                        placeholderText="From"
+                        dropDownMode="select"
+                        withPortal={isMobileOnly}
+                    />
+                </Col>
+                <Col md={3} class="text-center" align="center">
                 <DatePicker
                     class="test-xxx"
                     selected={endDate}
@@ -64,7 +66,11 @@ class IntervalDatePickerField extends PureComponent {
                     dropDownMode="select"
                     withPortal={isMobileOnly}
                 />
-            </div>
+                </Col>
+                <Col md={4} class="text-center" align="right">
+                    <Button onClick={()=>{}} color="primary" size="sm">Apply</Button>
+                </Col>
+            </Row>
         );
     }
 }

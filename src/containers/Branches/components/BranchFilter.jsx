@@ -23,8 +23,8 @@ export default class BranchFilter extends PureComponent {
                     <Col md={3}>
                         <MultiSelectDropdown/>
                     </Col>
-                    <Col md={6} class="text-center">
-                        <DatePickerView/>
+                    <Col md={9}>
+                    <DatePickerView/>
                     </Col>
                 </Row>
             </div>
