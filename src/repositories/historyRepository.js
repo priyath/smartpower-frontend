@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REALTIME_API_ENDPOINT = 'http://54.146.53.76:80/api';
+const REALTIME_API_ENDPOINT = 'http://3.80.189.73:80/api';
 
 const axiosFetch = (endpoint, method, data) => {
     return axios(endpoint, {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const REALTIME_API_ENDPOINT = 'http://54.146.53.76:80/api';
+const REALTIME_API_ENDPOINT = 'http://3.80.189.73:80/api';
 
 const axiosFetch = (endpoint, method, data) => {
     return axios(endpoint, {
@@ -42,7 +42,8 @@ export const loadThresholds = (location) => {
 };
 
 export const fetchComparisonData = ({location, fromDate, toDate, granularity}) => {
-    let formData = {calltype: 'Comparison-Data', filter: location, fromDate: fromDate, toDate: toDate, granularity: granularity};
+    //TODO dynamically set location
+    let formData = {calltype: 'Comparison-Data', filter: 'LOLC Head Office -01', fromDate: fromDate, toDate: toDate, granularity: granularity};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);

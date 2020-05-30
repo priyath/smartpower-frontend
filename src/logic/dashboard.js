@@ -117,6 +117,6 @@ export const getCompKeys = (data) => {
 
 export const getCompData = (data) => {
     return data.map(el => {
-        return el.startTime;
+        return el.totalEnergy;
     });
 }
