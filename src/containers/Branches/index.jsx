@@ -12,14 +12,15 @@ import {compose} from "redux";
 class BranchSummary extends PureComponent {
 
     componentDidMount() {
-        console.log('did mount ', this.props.branchDetails);
-        //this.props.getBranchSummary(this.props.branchDetails);
+        this.props.getBranchSummary(this.props.branchDetails);
     }
 
     render() {
         const {
-            t, rtl,
+            t, rtl, branchSummaryDetails,
         } = this.props;
+
+        console.log('Branch summary details: ', branchSummaryDetails);
 
         return (
             <Container className="branches">
@@ -48,10 +49,11 @@ const mapStateToProps = (state) => ({
     initialLoad: state.topbar.initialLoad,
     selectedBranchIdx: state.topbar.selectedBranchIdx,
     branchDetails: state.topbar.branchDetails,
+    branchSummaryDetails: state.branchSummary.branchSummaryDetails,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getBranchSummary: ( (branchSummary) => dispatch(getBranchSummary(branchSummary)))
+    getBranchSummary: (branchSummary) => dispatch(getBranchSummary(branchSummary))
 });
 
 export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(BranchSummary);

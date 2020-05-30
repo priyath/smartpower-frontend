@@ -12,15 +12,20 @@ export function updateRealtimeData(summaryData) {
 
 export function getBranchSummary(branchList, filterOptions) {
     return (dispatch, getState) => {
+        let promises = [];
         branchList.forEach((branch) => {
             const params = {
                 filter: branch.location,
-                fromDate: filterOptions.fromDate ? filterOptions.fromDate : '',
-                toDate: filterOptions.toDate ? filterOptions.toDate : '',
+                fromDate: filterOptions && filterOptions.fromDate ? filterOptions.fromDate : '',
+                toDate: filterOptions && filterOptions.toDate ? filterOptions.toDate : '',
             }
-            fetchBranchSummary(params).then((resp) => {
-                dispatch(updateRealtimeData(resp.data));
-            })
+            promises.push(fetchBranchSummary(params));
+        })
+        Promise.all(promises).then(resp => {
+            const concatSummaryData = resp.reduce((acc, respObject) => {
+                return acc.concat(respObject.data);
+            }, [])
+            dispatch(updateRealtimeData(concatSummaryData));
         })
     }
 }

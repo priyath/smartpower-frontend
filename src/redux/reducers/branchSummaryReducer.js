@@ -1,16 +1,19 @@
 import {UPDATE_BRANCH_SUMMARY} from "../actions/branchSummaryActions";
-import {} from "../../logic/branchSummaryManager";
+import {transformBranchSummaryData} from "../../logic/branchSummaryManager";
 import {fromJS} from "immutable";
 
 const initialState = {
+    branchSummaryDetails: []
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case UPDATE_BRANCH_SUMMARY:
-            console.log('branch summary: ', action.payload);
             state = fromJS(state);
-            return state.toJS();
+            const branchSummaryDetails = transformBranchSummaryData(action.payload);
+            return state
+                .set('branchSummaryDetails', branchSummaryDetails)
+                .toJS();
         default:
             return state;
     }
