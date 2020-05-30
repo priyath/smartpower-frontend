@@ -10,17 +10,19 @@ const steps = {
     'day': 86400000,
     'hour': 3600000,
     'min': 60000,
+    'sec': 1,
 }
 
 const nextStep = {
     'month': 'day',
     'day': 'hour',
     'hour': 'min',
+    'min': 'sec',
 }
 
 export const getMonthDateRange = (year, month) => {
     const startDate = moment([year, month]).valueOf();
-    const endDate = moment(startDate).endOf('month').valueOf();
+    const endDate = moment(startDate).endOf('month').valueOf() + 1;
 
     return {startDate, endDate};
 }
@@ -75,7 +77,7 @@ export const transformHistoryResponse = (data, meta) => {
                 name: idx,
                 x: bucket.val,
                 y: dataPoint.voltage_ln_average,
-                drilldown: true,
+                drilldown: bucket.type !== 'sec',
                 step: bucket.type,
                 from: bucket.val,
                 to: bucket.end,
@@ -94,12 +96,35 @@ export const transformHistoryResponse = (data, meta) => {
     //return t;
 }
 
+const appendZero = (num) => {
+    return num >= 10 ? num : "0" + num
+}
+
+export const getDateBasedOnGranularity = (timestamp, step) => {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = appendZero(date.getMonth() + 1);
+    const day = appendZero(date.getDate());
+    let hour = appendZero(date.getHours());
+
+    switch (step){
+        case 'day':
+            return '' + year + '-' + month;
+        case 'hour':
+            return '' + year + '-' + month + '-' + day;
+        case 'min':
+            return '' + year + '-' + month + '-' + day + ' ' + hour;
+        default:
+            return null;
+    }
+}
+
 export const getHistoryFilters = (meta) => {
     return {
         calltype: 'History-Data',
         filter: 'LOLC Head Office -01',
         granularity: meta.step,
-        fromDate: meta.from,
-        toDate: meta.to,
+        fromDate: getDateBasedOnGranularity(meta.from, meta.step),
+        toDate: getDateBasedOnGranularity(meta.to, meta.step),
     }
 }

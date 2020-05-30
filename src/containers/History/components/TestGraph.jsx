@@ -20,6 +20,13 @@ const afterSetExtremes = (e, chartComponent) => {
     console.log(e);
 }
 
+//TODO: this should be handled better
+const getChartName = {
+    'hour': 'Average Voltage (Day)',
+    'min': 'Average Voltage (Hour)',
+    'sec': 'Average Voltage (Min)',
+}
+
 const getDrilldownData = (data) => {
     return data.map(el => {
         return {
@@ -33,7 +40,7 @@ const getDrilldownData = (data) => {
 const getDrilldownSeries = (data) => {
     return {
         showInLegend: true,
-        name: 'Value',
+        name: getChartName[data[0].step],
         data: data,
         tooltip: {
             valueDecimals: 2
@@ -96,10 +103,10 @@ export default class LiveChart extends React.Component {
             series: [
                 {
                     showInLegend: true,
-                    name: 'Value',
+                    name: 'Average Voltage (Month)',
                     data: this.props.historyData,
                     tooltip: {
-                        valueDecimals: 2
+                        valueDecimals: 2,
                     },
                     // dataGrouping: {
                     //     forced: true,
