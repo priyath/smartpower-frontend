@@ -30,13 +30,6 @@ export function checkAlerts(realtimeDataResponse) {
         const alertObject = retrieveNewAlerts(thresholds, realtimeData, timeSinceLastAlert);
         if (alertObject.newAlerts.length > 0){
             dispatch(addNewAlerts(alertObject));
-
-            alertObject.newAlerts.map(alert => {
-                const alertData = transformAlertToPersist(alert);
-                persistAlertToDatabase(alertData).then(()=>{
-                    console.log('alert persisted to database');
-                });
-            })
         }
     }
 }
