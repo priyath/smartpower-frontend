@@ -18,7 +18,8 @@ class History extends PureComponent {
     };
 
     componentDidMount() {
-        this.props.loadHistoryData();
+        if (!this.props.historyLoaded)
+            this.props.loadHistoryData();
     }
 
     render() {
