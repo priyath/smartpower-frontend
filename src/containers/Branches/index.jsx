@@ -2,9 +2,7 @@ import React, { PureComponent } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import BranchCard from './components/BranchCard';
-import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
 import BranchFilter from "./components/BranchFilter";
 import {getBranchSummary} from "../../redux/actions/branchSummaryActions";
 import {compose} from "redux";
@@ -17,7 +15,7 @@ class BranchSummary extends PureComponent {
 
     render() {
         const {
-            t, rtl, branchSummaryDetails,
+            t, rtl, branchSummaryDetails, branchSummaryLoaded
         } = this.props;
 
         console.log('Branch summary details: ', branchSummaryDetails);
@@ -29,15 +27,23 @@ class BranchSummary extends PureComponent {
                         <h3 className="page-title">{t('branches.page_title')}</h3>
                     </Col>
                 </Row>
-                    <BranchFilter/>
-                <Row>
-                    <BranchCard dir={rtl.direction} />
-                    <BranchCard dir={rtl.direction} />
-                    <BranchCard dir={rtl.direction} />
-                    <BranchCard dir={rtl.direction} />
-                    <BranchCard dir={rtl.direction} />
-                    <BranchCard dir={rtl.direction} />
-                </Row>
+                {
+                    branchSummaryLoaded ?
+                        <div>
+                            <BranchFilter/>
+                            <Row>
+                                {
+                                    branchSummaryDetails.map((branchSummary) => {
+                                        return (
+                                            <BranchCard
+                                                branchSummary={branchSummary}
+                                        />)
+                                    })
+                                }
+                            </Row>
+                        </div>
+                        : <div class="loader"><p>Loading..</p></div>
+                }
             </Container>
         );
     }
@@ -50,6 +56,7 @@ const mapStateToProps = (state) => ({
     selectedBranchIdx: state.topbar.selectedBranchIdx,
     branchDetails: state.topbar.branchDetails,
     branchSummaryDetails: state.branchSummary.branchSummaryDetails,
+    branchSummaryLoaded: state.branchSummary.branchSummaryLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({

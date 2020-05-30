@@ -13,8 +13,8 @@ class IntervalDatePickerField extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            startDate: null,
-            endDate: null,
+            startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+            endDate: new Date(),
         };
         this.handleChange = this.handleChange.bind(this);
     }

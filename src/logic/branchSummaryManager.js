@@ -4,6 +4,7 @@ export const transformBranchSummaryData = (data) => {
         return branchSummaryMap[el.location] = {
             energyConsumption: el.totalEnergy,
             alertCount: 0,
+            location: el.location,
         };
     })
 }

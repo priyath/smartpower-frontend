@@ -7,14 +7,6 @@ import TrendingUpIcon from 'mdi-react/TrendingUpIcon';
 import Panel from "../../../shared/components/Panel";
 import PropTypes from 'prop-types';
 
-const data = [{ name: 'Mon', btc: 70.23 },
-  { name: 'Tue', btc: 80.5 },
-  { name: 'Wed', btc: 38.45 },
-  { name: 'Thu', btc: 89.2 },
-  { name: 'Fri', btc: 105.61 },
-  { name: 'Sat', btc: 98.6 },
-  { name: 'Sun', btc: 115 }];
-
 const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
@@ -40,43 +32,34 @@ CustomTooltip.defaultProps = {
 };
 
 export default class BranchCard extends PureComponent {
-  static propTypes = {
-    dir: PropTypes.string.isRequired,
-  };
-
   constructor() {
     super();
-    this.state = {
-      activeIndex: 0,
-    };
   }
 
   render() {
-    const { dir } = this.props;
-    const { activeIndex } = this.state;
-    const activeItem = data[activeIndex];
+    const { energyConsumption, alertCount, location } = this.props.branchSummary;
 
     return (
-      <Panel xl={4} lg={12} title="Biyagama Branch">
+      <Panel xl={4} lg={12} title={location}>
         <Table responsive striped>
           <thead>
           <tr>
-            <th>Info</th>
+            <th>Metric</th>
             <th>Value</th>
           </tr>
           </thead>
           <tbody>
           <tr>
             <td><p className="bold-text dashboard__btc">kWh</p></td>
-            <td>500</td>
+            <td>{energyConsumption}</td>
           </tr>
           <tr>
             <td><p className="bold-text dashboard__eth">Cost (LKR)</p></td>
-            <td>126.23</td>
+            <td>0</td>
           </tr>
           <tr>
             <td><p className="bold-text dashboard__neo">Alerts</p></td>
-            <td>122</td>
+            <td>{alertCount}</td>
           </tr>
           </tbody>
         </Table>

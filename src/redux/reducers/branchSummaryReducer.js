@@ -3,7 +3,8 @@ import {transformBranchSummaryData} from "../../logic/branchSummaryManager";
 import {fromJS} from "immutable";
 
 const initialState = {
-    branchSummaryDetails: []
+    branchSummaryDetails: [],
+    branchSummaryLoaded: false
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +14,7 @@ export default function (state = initialState, action) {
             const branchSummaryDetails = transformBranchSummaryData(action.payload);
             return state
                 .set('branchSummaryDetails', branchSummaryDetails)
+                .set('branchSummaryLoaded', true)
                 .toJS();
         default:
             return state;
