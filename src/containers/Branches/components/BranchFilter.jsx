@@ -1,14 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Col, Row } from 'reactstrap';
-import PropTypes from 'prop-types';
 import MultiSelectDropdown from "../../../shared/components/MultiSelectDropdown";
 import DatePickerView from "./DatePickerView";
 
 
 export default class BranchFilter extends PureComponent {
-    static propTypes = {
-        dir: PropTypes.string.isRequired,
-    };
 
     constructor() {
         super();
@@ -20,10 +16,10 @@ export default class BranchFilter extends PureComponent {
         return (
             <div className="branches__controls">
                 <Row>
-                    <Col md={3}>
+                    <Col md={4}>
                         <MultiSelectDropdown/>
                     </Col>
-                    <Col md={9}>
+                    <Col md={8}>
                     <DatePickerView/>
                     </Col>
                 </Row>

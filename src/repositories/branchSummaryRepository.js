@@ -12,7 +12,7 @@ const axiosFetch = (endpoint, method, data) => {
     });
 };
 
-export const fetchHistoryData = ({filter, fromDate, toDate}) => {
+export const fetchBranchSummary = ({filter, fromDate, toDate}) => {
     let formData = {calltype: 'Energy-Consumption', filter: filter, fromDate: fromDate, toDate: toDate};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
