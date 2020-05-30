@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import BranchCard from './components/BranchCard';
 import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
 import BranchFilter from "./components/BranchFilter";
+import {getComparisonData, initDashboardData} from "../../redux/actions/dashboardActions";
+import {compose} from "redux";
 
 class BranchSummary extends PureComponent {
     static propTypes = {
@@ -41,7 +43,20 @@ class BranchSummary extends PureComponent {
     }
 }
 
-export default connect(state => ({
+const mapStateToProps = (state) => ({
     rtl: state.rtl,
     theme: state.theme,
-}))(withTranslation('common')(BranchSummary));
+    initialLoad: state.topbar.initialLoad,
+    dashboardLoad: state.dashboard.dashboardLoad,
+    selectedBranchIdx: state.topbar.selectedBranchIdx,
+    branchDetails: state.topbar.branchDetails,
+    todayStats: state.dashboard.todayStats,
+    compKeys: state.dashboard.compKeys,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    initDashboardData: () => dispatch(initDashboardData()),
+    getComparisonData: (comparisonFilters) => dispatch(getComparisonData(comparisonFilters)),
+});
+
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(BranchSummary);
