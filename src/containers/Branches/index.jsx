@@ -7,7 +7,7 @@ import BranchCard from './components/BranchCard';
 import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
 import BranchFilter from "./components/BranchFilter";
 
-class CryptoDashboard extends PureComponent {
+class BranchSummary extends PureComponent {
     static propTypes = {
         t: PropTypes.func.isRequired,
         dispatch: PropTypes.func.isRequired,
@@ -44,4 +44,4 @@ class CryptoDashboard extends PureComponent {
 export default connect(state => ({
     rtl: state.rtl,
     theme: state.theme,
-}))(withTranslation('common')(CryptoDashboard));
+}))(withTranslation('common')(BranchSummary));
