@@ -13,7 +13,6 @@ const axiosFetch = (endpoint, method, data) => {
 };
 
 export const fetchRealtimeData = (location) => {
-    console.log('fetch real time data');
     let formData = {calltype: 'Real Time', filter: location};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)

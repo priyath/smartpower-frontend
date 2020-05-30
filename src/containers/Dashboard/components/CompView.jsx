@@ -27,7 +27,6 @@ class CompView extends React.Component {
             const keys = getCompKeys(res.data);
             const fromData = getCompData(res.data.fromDateEnergyData);
             const toData = getCompData(res.data.toDateEnergyData);
-            console.log(this.getChartConfig(keys, fromData, toData))
             this.setState({chartConfig: this.getChartConfig(keys, fromData, toData), fetching: false});
         })
     }
@@ -42,7 +41,7 @@ class CompView extends React.Component {
                 type: 'column',
             },
             title: {
-                text: 'Historical Data'
+                text: 'Comparison of Energy Consumption'
             },
             xAxis: {
                 categories: categories

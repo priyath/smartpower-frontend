@@ -18,8 +18,6 @@ class BranchSummary extends PureComponent {
             t, rtl, branchSummaryDetails, branchSummaryLoaded
         } = this.props;
 
-        console.log('Branch summary details: ', branchSummaryDetails);
-
         return (
             <Container className="branches">
                 <Row>
