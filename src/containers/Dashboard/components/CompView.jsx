@@ -17,6 +17,7 @@ class CompView extends React.Component {
         this.state = {
             chartConfig: this.getChartConfig(),
             fetching: true,
+            initialLoad: false,
         }
         this.getComparisonData = this.getComparisonData.bind(this);
     }
@@ -27,7 +28,7 @@ class CompView extends React.Component {
             const keys = getCompKeys(res.data);
             const fromData = getCompData(res.data.fromDateEnergyData);
             const toData = getCompData(res.data.toDateEnergyData);
-            this.setState({chartConfig: this.getChartConfig(keys, fromData, toData), fetching: false});
+            this.setState({chartConfig: this.getChartConfig(keys, fromData, toData), fetching: false, initialLoad: true});
         })
     }
 
@@ -74,6 +75,9 @@ class CompView extends React.Component {
 
     render() {
         const { t, dir, themeName, compKeys } = this.props;
+        const tempStyle = {
+            textAlign: 'center',
+        }
         return (
             <Row>
                 <CompControl
@@ -81,11 +85,13 @@ class CompView extends React.Component {
                 />
                 <Panel md={12} lg={12} xl={12} sm={12} xs={12} title={t('dashboard.comp_view')}>
                     <ResponsiveContainer height={600}>
-                        <HighComp
-                            compKeys={compKeys}
-                            chartConfig={this.state.chartConfig}
-                            fetching={this.state.fetching}
-                        />
+                        { !this.state.initialLoad ? <div style={tempStyle}>Retrieving Data...</div> :
+                            <HighComp
+                                compKeys={compKeys}
+                                chartConfig={this.state.chartConfig}
+                                fetching={this.state.fetching}
+                            />
+                        }
                     </ResponsiveContainer>
                 </Panel>
             </Row>
