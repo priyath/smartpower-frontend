@@ -58,11 +58,16 @@ class CompView extends React.Component {
             series: [{
                 name: 'Dataset 1',
                 data: fromDataSet,
-
+                tooltip: {
+                    valueDecimals: 2,
+                },
             }, {
                 name: 'Dataset 2',
                 data: toDataSet,
-
+                tooltip: {
+                    valueDecimals: 2,
+                },
+                color: '#338992',
             }]
         };
     }

@@ -19,7 +19,7 @@ class CompControl extends PureComponent {
             activeTab: '1',
             granularity: 'week',
             compareOne: new Date(),
-            compareTwo: new Date(),
+            compareTwo: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1),
             type: 'kwh',
         };
     }
@@ -90,11 +90,11 @@ class CompControl extends PureComponent {
                                 </UncontrolledDropdown>
                             </div>
                             <div className="progress-wrap progress-wrap--small progress-wrap--pink">
-                                <span className="form__form-group-label">From </span>
+                                <span className="form__form-group-label">Compare </span>
                                 <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
                             </div>
                             <div className="progress-wrap progress-wrap--small progress-wrap--pink">
-                                <span className="form__form-group-label">From </span>
+                                <span className="form__form-group-label">With </span>
                                 <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
                             </div>
                             <div className="progress-wrap progress-wrap--small progress-wrap--pink">
