@@ -58,11 +58,24 @@ export default class LiveChart extends React.Component {
     chartComponent;
     options;
     timer;
-
     constructor (props) {
         super(props);
         this.chartComponent = React.createRef();
         this.options = {
+            global: {
+                useUTC: false
+            },
+            time: {
+                /**
+                 * Use moment-timezone.js to return the timezone offset for individual
+                 * timestamps, used in the X axis labels and the tooltip header.
+                 */
+                getTimezoneOffset: function (timestamp) {
+                    let d = new Date();
+                    let timezoneOffset =  d.getTimezoneOffset()
+                    return timezoneOffset;
+                }
+            },
             chart: {
                 zoomType: 'xy',
                 events: {
@@ -92,6 +105,10 @@ export default class LiveChart extends React.Component {
             },
             scrollbar: {
                 liveRedraw: false
+            },
+            tooltip: {
+                split: false,
+                shared: true,
             },
             xAxis: {
                 events: {
