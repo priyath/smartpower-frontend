@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {gaugeKeys} from '../constants/globalConstants';
 
 const comparator = (a, b) => {
     if (a[0] < b[0]) return -1;
@@ -19,9 +20,6 @@ const nextStep = {
     'hour': 'min',
     'min': 'sec',
 }
-
-//TODO: maybe improve this so we dont depend on gauge keys to extract data
-const gaugeKeys = ['voltage_ln_average', 'frequency', 'current_average'];
 
 export const getMonthDateRange = (year, month) => {
     const startDate = moment([year, month]).valueOf();
