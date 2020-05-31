@@ -1,5 +1,5 @@
 import {UPDATE_HISTORY_DATA} from "../actions/historyActions";
-import {transformHistoryResponse} from "../../logic/historyManager";
+import {getAllGaugeHistoryData} from "../../logic/historyManager";
 import {fromJS} from "immutable";
 
 const initialState = {
@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
             state = fromJS(state);
             return fromJS(state)
                 .set('historyLoaded', true)
-                .set('historyData', transformHistoryResponse(action.payload.data))
+                .set('historyData', getAllGaugeHistoryData(action.payload.data))
                 .toJS();
         default:
             return state;

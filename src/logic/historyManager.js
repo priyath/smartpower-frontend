@@ -20,6 +20,9 @@ const nextStep = {
     'min': 'sec',
 }
 
+//TODO: maybe improve this so we dont depend on gauge keys to extract data
+const gaugeKeys = ['voltage_ln_average', 'frequency', 'current_average'];
+
 export const getMonthDateRange = (year, month) => {
     const startDate = moment([year, month]).valueOf();
     const endDate = moment(startDate).endOf('month').valueOf() + 1;
@@ -53,10 +56,20 @@ const getDataMap = (data) => {
             location: el.location,
             voltage_ln_average: el.voltage_ln_average,
             frequency: el.frequency,
+            current_average: el.current_average,
             timestamp: el.timestamp,
         }
     })
     return dataMap;
+}
+
+export const getAllGaugeHistoryData = (data)=> {
+    let transformedData = {};
+    gaugeKeys.forEach(key => {
+        transformedData[key] = transformHistoryResponse(data, {key, drilldown: false});
+    })
+
+    return transformedData;
 }
 
 
@@ -76,11 +89,12 @@ export const transformHistoryResponse = (data, meta) => {
             return {
                 name: idx,
                 x: bucket.val,
-                y: dataPoint.voltage_ln_average,
+                y: dataPoint[meta.key],
                 drilldown: bucket.type !== 'sec',
                 step: bucket.type,
                 from: bucket.val,
                 to: bucket.end,
+                gauge: meta.key,
             }
         }
         return {

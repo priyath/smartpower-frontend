@@ -22,9 +22,21 @@ const afterSetExtremes = (e, chartComponent) => {
 
 //TODO: this should be handled better
 const getChartName = {
-    'hour': 'Average Voltage (Day)',
-    'min': 'Average Voltage (Hour)',
-    'sec': 'Average Voltage (Min)',
+    'hour': {
+        voltage_ln_average: 'Average Voltage (Day)',
+        frequency: 'Average Frequency (Day)',
+        current_average: 'Average Current (Day)',
+    },
+    'min': {
+        voltage_ln_average: 'Average Voltage (Hour)',
+        frequency: 'Average Frequency (Hour)',
+        current_average: 'Average Current (Hour)',
+    },
+    'sec': {
+        voltage_ln_average: 'Average Voltage (Minute)',
+        frequency: 'Average Frequency (Minute)',
+        current_average: 'Average Current (Minute)',
+    },
 }
 
 const getDrilldownData = (data) => {
@@ -40,7 +52,7 @@ const getDrilldownData = (data) => {
 const getDrilldownSeries = (data) => {
     return {
         showInLegend: true,
-        name: getChartName[data[0].step],
+        name: getChartName[data[0].step][data[0].gauge],
         data: data,
         tooltip: {
             valueDecimals: 2
@@ -87,6 +99,7 @@ export default class LiveChart extends React.Component {
                             step: e.point.step,
                             from: e.point.from,
                             to: e.point.to,
+                            key: e.point.gauge,
                         }
                         chart.showLoading('Retrieving Data...');
                         fetchHistoryDrilldownData(getHistoryFilters(metaData)).then((resp) => {
@@ -118,10 +131,11 @@ export default class LiveChart extends React.Component {
                 },
             },
             series: [
+                //TODO: this should be dynamic generation
                 {
                     showInLegend: true,
                     name: 'Average Voltage (Month)',
-                    data: this.props.historyData,
+                    data: this.props.historyData['voltage_ln_average'],
                     tooltip: {
                         valueDecimals: 2,
                     },
@@ -132,6 +146,35 @@ export default class LiveChart extends React.Component {
                     //     ]
                     // },
                 },
+                {
+                    showInLegend: true,
+                    name: 'Average Frequency (Month)',
+                    data: this.props.historyData['frequency'],
+                    tooltip: {
+                        valueDecimals: 2,
+                    },
+                    // dataGrouping: {
+                    //     forced: true,
+                    //     units: [
+                    //         ['day', [1]]
+                    //     ]
+                    // },
+                },
+                {
+                    showInLegend: true,
+                    name: 'Average Current (Month)',
+                    data: this.props.historyData['current_average'],
+                    tooltip: {
+                        valueDecimals: 2,
+                    },
+                    color: '#d46363',
+                    // dataGrouping: {
+                    //     forced: true,
+                    //     units: [
+                    //         ['day', [1]]
+                    //     ]
+                    // },
+                }
             ],
             drilldown: {
                 series: []
