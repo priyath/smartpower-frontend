@@ -7,6 +7,7 @@ import Branches from '../../../Branches/index';
 import Locations from '../../../Locations/index';
 import UserList from '../../../ControlPanel/UserList/index';
 import UserAdd from '../../../ControlPanel/Add/index';
+import Thresholds from '../../../ControlPanel/Thresholds/index';
 import Alerts from '../../../Alerts/index';
 import {compose} from "redux";
 import {withTranslation} from "react-i18next";
@@ -37,6 +38,7 @@ class WrappedRoutes extends Component {
                         <Route path="/alerts" render={() => <AlertWithLoading isLoading={!(initialLoad)}/>}/>
                         <Route path="/control_panel/users" component={UserList}/>
                         <Route path="/control_panel/users_add" component={UserAdd}/>
+                        <Route path="/control_panel/thresholds" component={Thresholds}/>
                     </div>
                 }
             </div>
