@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
+import React, {useEffect, useState} from 'react';
 import { EditingState } from '@devexpress/dx-react-grid';
 import {
     Grid,
@@ -8,27 +7,27 @@ import {
     TableEditRow,
     TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
-
-
-import {
-    generateRows,
-    defaultColumnValues,
-} from './demo-data/generator';
+import { loadThresholds } from '../../../../repositories/dashboardRepository';
+import { generateThresholdRows } from '../../../../logic/thresholdManager';
 import {Card, CardBody, Col} from "reactstrap";
 
 const getRowId = row => row.id;
 
+const columnNames = [
+    { name: 'gauge', title: 'Gauge' },
+    { name: 'lowerThreshold', title: 'Lower Threshold' },
+    { name: 'upperThreshold', title: 'Upper Threshold' },
+]
+
 export default () => {
-    const [columns] = useState([
-        { name: 'name', title: 'Name' },
-        { name: 'gender', title: 'Gender' },
-        { name: 'city', title: 'City' },
-        { name: 'car', title: 'Car' },
-    ]);
-    const [rows, setRows] = useState(generateRows({
-        columnValues: { id: ({ index }) => index, ...defaultColumnValues },
-        length: 8,
-    }));
+    const [columns] = useState(columnNames);
+    const [rows, setRows] = useState([]);
+    useEffect(() => {
+        loadThresholds().then((res) => {
+            const rows = generateThresholdRows(res.data);
+            setRows(rows);
+        })
+    }, [])
 
     const commitChanges = ({ added, changed, deleted }) => {
         let changedRows;
