@@ -8,6 +8,7 @@ import {
     TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
 import { loadThresholds } from '../../../../repositories/dashboardRepository';
+import { updateThresholds } from '../../../../repositories/thresholdRepository';
 import { generateThresholdRows } from '../../../../logic/thresholdManager';
 import {Card, CardBody, Col} from "reactstrap";
 
@@ -42,7 +43,20 @@ export default () => {
             ];
         }
         if (changed) {
-            changedRows = rows.map(row => (changed[row.id] ? { ...row, ...changed[row.id] } : row));
+            let key;
+            let upperThreshold;
+            let lowerThreshold;
+
+            changedRows = rows.map(row => {
+                if (changed[row.id]){
+                    key = row.id;
+                    lowerThreshold = changed[row.id].lowerThreshold ? changed[row.id].lowerThreshold : row.lowerThreshold;
+                    upperThreshold = changed[row.id].upperThreshold ? changed[row.id].upperThreshold : row.upperThreshold;
+                    updateThresholds({key, upperThreshold, lowerThreshold});
+                    return { ...row, ...changed[row.id] };
+                }
+                return row;
+            });
         }
         if (deleted) {
             const deletedSet = new Set(deleted);
