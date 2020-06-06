@@ -356,10 +356,9 @@
   }
 
   .dashboard__sales-report-now {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18px;
-    margin-bottom: 4px;
+    font-size: 40px;
+    color: #707586;
+    margin-bottom: 10px;
   }
 
   .dashboard__sales-report-plan {
@@ -368,6 +367,10 @@
     color: $color-additional;
     opacity: 0.5;
     margin-bottom: 10px;
+  }
+
+  .dashboard__stats-predicted {
+    color: #af3636;
   }
 
   .dashboard__sales-report-value {

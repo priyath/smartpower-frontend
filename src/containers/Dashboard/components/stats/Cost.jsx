@@ -1,10 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import {
-  BarChart, Bar, Cell, ResponsiveContainer,
-} from 'recharts';
-import TrendingDownIcon from 'mdi-react/TrendingDownIcon';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
@@ -52,8 +48,15 @@ class Cost extends PureComponent {
             <div className="card__title">
               <h5 className="bold-text">{t('dashboard.cost')}</h5>
             </div>
-            <div className="dashboard__total dashboard__cost">
-              {cost}
+            <div className="dashboard__sales-report dashboard__cost-details">
+              <div className="progress-wrap progress-wrap--small">
+                <p className="dashboard__sales-report-title">CURRENT</p>
+                <p className="dashboard__sales-report-now">{cost}</p>
+              </div>
+              <div className="progress-wrap progress-wrap--small progress-wrap--pink">
+                <p className="dashboard__sales-report-title">PREDICTED</p>
+                <p className="dashboard__sales-report-now dashboard__stats-predicted">{cost}</p>
+              </div>
             </div>
           </CardBody>
         </Card>
