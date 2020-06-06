@@ -20,7 +20,7 @@ export default class BranchFilter extends PureComponent {
                         <MultiSelectDropdown/>
                     </Col>
                     <Col md={8}>
-                    <DatePickerView/>
+                    <DatePickerView fetchSummaryDetails={this.props.fetchSummaryDetails}/>
                     </Col>
                 </Row>
             </div>

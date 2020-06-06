@@ -3,8 +3,8 @@ import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import IntervalDatePickerField from "../../../shared/components/form/IntervalDatePicker";
 
-const DatePickerView = ({ handleSubmit }) => (
-        <IntervalDatePickerField onChange={()=>{}}/>
+const DatePickerView = ({ fetchSummaryDetails }) => (
+        <IntervalDatePickerField onSubmit={fetchSummaryDetails}/>
 );
 
 DatePickerView.propTypes = {

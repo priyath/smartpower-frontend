@@ -19,6 +19,10 @@ class IntervalDatePickerField extends PureComponent {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+        //this.handleSubmit();
+    }
+
     handleChangeStart = startDate => this.handleChange({ startDate });
 
     handleChangeEnd = endDate => this.handleChange({ endDate });
@@ -26,14 +30,17 @@ class IntervalDatePickerField extends PureComponent {
     handleChange({ startDate, endDate }) {
         const { startDate: stateStartDate, endDate: stateEndDate } = this.state;
 
-        const { onChange } = this.props;
-
         startDate = startDate || stateStartDate;
         endDate = endDate || stateEndDate;
 
         this.setState({ startDate, endDate });
-        onChange({ start: startDate, end: endDate });
     }
+
+    handleSubmit = () => {
+        const fromDate = this.state.startDate;
+        const toDate = this.state.endDate;
+        this.props.onSubmit({fromDate, toDate});
+    };
 
     render() {
         const { startDate, endDate } = this.state;
@@ -54,21 +61,21 @@ class IntervalDatePickerField extends PureComponent {
                     />
                 </Col>
                 <Col md={3} class="text-center" align="center">
-                <DatePicker
-                    class="test-xxx"
-                    selected={endDate}
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={this.handleChangeEnd}
-                    dateFormat="yyyy/MM/dd"
-                    placeholderText="To"
-                    dropDownMode="select"
-                    withPortal={isMobileOnly}
-                />
+                    <DatePicker
+                        class="test-xxx"
+                        selected={endDate}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={this.handleChangeEnd}
+                        dateFormat="yyyy/MM/dd"
+                        placeholderText="To"
+                        dropDownMode="select"
+                        withPortal={isMobileOnly}
+                    />
                 </Col>
                 <Col md={4} class="text-center" align="right">
-                    <Button onClick={()=>{}} color="primary" size="sm">Apply</Button>
+                    <Button onClick={this.handleSubmit} color="primary" size="sm">Apply</Button>
                 </Col>
             </Row>
         );
