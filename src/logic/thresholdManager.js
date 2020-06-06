@@ -5,6 +5,9 @@ export const generateThresholdRows = (thresholdData) => {
             gauge: entry.scantypeid,
             lowerThreshold: entry.lowerthreshold,
             upperThreshold: entry.upperthreshold,
+            startValue: entry.startvalue,
+            endValue: entry.endvalue,
+            tickInterval: entry.ticinterval,
         }
     })
 }

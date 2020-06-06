@@ -16,8 +16,11 @@ const getRowId = row => row.id;
 
 const columnNames = [
     { name: 'gauge', title: 'Gauge' },
+    { name: 'startValue', title: 'Start Value' },
+    { name: 'endValue', title: 'End Value' },
     { name: 'lowerThreshold', title: 'Lower Threshold' },
     { name: 'upperThreshold', title: 'Upper Threshold' },
+    { name: 'tickInterval', title: 'Tick Interval' },
 ]
 
 export default () => {
@@ -46,13 +49,19 @@ export default () => {
             let key;
             let upperThreshold;
             let lowerThreshold;
+            let startValue;
+            let endValue;
+            let tickInterval;
 
             changedRows = rows.map(row => {
                 if (changed[row.id]){
                     key = row.id;
                     lowerThreshold = changed[row.id].lowerThreshold ? changed[row.id].lowerThreshold : row.lowerThreshold;
                     upperThreshold = changed[row.id].upperThreshold ? changed[row.id].upperThreshold : row.upperThreshold;
-                    updateThresholds({key, upperThreshold, lowerThreshold});
+                    startValue = changed[row.id].startValue ? changed[row.id].startValue : row.startValue;
+                    endValue = changed[row.id].endValue ? changed[row.id].endValue : row.endValue;
+                    tickInterval = changed[row.id].tickInterval ? changed[row.id].tickInterval : row.tickInterval;
+                    updateThresholds({key, upperThreshold, lowerThreshold, startValue, endValue, tickInterval});
                     return { ...row, ...changed[row.id] };
                 }
                 return row;
