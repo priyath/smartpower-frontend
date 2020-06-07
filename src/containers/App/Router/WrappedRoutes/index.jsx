@@ -27,6 +27,7 @@ class WrappedRoutes extends Component {
         const AlertWithLoading = WithLoading(Alerts);
         const HistoryWithLoading = WithLoading(History);
         const BranchesWithLoading = WithLoading(Branches);
+        const LocationsWithLoading = WithLoading(Locations);
         return (
             <div>
                 <Layout />
@@ -35,8 +36,8 @@ class WrappedRoutes extends Component {
                         <Route path="/dashboard" render={() => <DashboardWithLoading isLoading={!(initialLoad)}/>}/>
                         <Route path="/history" render={() => <HistoryWithLoading isLoading={!(initialLoad)}/>}/>
                         <Route path="/branches" render={() => <BranchesWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/locations" component={Locations}/>
                         <Route path="/alerts" render={() => <AlertWithLoading isLoading={!(initialLoad)}/>}/>
+                        <Route path="/locations" render={() => <LocationsWithLoading isLoading={!(initialLoad)}/>}/>
                         <Route path="/control_panel/users" component={UserList}/>
                         <Route path="/control_panel/users_add" component={UserAdd}/>
                         <Route path="/control_panel/thresholds" component={Thresholds}/>
