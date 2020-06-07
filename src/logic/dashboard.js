@@ -126,7 +126,7 @@ export const getCompData = (data) => {
 }
 
 export const getTickInterval = (start, end, tick) => {
-    if (isNaN(start) || isNaN(end) || isNaN(tick) || (start >= end)) return [
+    if (isNaN(start) || isNaN(end) || isNaN(tick) || (start >= end) || (tick <= 0)) return [
         0,10,20,30,40,50,60,70,80,90,100
     ];
     let ticks = [start];
@@ -139,4 +139,33 @@ export const getTickInterval = (start, end, tick) => {
         counter = counter + tick;
     }
     return ticks;
+}
+
+const lowerThresholdColor = 'rgba(253,189,5,0.5)';
+const upperThresholdColor = 'rgba(236,26,26,0.5)';
+const idealRangeColor = 'rgba(46,255,0,0.5)';
+
+export const getHighlights = (gauge) => {
+    const upperThreshold = gauge.upperThreshold;
+    const lowerThreshold = gauge.lowerThreshold;
+    const startValue = gauge.startValue;
+    const endValue = gauge.endValue;
+
+    return [
+        {
+        "from": startValue,
+        "to": lowerThreshold,
+        "color": lowerThresholdColor
+        },
+        {
+            "from": lowerThreshold,
+            "to": upperThreshold,
+            "color": idealRangeColor
+        },
+        {
+            "from": upperThreshold,
+            "to": endValue,
+            "color": upperThresholdColor
+        }
+    ]
 }

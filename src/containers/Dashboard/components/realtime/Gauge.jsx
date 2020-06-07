@@ -1,6 +1,6 @@
 import React from 'react'
 import {RadialGauge} from 'canvas-gauges'
-import {getTickInterval} from '../../../../logic/dashboard';
+import {getTickInterval, getHighlights} from '../../../../logic/dashboard';
 
 class ReactRadialGauge extends React.Component {
   componentDidMount () {
@@ -11,36 +11,14 @@ class ReactRadialGauge extends React.Component {
     const options = Object.assign({}, this.props, {
       renderTo: this.el,
       width: 140,
-      title: "Iteq",
+      title: "HEXILON",
       height: 140,
       units:"",
       minValue: startValue,
       maxValue: endValue,
       majorTicks: getTickInterval(startValue, endValue, tickInterval),
-      minorTicks: tickInterval,
       strokeTicks: true,
-      highlights:[
-          {
-              "from": 0,
-              "to": 20,
-              "color": "rgba(10, 10, 10, .25)"
-          },
-          {
-              "from": 20,
-              "to": 30,
-              "color": "rgba(0, 255, 10, .50)"
-          },
-          {
-              "from": 30,
-              "to": 60,
-              "color": "rgba(255, 255, 10, .50)"
-          },
-          {
-              "from": 60,
-              "to": 100,
-              "color": "rgba(255, 50, 50, .50)"
-          }
-      ],
+      highlights: getHighlights(this.props.gaugeObject),
       colorPlate:"#fff",
       borderShadowWidth: 0,
       valueBox: true,
