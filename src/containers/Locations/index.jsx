@@ -26,8 +26,8 @@ class Locations extends PureComponent {
 
     onMarkerClick(marker) {
         this.setState({
-            branchName: marker.photo_title,
-            consumption: marker.consumption
+            branchName: marker.location,
+            consumption: ''
         })
     }
 

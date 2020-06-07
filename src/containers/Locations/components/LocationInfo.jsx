@@ -11,7 +11,7 @@ const LocationInfo = ({ t, branchName, consumption }) => (
     <Panel md={12} lg={6} xl={4} title={branchName}>
       <div className="dashboard__stat dashboard__stat--budget">
         <div className="dashboard__stat-main">
-          <p className="dashboard__stat-main-title">kW consumption: 1st - 25th January</p>
+          <p className="dashboard__stat-main-title">Branch Information</p>
           <p className="dashboard__stat-main-number">{consumption}</p>
           <hr />
         </div>

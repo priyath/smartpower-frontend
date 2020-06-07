@@ -40,7 +40,7 @@ const Map = compose(
             onMarkerClick: (props) => index => {
                 const { setOnMarkerClick } = props;
                 setOnMarkerClick(index);
-                props.markerHandler(props.markers[index]);
+                props.markerHandler(props.branchList[index]);
             }
         }
     ),
@@ -84,16 +84,16 @@ const Map = compose(
                 },
             ]}
         >
-            {props.markers.map((marker, index) => (
+            {props.branchList.map((branch, index) => (
                 <Marker
                     idx={index}
-                    key={marker.photo_id}
-                    position={{ lat: marker.latitude, lng: marker.longitude }}
+                    key={index}
+                    position={{ lat: branch.lat, lng: branch.lng }}
                     onClick={()=>{ props.onMarkerClick(index)} }
                 >
                     {props.isOpen && props.infoIndex === index && (
                     <InfoWindow>
-                        <h4>{marker.photo_title}</h4>
+                        <h4>{branch.location}</h4>
                     </InfoWindow>
                 )}</Marker>
             ))}
@@ -101,16 +101,18 @@ const Map = compose(
     </GoogleMap>
 ));
 
-const GeoMap = ({ t, onMarkerClick }) => (
+const GeoMap = ({ t, branchList, onMarkerClick }) => {
+    return (
     <Panel xs={12} md={12} lg={12} xl={8} title={t('locations.geo_map')}>
         <div dir="ltr">
             <Map
                 markers={data.photos}
                 markerHandler={onMarkerClick}
+                branchList={branchList}
             />
         </div>
     </Panel>
-);
+)};
 
 GeoMap.propTypes = {
     t: PropTypes.func.isRequired,
