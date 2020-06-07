@@ -25,3 +25,10 @@ export const updateBranchList = ({location, geoLng, geoLat}) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const addNewBranch = ({location, geoLng, geoLat}) => {
+    let formData = {calltype: 'Add-Locations', location, geoLng, geoLat};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};

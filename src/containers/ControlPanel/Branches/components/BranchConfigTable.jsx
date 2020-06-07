@@ -7,7 +7,7 @@ import {
     TableEditRow,
     TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
-import { fetchBranchList, updateBranchList } from '../../../../repositories/initRepository';
+import { fetchBranchList, updateBranchList, addNewBranch } from '../../../../repositories/initRepository';
 import { generateBranchConfigRows } from '../../../../logic/geoManager';
 import {Card, CardBody, Col} from "reactstrap";
 
@@ -36,10 +36,10 @@ export default () => {
             const startingAddedId = rows.length > 0 ? rows[rows.length - 1].id + 1 : 0;
             changedRows = [
                 ...rows,
-                ...added.map((row, index) => ({
-                    id: startingAddedId + index,
-                    ...row,
-                })),
+                ...added.map((row, index) => {
+                    addNewBranch({location: row.location, geoLat: row.lat, geoLng: row.lng});
+                    return ({id: startingAddedId + index, ...row,})
+                }),
             ];
         }
         if (changed) {
@@ -81,6 +81,7 @@ export default () => {
                 <TableHeaderRow />
                 <TableEditRow />
                 <TableEditColumn
+                    showAddCommand
                     showEditCommand
                 />
             </Grid>
