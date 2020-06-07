@@ -141,9 +141,9 @@ export const getTickInterval = (start, end, tick) => {
     return ticks;
 }
 
-const lowerThresholdColor = 'rgba(253,189,5,0.5)';
-const upperThresholdColor = 'rgba(236,26,26,0.5)';
-const idealRangeColor = 'rgba(46,255,0,0.5)';
+export const lowerThresholdColor = 'rgba(253,189,5,0.5)';
+export const upperThresholdColor = 'rgba(187,62,62, 0.6)';
+export const idealRangeColor = 'rgba(94,173,94,0.75)';
 
 export const getHighlights = (gauge) => {
     const upperThreshold = gauge.upperThreshold;

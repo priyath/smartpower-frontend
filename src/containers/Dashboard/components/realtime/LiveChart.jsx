@@ -2,6 +2,7 @@ import React from 'react';
 import HighchartsReact from 'highcharts-react-official';
 import Panel from "../../../../shared/components/Panel";
 import {ResponsiveContainer} from "recharts";
+import {idealRangeColor, upperThresholdColor, lowerThresholdColor} from '../../../../logic/dashboard';
 
 export default class LiveChart extends React.Component {
     chartComponent;
@@ -64,7 +65,8 @@ export default class LiveChart extends React.Component {
                         data: props.data.realtimeData,
                         pointStart: Date.now(),
                         pointInterval: 1666,
-                        color: 'rgba(91,169,222,0.73)'
+                        color: idealRangeColor,
+                        fillOpacity: 0.4,
                     }
                 ],
                 selectedGaugeIdx: null,
@@ -108,15 +110,21 @@ export default class LiveChart extends React.Component {
             max: maxRealtime + 0.1,
         }, false, false);
 
-        if (y > selectedGauge.upperThreshold || y < selectedGauge.lowerThreshold) {
+        if (y > selectedGauge.upperThreshold) {
             chart.series[0].update({
-                color: 'rgb(187,62,62, 0.6)',
+                color: upperThresholdColor,
             }, false);
             chart.update({thresholdBreached: true}, false);
-        } else {
+        } else if (y < selectedGauge.lowerThreshold) {
+            chart.series[0].update({
+                color: lowerThresholdColor,
+            }, false);
+            chart.update({thresholdBreached: true}, false);
+        }
+        else {
             if (thresholdBreached) {
                 chart.series[0].update({
-                    color: 'rgba(91,169,222,0.73)',
+                    color: idealRangeColor,
                 }, false);
                 chart.update({thresholdBreached: false}, false);
             }
