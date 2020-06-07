@@ -1,31 +1,23 @@
 import React from 'react'
-
 import {RadialGauge} from 'canvas-gauges'
+import {getTickInterval} from '../../../../logic/dashboard';
 
 class ReactRadialGauge extends React.Component {
   componentDidMount () {
+    const startValue = this.props.gaugeObject.startValue;
+    const endValue = this.props.gaugeObject.endValue;
+    const tickInterval = this.props.gaugeObject.tickInterval;
+
     const options = Object.assign({}, this.props, {
       renderTo: this.el,
       width: 140,
       title: "Iteq",
       height: 140,
       units:"",
-      minValue: 0,
-      maxValue: 100,
-      majorTicks: [
-          "0",
-          "10",
-          "20",
-          "30",
-          "40",
-          "50",
-          "60",
-          "70",
-          "80",
-          "90",
-          "100"
-      ],
-      minorTicks: 2,
+      minValue: startValue,
+      maxValue: endValue,
+      majorTicks: getTickInterval(startValue, endValue, tickInterval),
+      minorTicks: tickInterval,
       strokeTicks: true,
       highlights:[
           {

@@ -124,3 +124,19 @@ export const getCompData = (data) => {
         return el.totalEnergy;
     });
 }
+
+export const getTickInterval = (start, end, tick) => {
+    if (isNaN(start) || isNaN(end) || isNaN(tick) || (start >= end)) return [
+        0,10,20,30,40,50,60,70,80,90,100
+    ];
+    let ticks = [start];
+    let counter = parseInt(start);
+    end = parseInt(end);
+    tick = parseInt(tick);
+
+    while (counter <= end){
+        ticks.push(counter);
+        counter = counter + tick;
+    }
+    return ticks;
+}
