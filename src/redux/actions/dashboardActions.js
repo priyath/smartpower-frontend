@@ -1,4 +1,6 @@
-import { fetchRealtimeData, fetchTodayStats, fetchTodayConsumption, loadThresholds, fetchComparisonData } from "../../repositories/dashboardRepository";
+import { fetchRealtimeData, fetchTodayConsumption, loadThresholds, fetchComparisonData } from "../../repositories/dashboardRepository";
+import { fetchBranchSummary } from "../../repositories/branchSummaryRepository";
+import { getCurrentMonthRange } from "../../logic/commonLogic";
 import { checkAlerts } from "./alertActions";
 
 export const ON_GAUGE_SELECT = 'ON_GAUGE_SELECT';
@@ -54,8 +56,9 @@ export function initDashboardData() {
     return (dispatch, getState) => {
         const selectedBranchIdx = getState().topbar.selectedBranchIdx;
         const location = getState().topbar.branchDetails[selectedBranchIdx].location;
+        const {fromDate, toDate} = getCurrentMonthRange();
         loadThresholds().then((thresholdResponse) => {
-            Promise.all([fetchTodayStats(location), fetchTodayConsumption(location)])
+            Promise.all([fetchBranchSummary({filter: location, fromDate, toDate}), fetchTodayConsumption(location)])
             .then((response) => {
                 const statsResponse = response[0];
                 const dataResponse = response[1];

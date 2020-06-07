@@ -19,8 +19,9 @@ export const fetchRealtimeData = (location) => {
         .then(response => response);
 };
 
+//not in use
 export const fetchTodayStats = (location) => {
-    let formData = {calltype: 'Today-Stats', filter: location};
+    let formData = {calltype: 'Today-Data', filter: location};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
