@@ -66,7 +66,7 @@ class ReactRadialGauge extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.gauge.value = nextProps.value;
+    this.gauge.value = nextProps.gaugeObject.value;
     this.gauge.update(nextProps);
   }
 

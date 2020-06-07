@@ -13,7 +13,7 @@ function GaugeGrid(props) {
                 gauges.map((gauge)=>(
                     <Grid item xs={12} md={4}>
                         <GCard id={gauge.id} title={gauge.title} avatar={gauge.avatar} selected={gauge.selected} onGaugeSelect={onGaugeSelect}>
-                            <Gauge value={gauge.value}>
+                            <Gauge gaugeObject={gauge}>
                             </Gauge>
                         </GCard>
                     </Grid>

@@ -33,6 +33,7 @@ export const updateGaugeRealtimeData = (gauges, realtimeData) => {
             return parseInt(obj.controlid) === gauge.id;
         })[0];
         const readingValue = realtimeData ? realtimeData.readingvalue : 0;
+        gauge.value = readingValue;
         gauge.realtimeData.push(readingValue);
         gauge.realtimeData.shift();
         return gauge;
@@ -73,6 +74,9 @@ export const updateGaugesWithThresholdInfo = (gauges, thresholdData) => {
         if (threshold) {
             gauge.upperThreshold = threshold.upperthreshold;
             gauge.lowerThreshold = threshold.lowerthreshold;
+            gauge.startValue = threshold.startvalue;
+            gauge.endValue = threshold.endvalue;
+            gauge.tickInterval = threshold.ticinterval;
         }
         return gauge;
     })
