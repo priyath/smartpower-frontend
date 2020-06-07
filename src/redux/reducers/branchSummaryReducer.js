@@ -1,10 +1,11 @@
-import {UPDATE_BRANCH_SUMMARY} from "../actions/branchSummaryActions";
+import {PENDING_BRANCH_SUMMARY, UPDATE_BRANCH_SUMMARY} from "../actions/branchSummaryActions";
 import {transformBranchSummaryData} from "../../logic/branchSummaryManager";
 import {fromJS} from "immutable";
 
 const initialState = {
     branchSummaryDetails: [],
-    branchSummaryLoaded: false
+    branchSummaryLoaded: false,
+    fetchingBranchSummary: false,
 };
 
 export default function (state = initialState, action) {
@@ -15,6 +16,11 @@ export default function (state = initialState, action) {
             return state
                 .set('branchSummaryDetails', branchSummaryDetails)
                 .set('branchSummaryLoaded', true)
+                .set('fetchingBranchSummary', false)
+                .toJS();
+        case PENDING_BRANCH_SUMMARY:
+            return fromJS(state)
+                .set('fetchingBranchSummary', true)
                 .toJS();
         default:
             return state;

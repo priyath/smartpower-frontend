@@ -22,7 +22,7 @@ class BranchSummary extends PureComponent {
 
     render() {
         const {
-            t, rtl, branchSummaryDetails, branchSummaryLoaded
+            t, rtl, branchSummaryDetails, fetchingBranchSummary, branchSummaryLoaded
         } = this.props;
 
         return (
@@ -36,13 +36,14 @@ class BranchSummary extends PureComponent {
                             <BranchFilter fetchSummaryDetails={this.fetchSummaryDetails}/>
                             <Row>
                                 {
-                                    branchSummaryLoaded ?
+                                    branchSummaryLoaded && !fetchingBranchSummary ?
                                     branchSummaryDetails.map((branchSummary) => {
                                         return (
                                             <BranchCard
                                                 branchSummary={branchSummary}
                                         />)
-                                    }) : <div><p>Select a date range to view branch summary.</p></div>
+                                    }) : fetchingBranchSummary ? <div className='loader'><p className='branch__summary-loading'>Retrieving branch summary data</p></div> :
+                                        <p className='branch__summary-loading'>Select a date range to view branch summary</p>
                                 }
                             </Row>
                         </div>
@@ -58,7 +59,8 @@ const mapStateToProps = (state) => ({
     selectedBranchIdx: state.topbar.selectedBranchIdx,
     branchDetails: state.topbar.branchDetails,
     branchSummaryDetails: state.branchSummary.branchSummaryDetails,
-    branchSummaryLoaded: state.branchSummary.branchSummaryLoaded
+    branchSummaryLoaded: state.branchSummary.branchSummaryLoaded,
+    fetchingBranchSummary: state.branchSummary.fetchingBranchSummary
 });
 
 const mapDispatchToProps = (dispatch) => ({

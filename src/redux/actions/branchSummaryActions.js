@@ -1,12 +1,19 @@
 import {} from '../../logic/branchSummaryManager';
 import {fetchBranchSummary} from '../../repositories/branchSummaryRepository';
 
-export const UPDATE_BRANCH_SUMMARY = 'UPDATE_BRANCH_SUMMARY'
+export const UPDATE_BRANCH_SUMMARY = 'UPDATE_BRANCH_SUMMARY';
+export const PENDING_BRANCH_SUMMARY = 'PENDING_BRANCH_SUMMARY';
 
 export function updateRealtimeData(summaryData) {
     return {
         type: UPDATE_BRANCH_SUMMARY,
         payload: summaryData
+    };
+}
+
+export function pendingBranchSummary() {
+    return {
+        type: PENDING_BRANCH_SUMMARY,
     };
 }
 
@@ -27,5 +34,6 @@ export function getBranchSummary(branchList, filterOptions) {
             }, [])
             dispatch(updateRealtimeData(concatSummaryData));
         })
+        dispatch(pendingBranchSummary());
     }
 }
