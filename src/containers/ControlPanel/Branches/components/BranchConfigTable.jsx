@@ -7,7 +7,7 @@ import {
     TableEditRow,
     TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui';
-import { fetchBranchList } from '../../../../repositories/initRepository';
+import { fetchBranchList, updateBranchList } from '../../../../repositories/initRepository';
 import { generateBranchConfigRows } from '../../../../logic/geoManager';
 import {Card, CardBody, Col} from "reactstrap";
 
@@ -43,24 +43,18 @@ export default () => {
             ];
         }
         if (changed) {
-            let key;
-            let upperThreshold;
-            let lowerThreshold;
-            let startValue;
-            let endValue;
-            let tickInterval;
+            let location;
+            let geoLng;
+            let geoLat;
 
             changedRows = rows.map(row => {
-                // if (changed[row.id]){
-                //     key = row.id;
-                //     lowerThreshold = changed[row.id].lowerThreshold ? changed[row.id].lowerThreshold : row.lowerThreshold;
-                //     upperThreshold = changed[row.id].upperThreshold ? changed[row.id].upperThreshold : row.upperThreshold;
-                //     startValue = changed[row.id].startValue ? changed[row.id].startValue : row.startValue;
-                //     endValue = changed[row.id].endValue ? changed[row.id].endValue : row.endValue;
-                //     tickInterval = changed[row.id].tickInterval ? changed[row.id].tickInterval : row.tickInterval;
-                //     updateThresholds({key, upperThreshold, lowerThreshold, startValue, endValue, tickInterval});
-                //     return { ...row, ...changed[row.id] };
-                // }
+                if (changed[row.id]){
+                    location = row.id;
+                    geoLng = changed[row.id].lng ? changed[row.id].lng : row.lng;
+                    geoLat = changed[row.id].lat ? changed[row.id].lat : row.lat;
+                    updateBranchList({location, geoLng, geoLat});
+                    return { ...row, ...changed[row.id] };
+                }
                 return row;
             });
         }
