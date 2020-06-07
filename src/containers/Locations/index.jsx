@@ -4,10 +4,11 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LocationInfo from './components/LocationInfo';
-import { ThemeProps, RTLProps } from './../../shared/prop-types/ReducerProps';
+import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
 import GeoMap from "./components/GeoMap";
+import {compose} from "redux";
 
-class History extends PureComponent {
+class Locations extends PureComponent {
     static propTypes = {
         t: PropTypes.func.isRequired,
         dispatch: PropTypes.func.isRequired,
@@ -45,7 +46,7 @@ class History extends PureComponent {
                 </Row>
                 <Row>
                     <GeoMap
-                        onMarkerClick={this.onMarkerClick.bind(this)}/>
+                        onMarkerClick={this.onMarkerClick.bind(this)} branchList={this.props.branchDetails}/>
                     <LocationInfo
                         dir={rtl.direction}
                         theme={theme.className}
@@ -58,7 +59,15 @@ class History extends PureComponent {
     }
 }
 
-export default connect(state => ({
+const mapStateToProps = (state) => ({
     rtl: state.rtl,
     theme: state.theme,
-}))(withTranslation('common')(History));
+    initialLoad: state.topbar.initialLoad,
+    branchDetails: state.topbar.branchDetails,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Locations);
+
