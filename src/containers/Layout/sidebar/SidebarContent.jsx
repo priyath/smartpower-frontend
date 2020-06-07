@@ -30,6 +30,7 @@ class SidebarContent extends Component {
             {/*<SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />*/}
             {/*<SidebarLink title="Settings" route="/settings" onClick={this.hideSidebar} />*/}
             <SidebarLink title="Thresholds" route="/control_panel/thresholds" onClick={this.hideSidebar} />
+            <SidebarLink title="Branches" route="/control_panel/branches" onClick={this.hideSidebar} />
           </SidebarCategory>
         </ul>
       </div>
