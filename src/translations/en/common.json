@@ -2,7 +2,7 @@
   "dashboard": {
     "page_title": "Dashboard",
     "visits":  "Visits",
-    "current_month_kwh_value":  "month Consumption",
+    "current_month_kwh_value":  "month Consumption - kWh",
     "cost":  "Month Cost",
     "bounce_rate":  "Bounce rate",
     "ab_testing":  "A/B testing analytics",

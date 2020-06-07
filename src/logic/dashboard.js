@@ -1,4 +1,4 @@
-import { extend } from 'lodash';
+import {getCurrentMonthDay, daysInMonth} from '../logic/commonLogic';
 
 export const updateGaugeSelection = (gauges, selectedGauge) => {
     const gaugeIndex = selectedGauge - 1;
@@ -50,13 +50,21 @@ export const randomizeData = (data) => {
     return data;
 };
 
-//test function
-export const getTodayStats = (existing, updated) => {
-    updated.minVoltage = updated.minVoltage ? updated.minVoltage : 0;
-    updated.maxVoltage = updated.maxVoltage ? updated.maxVoltage : 0;
-    updated.peak = updated.todayPeakKW ? updated.todayPeakKW : 0;
-    updated.consumption = updated.todayEnergy ? updated.todayEnergy : 0;
-    return extend({},existing,updated);
+const getPredictedConsumption = (consumption) => {
+    const currDay = getCurrentMonthDay();
+    return Math.round((consumption/currDay)*daysInMonth());
+}
+
+export const getTodayStats = (energyData, statsData) => {
+    let stats = {};
+    stats.minVoltage = statsData.minVoltage ? statsData.minVoltage : 0;
+    stats.maxVoltage = statsData.maxVoltage ? statsData.maxVoltage : 0;
+    stats.peak = statsData.todayPeakKW ? Math.round(statsData.todayPeakKW) : 0;
+    stats.consumption = energyData.totalEnergy ? Math.round(energyData.totalEnergy) : 0;
+    stats.predConsumption = energyData.totalEnergy ? getPredictedConsumption(energyData.totalEnergy) : 0;
+    stats.cost = 0;
+
+    return stats;
 };
 
 export const getThresholdFromScantype = (thresholdData, scanType) => {

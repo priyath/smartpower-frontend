@@ -55,12 +55,12 @@ export default function (state = initialState, action) {
             const gauges = state.get('gauges').toJS();
 
             const thresholdData = action.payload.thresholdResponse.data;
-            const statsResponse = action.payload.statsResponse;
-            const dataResponse = action.payload.dataResponse;
-            const rawStats = statsResponse.data[0];
-            const rawData = dataResponse.data[0];
+            const energyConsumptionResp = action.payload.energyConsumptionResp;
+            const todayStatsResp = action.payload.todayStatsResp;
+            const energyData = energyConsumptionResp.data[0];
+            const statsData = todayStatsResp.data[0];
 
-            const updatedStats = getTodayStats(todayStats,rawStats, rawData);
+            const updatedStats = getTodayStats(energyData,statsData);
             const updatedGauges = updateGaugesWithThresholdInfo(gauges, thresholdData);
             return state
                 .set('todayStats', updatedStats)

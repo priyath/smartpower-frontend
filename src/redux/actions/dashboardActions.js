@@ -60,9 +60,9 @@ export function initDashboardData() {
         loadThresholds().then((thresholdResponse) => {
             Promise.all([fetchBranchSummary({filter: location, fromDate, toDate}), fetchTodayConsumption(location)])
             .then((response) => {
-                const statsResponse = response[0];
-                const dataResponse = response[1];
-                dispatch(updateTodayStats({thresholdResponse, statsResponse, dataResponse}));
+                const energyConsumptionResp = response[0];
+                const todayStatsResp = response[1];
+                dispatch(updateTodayStats({thresholdResponse, energyConsumptionResp, todayStatsResp}));
             })
         })
     }

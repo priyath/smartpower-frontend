@@ -39,7 +39,7 @@ class KWValue extends PureComponent {
   render() {
     const { activeIndex } = this.state;
     const activeItem = data[activeIndex];
-    const { t, consumption } = this.props;
+    const { t, todayStats } = this.props;
 
     return (
       <Col md={12} xl={3} lg={6} xs={12}>
@@ -51,11 +51,11 @@ class KWValue extends PureComponent {
             <div className="dashboard__sales-report dashboard__cost-details">
               <div className="progress-wrap progress-wrap--small">
                 <p className="dashboard__sales-report-title">CURRENT</p>
-                <p className="dashboard__sales-report-now">{consumption}</p>
+                <p className="dashboard__sales-report-now">{todayStats.consumption}</p>
               </div>
               <div className="progress-wrap progress-wrap--small progress-wrap--pink">
                 <p className="dashboard__sales-report-title">PREDICTED</p>
-                <p className="dashboard__sales-report-now dashboard__stats-predicted">{consumption}</p>
+                <p className="dashboard__sales-report-now dashboard__stats-predicted">{todayStats.predConsumption}</p>
               </div>
             </div>
           </CardBody>

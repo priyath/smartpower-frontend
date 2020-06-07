@@ -36,3 +36,12 @@ export const getCurrentMonthRange = () => {
 
     return {fromDate: formatDate('hour', year, month, firstDay), toDate: formatDate('hour', year, month, lastDay)}
 }
+
+export const getCurrentMonthDay = () => {
+    return appendZero(new Date().getDate());
+}
+
+export const daysInMonth  = () => {
+    const date = new Date();
+    return new Date(date.getFullYear(), (date.getMonth()+1), 0).getDate();
+}

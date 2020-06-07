@@ -8,11 +8,11 @@ import Cost from "./stats/Cost";
 import {compose} from "redux";
 
 const CompView = ({ t, dir, themeName, todayStats }) => {
-    const { consumption, cost } = todayStats;
+    const { cost } = todayStats;
     return (
         <Row>
             <TodayStats todayStats={todayStats} />
-            <KWValue consumption={consumption} />
+            <KWValue todayStats={todayStats} />
             <Cost cost={cost}/>
         </Row>
     );
