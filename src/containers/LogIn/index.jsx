@@ -1,25 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import FacebookIcon from 'mdi-react/FacebookIcon';
-import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
+import React, {PureComponent} from 'react';
 import LogInForm from './components/LogInForm';
+import {authUser} from '../../repositories/loginRepository';
 
-const LogIn = () => (
-  <div className="account">
-    <div className="account__wrapper">
-      <div className="account__card">
-        <div className="account__head">
-          <h3 className="account__title">Welcome to
-            <span className="account__logo"> Smart
-              <span className="account__logo-accent">POWER</span>
-            </span>
-          </h3>
+class LogIn extends PureComponent {
+
+  constructor() {
+    super();
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
+
+  handleSubmit = async (submit) => {
+    try {
+      await authUser(submit);
+      this.setState({isAuthenticated: true})
+    } catch (e) {
+      console.log('something went wrong');
+    }
+  }
+
+  render() {
+    return (
+      <div className="account">
+        <div className="account__wrapper">
+          <div className="account__card">
+            <div className="account__head">
+              <h3 className="account__title">Welcome to
+                <span className="account__logo"> Smart
+                <span className="account__logo-accent">POWER</span>
+              </span>
+              </h3>
+            </div>
+            <LogInForm
+                onSubmit={this.handleSubmit}
+                isAuthenticated={this.state.isAuthenticated}/>
+          </div>
         </div>
-        <LogInForm onSubmit />
       </div>
-    </div>
-  </div>
-);
+    )
+  }
+}
 
 export default LogIn;
 
