@@ -11,3 +11,14 @@ export const authUser = ({username, password}) => {
         }
     );
 };
+
+export const createUser = ({firstName, lastName, email, username, password, role}) => {
+    let formData = {firstName, lastName, email, username, password, role};
+
+    return axiosFetchJSON(AUTH_API_ENDPOINT + '/users', 'POST', formData)
+        .then(response => response)
+        .catch((e) => {
+                throw e;
+            }
+        );
+};

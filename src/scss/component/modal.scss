@@ -90,7 +90,7 @@
 .modal-dialog--success {
 
   .modal__title-icon {
-    color: $color-accent;
+    color: #4ce1b6;
   }
 }
 
@@ -142,7 +142,7 @@
   }
 
   &.modal-dialog--success .modal-content {
-    background-color: $color-accent;
+    background-color: #4ce1b6;
   }
 
   &.modal-dialog--warning .modal-content {
@@ -202,7 +202,7 @@
   }
 
   &.modal-dialog--success .modal__header {
-    background-color: $color-accent;
+    background-color: #4ce1b6;
   }
 
   &.modal-dialog--warning .modal__header {

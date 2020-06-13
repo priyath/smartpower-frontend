@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 import EyeIcon from 'mdi-react/EyeIcon';
 import { withTranslation } from 'react-i18next';
 import renderSelectField from '../../../../shared/components/form/Select';
+import {createUser} from '../../../../repositories/loginRepository';
 import validate from './validate';
+import Modal from "../../../../shared/components/Modal";
+import {getErrorMessage} from '../Constants';
 
 const renderField = ({
                          input, placeholder, type, meta: { touched, error },
@@ -47,6 +50,9 @@ class AddUserForm extends PureComponent {
         super();
         this.state = {
             showPassword: false,
+            modal: false,
+            modalMessage: '',
+            modalColor: '',
         };
     }
 
@@ -54,6 +60,35 @@ class AddUserForm extends PureComponent {
         e.preventDefault();
         this.setState(prevState => ({ showPassword: !prevState.showPassword }));
     };
+
+    handleSubmit = (values) => {
+        const updatedValues = {role: values.select.value, ...values};
+        createUser(updatedValues).then((res) => {
+            this.setState({
+                modal: true,
+                modalMessage: `${getErrorMessage(201)}`,
+                modalColor: `success`,
+                modalTitle: `User Creation Successful`,
+            })
+        }).catch((e) => {
+            const status = e.response.status;
+            this.setState({
+                modal: true,
+                modalMessage: `${getErrorMessage(status)}`,
+                modalColor: `danger`,
+                modalTitle: `User Creation Failed`,
+            })
+        })
+    }
+
+    modalToggle = (notification) => {
+        console.log('notification: ', notification);
+        this.setState(prevState => (
+            {
+                modal: !prevState.modal,
+                modalMessage: notification ? 'test' : ''
+            }));
+    }
 
     render() {
         const {
@@ -69,7 +104,7 @@ class AddUserForm extends PureComponent {
                             <h5 className="bold-text">{t('forms.from_validation.vertical_form_validate')}</h5>
                             <h5 className="subhead">Errors are under fields</h5>
                         </div>
-                        <form className="form" onSubmit={handleSubmit}>
+                        <form className="form" onSubmit={handleSubmit(this.handleSubmit)}>
                             <div className="form__form-group">
                                 <span className="form__form-group-label">First Name</span>
                                 <div className="form__form-group-field">
@@ -147,12 +182,20 @@ class AddUserForm extends PureComponent {
                                 </div>
                             </div>
                             <ButtonToolbar className="form__button-toolbar">
-                                <Button color="primary" type="submit">Validate</Button>
+                                <Button color="primary" disabled={submitting} type="submit">Submit</Button>
                                 <Button type="button" onClick={reset} disabled={pristine || submitting}>
-                                    Cancel
+                                    Reset
                                 </Button>
                             </ButtonToolbar>
                         </form>
+                        <Modal
+                            color={this.state.modalColor}
+                            title={this.state.modalTitle}
+                            colored
+                            showModal={this.state.modal}
+                            modalToggle={this.modalToggle}
+                            message={this.state.modalMessage}
+                        />
                     </CardBody>
                 </Card>
             </Col>
