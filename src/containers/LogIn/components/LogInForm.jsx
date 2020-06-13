@@ -24,7 +24,7 @@ class LogInForm extends PureComponent {
   };
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
     const { showPassword } = this.state;
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -69,12 +69,12 @@ class LogInForm extends PureComponent {
             </button>
           </div>
         </div>
-        <button type='submit' className="btn btn-primary account__btn account__btn--small">Sign In</button>
+        <button type='submit' disabled={submitting} className="btn btn-primary account__btn account__btn--small">Sign In</button>
       </form>
     );
   }
 }
 
 export default reduxForm({
-  form: 'log_in_form',
+  form: 'loginForm',
 })(LogInForm);
