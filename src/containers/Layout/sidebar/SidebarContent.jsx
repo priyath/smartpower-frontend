@@ -26,11 +26,13 @@ class SidebarContent extends Component {
           <SidebarLink title="Locations" icon="home" route="/locations" onClick={this.hideSidebar} />
           <SidebarLink title="Alerts" icon="home" route="/alerts" onClick={this.hideSidebar} />
           <SidebarCategory title="Control Panel" icon="menu">
-            {/*<SidebarLink title="User List" route="/control_panel/users" onClick={this.hideSidebar} />*/}
-            <SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />
             {/*<SidebarLink title="Settings" route="/settings" onClick={this.hideSidebar} />*/}
             <SidebarLink title="Thresholds" route="/control_panel/thresholds" onClick={this.hideSidebar} />
             <SidebarLink title="Branches" route="/control_panel/branches" onClick={this.hideSidebar} />
+          </SidebarCategory>
+          <SidebarCategory title="User Management" icon="menu">
+            {/*<SidebarLink title="User List" route="/control_panel/users" onClick={this.hideSidebar} />*/}
+            <SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />
           </SidebarCategory>
         </ul>
       </div>

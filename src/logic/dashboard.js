@@ -60,7 +60,7 @@ export const getTodayStats = (energyData, statsData) => {
     stats.minVoltage = statsData.minVoltage ? statsData.minVoltage : 0;
     stats.maxVoltage = statsData.maxVoltage ? statsData.maxVoltage : 0;
     stats.peak = statsData.todayPeakKW ? Math.round(statsData.todayPeakKW) : 0;
-    stats.consumption = energyData.totalEnergy ? Math.round(energyData.totalEnergy) : 0;
+    stats.consumption = energyData.totalEnergy ? Math.round((energyData.totalEnergy + Number.EPSILON)*100)/100 : 0;
     stats.predConsumption = energyData.totalEnergy ? getPredictedConsumption(energyData.totalEnergy) : 0;
     stats.cost = 0;
 

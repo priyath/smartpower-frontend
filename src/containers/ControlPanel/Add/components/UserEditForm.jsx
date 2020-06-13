@@ -48,6 +48,7 @@ class UserEditForm extends PureComponent {
                                         component="input"
                                         type="text"
                                         placeholder="First Name"
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
@@ -59,6 +60,7 @@ class UserEditForm extends PureComponent {
                                         component="input"
                                         type="text"
                                         placeholder="Last Name"
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
@@ -70,6 +72,7 @@ class UserEditForm extends PureComponent {
                                         component="input"
                                         type="text"
                                         placeholder="Username"
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
@@ -94,6 +97,7 @@ class UserEditForm extends PureComponent {
                                         component="input"
                                         type="email"
                                         placeholder="example@mail.com"
+                                        autoComplete="off"
                                     />
                                 </div>
                             </div>
@@ -105,6 +109,7 @@ class UserEditForm extends PureComponent {
                                         component="input"
                                         type={showPassword ? 'text' : 'password'}
                                         placeholder="Password"
+                                        autoComplete="new-password"
                                     />
                                     <button
                                         type="button"
