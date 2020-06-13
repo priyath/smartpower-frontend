@@ -175,8 +175,8 @@ class AddUserForm extends PureComponent {
                                         component={renderSelectField}
                                         type="text"
                                         options={[
-                                            { value: 'one', label: 'One' },
-                                            { value: 'two', label: 'Two' },
+                                            { value: 'admin', label: 'Admin' },
+                                            { value: 'user', label: 'User' },
                                         ]}
                                     />
                                 </div>
