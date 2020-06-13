@@ -50,11 +50,11 @@ class KWValue extends PureComponent {
             </div>
             <div className="dashboard__sales-report dashboard__cost-details">
               <div className="progress-wrap progress-wrap--small">
-                <p className="dashboard__sales-report-title">CURRENT</p>
+                <p className="dashboard__sales-report-title">CONSUMED</p>
                 <p className="dashboard__sales-report-now">{todayStats.consumption}</p>
               </div>
               <div className="progress-wrap progress-wrap--small progress-wrap--pink">
-                <p className="dashboard__sales-report-title">PREDICTED</p>
+                <p className="dashboard__sales-report-title">MONTH PREDICTION</p>
                 <p className="dashboard__sales-report-now dashboard__stats-predicted">{todayStats.predConsumption}</p>
               </div>
             </div>

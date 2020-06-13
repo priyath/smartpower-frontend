@@ -62,23 +62,25 @@ class AddUserForm extends PureComponent {
     };
 
     handleSubmit = (values) => {
-        const updatedValues = {role: values.select.value, ...values};
-        createUser(updatedValues).then((res) => {
-            this.setState({
-                modal: true,
-                modalMessage: `${getErrorMessage(201)}`,
-                modalColor: `success`,
-                modalTitle: `User Creation Successful`,
+        if (values && values.select && values.select.value) {
+            const updatedValues = {role: values.select.value, ...values};
+            createUser(updatedValues).then((res) => {
+                this.setState({
+                    modal: true,
+                    modalMessage: `${getErrorMessage(201)}`,
+                    modalColor: `success`,
+                    modalTitle: `User Creation Successful`,
+                })
+            }).catch((e) => {
+                const status = e.response.status;
+                this.setState({
+                    modal: true,
+                    modalMessage: `${getErrorMessage(status)}`,
+                    modalColor: `danger`,
+                    modalTitle: `User Creation Failed`,
+                })
             })
-        }).catch((e) => {
-            const status = e.response.status;
-            this.setState({
-                modal: true,
-                modalMessage: `${getErrorMessage(status)}`,
-                modalColor: `danger`,
-                modalTitle: `User Creation Failed`,
-            })
-        })
+        }
     }
 
     modalToggle = (notification) => {
