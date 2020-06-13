@@ -27,7 +27,9 @@ class LogInForm extends PureComponent {
     const { handleSubmit } = this.props;
     const { showPassword } = this.state;
 
-    if (this.props.isAuthenticated) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (currentUser && currentUser.accessToken){
       return <Redirect to='/dashboard'/>
     }
 

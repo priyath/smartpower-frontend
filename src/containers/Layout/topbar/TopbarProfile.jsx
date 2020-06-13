@@ -17,6 +17,10 @@ export default class TopbarProfile extends PureComponent {
     this.setState(prevState => ({ collapse: !prevState.collapse }));
   };
 
+  onLogout = () => {
+    localStorage.removeItem('currentUser');
+  }
+
   render() {
     const { collapse } = this.state;
 
@@ -30,7 +34,7 @@ export default class TopbarProfile extends PureComponent {
         {collapse && <button type="button" className="topbar__back" onClick={this.toggle} />}
         <Collapse isOpen={collapse} className="topbar__menu-wrap">
           <div className="topbar__menu">
-            <TopbarMenuLink title="Log Out" icon="exit" path="/" />
+            <TopbarMenuLink title="Log Out" icon="exit" path="/" onClick={this.onLogout}/>
           </div>
         </Collapse>
       </div>

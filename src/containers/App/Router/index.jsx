@@ -9,7 +9,7 @@ const Router = () => (
         <main>
             <Switch>
                 <Route exact path="/" component={LogIn} />
-                <Route exact path="/log_in" component={LogIn} />
+                <Route exact path="/login" component={LogIn} />
                 <Route path="/" component={WrappedRoutes} />
             </Switch>
         </main>

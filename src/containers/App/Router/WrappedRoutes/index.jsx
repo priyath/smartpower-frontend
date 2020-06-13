@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
 import Layout from '../../../Layout/index';
 import Dashboard from '../../../Dashboard/index';
 import History from '../../../History/index';
@@ -14,6 +13,7 @@ import {compose} from "redux";
 import {withTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import WithLoading from "./HOCLoader";
+import PrivateRoute from "./PrivateRoute";
 
 class WrappedRoutes extends Component {
 
@@ -33,15 +33,15 @@ class WrappedRoutes extends Component {
                 <Layout />
                 {
                     <div className="container__wrap">
-                        <Route path="/dashboard" render={() => <DashboardWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/history" render={() => <HistoryWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/branches" render={() => <BranchesWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/alerts" render={() => <AlertWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/locations" render={() => <LocationsWithLoading isLoading={!(initialLoad)}/>}/>
-                        <Route path="/control_panel/users" component={UserList}/>
-                        <Route path="/control_panel/users_add" component={UserAdd}/>
-                        <Route path="/control_panel/thresholds" component={Thresholds}/>
-                        <Route path="/control_panel/branches" component={BranchConfig}/>
+                        <PrivateRoute path="/dashboard" render={() => <DashboardWithLoading isLoading={!(initialLoad)}/>}/>
+                        <PrivateRoute path="/history" render={() => <HistoryWithLoading isLoading={!(initialLoad)}/>}/>
+                        <PrivateRoute path="/branches" render={() => <BranchesWithLoading isLoading={!(initialLoad)}/>}/>
+                        <PrivateRoute path="/alerts" render={() => <AlertWithLoading isLoading={!(initialLoad)}/>}/>
+                        <PrivateRoute path="/locations" render={() => <LocationsWithLoading isLoading={!(initialLoad)}/>}/>
+                        <PrivateRoute path="/control_panel/users" component={UserList}/>
+                        <PrivateRoute path="/control_panel/users_add" component={UserAdd}/>
+                        <PrivateRoute path="/control_panel/thresholds" component={Thresholds}/>
+                        <PrivateRoute path="/control_panel/branches" component={BranchConfig}/>
                     </div>
                 }
             </div>

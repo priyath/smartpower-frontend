@@ -6,16 +6,14 @@ class LogIn extends PureComponent {
 
   constructor() {
     super();
-    this.state = {
-      isAuthenticated: false,
-    };
   }
 
   handleSubmit = async (submit) => {
     try {
-      await authUser(submit);
-      this.setState({isAuthenticated: true})
+      const authResponse = await authUser(submit);
+      localStorage.setItem('currentUser', JSON.stringify(authResponse.data));
     } catch (e) {
+      console.log(e);
       console.log('something went wrong');
     }
   }
@@ -34,7 +32,7 @@ class LogIn extends PureComponent {
             </div>
             <LogInForm
                 onSubmit={this.handleSubmit}
-                isAuthenticated={this.state.isAuthenticated}/>
+            />
           </div>
         </div>
       </div>
