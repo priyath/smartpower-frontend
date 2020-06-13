@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import UserEditForm from './components/UserEditForm';
+import AddNewUserForm from './components/UserEditForm';
 
 const UserList = () => (
     <Container>
@@ -10,7 +10,7 @@ const UserList = () => (
             </Col>
         </Row>
         <Row>
-            <UserEditForm onSubmit />
+            <AddNewUserForm onSubmit />
         </Row>
     </Container>
 );

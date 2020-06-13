@@ -32,7 +32,7 @@ class SidebarContent extends Component {
           </SidebarCategory>
           <SidebarCategory title="User Management" icon="menu">
             {/*<SidebarLink title="User List" route="/control_panel/users" onClick={this.hideSidebar} />*/}
-            {/*<SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />*/}
+            <SidebarLink title="Add User" route="/control_panel/users_add" onClick={this.hideSidebar} />
           </SidebarCategory>
         </ul>
       </div>
