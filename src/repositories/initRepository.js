@@ -19,15 +19,15 @@ export const fetchBranchList = () => {
         .then(response => response);
 };
 
-export const updateBranchList = ({location, geoLng, geoLat}) => {
-    let formData = {calltype: 'Update-Locations', filter: location, geoLng, geoLat};
+export const updateBranchList = ({location, geoLng, geoLat, contactName, contactEmail, contactPhone}) => {
+    let formData = {calltype: 'Update-Locations', filter: location, geoLng, geoLat, contactName, contactEmail, contactPhone};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
 
-export const addNewBranch = ({location, geoLng, geoLat}) => {
-    let formData = {calltype: 'Add-Locations', location, geoLng, geoLat};
+export const addNewBranch = ({location, geoLng, geoLat, contactName, contactEmail, contactPhone}) => {
+    let formData = {calltype: 'Add-Locations', location, geoLng, geoLat, contactName, contactEmail, contactPhone};
 
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);

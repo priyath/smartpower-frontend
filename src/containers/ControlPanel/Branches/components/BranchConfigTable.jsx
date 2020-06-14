@@ -17,6 +17,9 @@ const columnNames = [
     { name: 'location', title: 'Branch' },
     { name: 'lat', title: 'Geo Coordinate (LAT)' },
     { name: 'lng', title: 'Geo Coordinate (LNG)' },
+    { name: 'contactName', title: 'Contact Name' },
+    { name: 'contactEmail', title: 'Email' },
+    { name: 'contactPhone', title: 'Phone' },
 ]
 
 export default () => {
@@ -37,7 +40,7 @@ export default () => {
             changedRows = [
                 ...rows,
                 ...added.map((row, index) => {
-                    addNewBranch({location: row.location, geoLat: row.lat, geoLng: row.lng});
+                    addNewBranch({location: row.location, geoLat: row.lat, geoLng: row.lng, contactName: row.contactName, contactEmail: row.contactEmail, contactPhone: row.contactPhone});
                     return ({id: startingAddedId + index, ...row,})
                 }),
             ];
@@ -46,13 +49,19 @@ export default () => {
             let location;
             let geoLng;
             let geoLat;
+            let contactName;
+            let contactEmail;
+            let contactPhone;
 
             changedRows = rows.map(row => {
                 if (changed[row.id]){
                     location = row.id;
                     geoLng = changed[row.id].lng ? changed[row.id].lng : row.lng;
                     geoLat = changed[row.id].lat ? changed[row.id].lat : row.lat;
-                    updateBranchList({location, geoLng, geoLat});
+                    contactName = changed[row.id].contactName ? changed[row.id].contactName : row.contactName;
+                    contactEmail = changed[row.id].contactEmail ? changed[row.id].contactEmail : row.contactEmail;
+                    contactPhone = changed[row.id].contactPhone ? changed[row.id].contactPhone : row.contactPhone;
+                    updateBranchList({location, geoLng, geoLat, contactName, contactEmail, contactPhone});
                     return { ...row, ...changed[row.id] };
                 }
                 return row;
