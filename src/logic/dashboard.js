@@ -153,7 +153,7 @@ export const getTickInterval = (start, end, tick) => {
     return ticks;
 }
 
-export const lowerThresholdColor = 'rgba(253,189,5,0.5)';
+export const lowerThresholdColor = 'rgba(255,170,28,0.5)';
 export const upperThresholdColor = 'rgba(187,62,62, 0.6)';
 export const idealRangeColor = 'rgba(94,173,94,0.75)';
 
