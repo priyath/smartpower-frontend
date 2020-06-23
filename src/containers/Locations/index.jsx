@@ -7,6 +7,9 @@ import LocationInfo from './components/LocationInfo';
 import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
 import GeoMap from "./components/GeoMap";
 import {compose} from "redux";
+import {fetchAlerts} from "../../redux/actions/alertActions";
+import {updateBranchDetailsWithAlertCount} from '../../logic/alertManager';
+import {fetchAlertSummaryFromDatabase} from '../../repositories/alertRepository';
 
 class Locations extends PureComponent {
     static propTypes = {
@@ -20,8 +23,16 @@ class Locations extends PureComponent {
         super(props);
         this.state = {
             branchName: "Select a Branch",
-            consumption: null
+            consumption: null,
+            alertSummaryLoaded: false,
+            alertSummaryDetails: [],
         };
+    }
+
+    componentDidMount() {
+        fetchAlertSummaryFromDatabase().then((resp) => {
+            this.setState({alertSummaryDetails: resp.data, alertSummaryLoaded: true})
+        })
     }
 
     onMarkerClick(marker) {
@@ -33,8 +44,12 @@ class Locations extends PureComponent {
 
     render() {
         const {
-            t, rtl, theme,
+            t, rtl, theme, initialLoad, alertSummaryLoad
         } = this.props;
+
+        const {alertSummaryLoaded, alertSummaryDetails} = this.state;
+
+        const branchDetails = updateBranchDetailsWithAlertCount(this.props.branchDetails, alertSummaryDetails);
 
         return (
             //TODO: classnames should be refactored?
@@ -44,16 +59,20 @@ class Locations extends PureComponent {
                         <h3 className="page-title">{t('locations.page_title')}</h3>
                     </Col>
                 </Row>
-                <Row>
-                    <GeoMap
-                        onMarkerClick={this.onMarkerClick.bind(this)} branchList={this.props.branchDetails}/>
-                    <LocationInfo
-                        dir={rtl.direction}
-                        theme={theme.className}
-                        branchName={this.state.branchName}
-                        consumption={this.state.consumption}
-                    />
-                </Row>
+
+                    {
+                        initialLoad && alertSummaryLoaded ?
+                            <Row>
+                            <GeoMap
+                                onMarkerClick={this.onMarkerClick.bind(this)} branchList={branchDetails}/>
+                            <LocationInfo
+                            dir={rtl.direction}
+                            theme={theme.className}
+                            branchName={this.state.branchName}
+                            consumption={this.state.consumption}
+                            />
+                            </Row> : <Row className="loader"><p>Loading..</p></Row>
+                    }
             </Container>
         );
     }
@@ -64,9 +83,12 @@ const mapStateToProps = (state) => ({
     theme: state.theme,
     initialLoad: state.topbar.initialLoad,
     branchDetails: state.topbar.branchDetails,
+    alertList: state.alert.persistedAlertList,
+    alertsLoaded: state.alert.alertsLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    fetchAlertSummary: () => dispatch(fetchAlerts())
 });
 
 export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Locations);

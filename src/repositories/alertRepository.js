@@ -27,3 +27,10 @@ export const fetchAlertsFromDatabase = (filter) => {
     return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
         .then(response => response);
 };
+
+export const fetchAlertSummaryFromDatabase = () => {
+    let formData = {calltype: 'Alerts-Summary'};
+
+    return axiosFetch(REALTIME_API_ENDPOINT, 'POST', formData)
+        .then(response => response);
+};

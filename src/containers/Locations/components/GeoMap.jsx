@@ -48,7 +48,7 @@ const Map = compose(
     withGoogleMap,
 )(props => (
     <GoogleMap
-        defaultZoom={10}
+        defaultZoom={8}
         defaultCenter={{ lat: 6.839094, lng: 79.885041 }}
         defaultOptions={{ styles: silverMapStyle }}
     >
@@ -84,19 +84,22 @@ const Map = compose(
                 },
             ]}
         >
-            {props.branchList.map((branch, index) => (
-                <Marker
-                    idx={index}
-                    key={index}
-                    position={{ lat: branch.lat, lng: branch.lng }}
-                    onClick={()=>{ props.onMarkerClick(index)} }
-                >
-                    {props.isOpen && props.infoIndex === index && (
-                    <InfoWindow>
-                        <h4>{branch.location}</h4>
-                    </InfoWindow>
-                )}</Marker>
-            ))}
+            {props.branchList.map((branch, index) => {
+                return (
+                    <Marker
+                        idx={index}
+                        key={index}
+                        position={{ lat: branch.lat, lng: branch.lng }}
+                        onClick={()=>{ props.onMarkerClick(index)} }
+                        options={{icon: branch.alertCount > 0 ? `${process.env.PUBLIC_URL}/img/map_markers/red-marker.png`
+                                : `${process.env.PUBLIC_URL}/img/map_markers/green-marker.png`}}
+                    >
+                        {props.isOpen && props.infoIndex === index && (
+                        <InfoWindow>
+                            <h4>{branch.location}</h4>
+                        </InfoWindow>
+                    )}</Marker>
+            )})}
         </MarkerClusterer>
     </GoogleMap>
 ));

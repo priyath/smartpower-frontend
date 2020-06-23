@@ -125,3 +125,12 @@ export const getThresholdMap = (data) => {
 export const buildModalMessage = (notification) => {
     return `${notification.name} reading is ${notification.reading} at ${notification.location}. Upper Threshold: ${notification.upperThreshold} Lower Threshold: ${notification.lowerThreshold}`
 }
+
+export const updateBranchDetailsWithAlertCount = (branchDetails, alertSummaryDetails) => {
+    return branchDetails.map(branch => {
+        const summaryDetails = alertSummaryDetails.find(alertSummary => alertSummary.location === branch.location);
+        const alertCount = summaryDetails && !isNaN(summaryDetails.alert_count) ? summaryDetails.alert_count : 0;
+        branch['alertCount'] = alertCount;
+        return branch;
+    })
+}
