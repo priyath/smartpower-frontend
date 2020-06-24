@@ -48,7 +48,6 @@ class Locations extends PureComponent {
         } = this.props;
 
         const {alertSummaryLoaded, alertSummaryDetails} = this.state;
-
         const branchDetails = updateBranchDetailsWithAlertCount(this.props.branchDetails, alertSummaryDetails);
 
         return (
@@ -66,10 +65,11 @@ class Locations extends PureComponent {
                             <GeoMap
                                 onMarkerClick={this.onMarkerClick.bind(this)} branchList={branchDetails}/>
                             <LocationInfo
-                            dir={rtl.direction}
-                            theme={theme.className}
-                            branchName={this.state.branchName}
-                            consumption={this.state.consumption}
+                                dir={rtl.direction}
+                                theme={theme.className}
+                                branchName={this.state.branchName}
+                                consumption={this.state.consumption}
+                                branchDetails={branchDetails}
                             />
                             </Row> : <Row className="loader"><p>Loading..</p></Row>
                     }
