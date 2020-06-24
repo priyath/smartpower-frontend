@@ -1,12 +1,9 @@
 import React from 'react';
-import { PieChart, Pie } from 'recharts';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Panel from '../../../shared/components/Panel';
 import SummaryTable from "./SummaryTable";
-
-const data01 = [{ value: 50, fill: '#4ce1b6' },
-  { value: 50, fill: '#eeeeee' }];
+import LocationTable from "./LocationTable";
 
 const LocationInfo = ({ t, branchName, consumption, branchDetails }) => (
     <Panel md={12} lg={6} xl={4} title={branchName}>
@@ -16,7 +13,7 @@ const LocationInfo = ({ t, branchName, consumption, branchDetails }) => (
           <p className="dashboard__stat-main-number">{consumption}</p>
           <hr />
         </div>
-        <SummaryTable branchDetails={branchDetails}/>
+          {branchName ? <LocationTable branchDetails={branchDetails}/> : <SummaryTable branchDetails={branchDetails}/>}
       </div>
     </Panel>
 );

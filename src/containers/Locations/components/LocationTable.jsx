@@ -3,6 +3,9 @@ import React, { PureComponent } from 'react';
 import {
     ButtonToolbar, Card, CardBody, Col,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import MagnifyIcon from 'mdi-react/MagnifyIcon';
 import EditTable from '../../../shared/components/table/EditableTable';
 
 export default class SummaryTable extends PureComponent {
@@ -10,8 +13,8 @@ export default class SummaryTable extends PureComponent {
         super();
         this.heads = [
             {
-                key: 'location',
-                name: 'Location',
+                key: 'alertType',
+                name: 'Alert Type',
                 sortable: true,
             },
             {
@@ -27,7 +30,6 @@ export default class SummaryTable extends PureComponent {
     };
 
     createRows = (branchDetails) => {
-        if (!branchDetails) return [];
         return branchDetails.map(el => {
             return {
                 location: el.location,
