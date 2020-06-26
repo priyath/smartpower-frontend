@@ -126,11 +126,35 @@ export const buildModalMessage = (notification) => {
     return `${notification.name} reading is ${notification.reading} at ${notification.location}. Upper Threshold: ${notification.upperThreshold} Lower Threshold: ${notification.lowerThreshold}`
 }
 
+const getAlertSummaryMap = (alertDetails) => {
+    let summaryMap = {};
+
+    alertDetails.forEach((alert => {
+        const scantype = alert.scantype;
+
+        if (!(alert.location in summaryMap)) {
+            summaryMap[alert.location] = {};
+        }
+        summaryMap[alert.location][scantype] = isNaN(alert.alert_count) ? 0 : alert.alert_count;
+    }))
+    return summaryMap;
+}
+
+const getTotalAlerts = (summaryDetails) => {
+    let totalAlerts = 0;
+    for (let key in summaryDetails) {
+        totalAlerts = totalAlerts + summaryDetails[key];
+    }
+    return totalAlerts;
+}
+
 export const updateBranchDetailsWithAlertCount = (branchDetails, alertSummaryDetails) => {
+    const summaryMap = getAlertSummaryMap(alertSummaryDetails);
     return branchDetails.map(branch => {
-        const summaryDetails = alertSummaryDetails.find(alertSummary => alertSummary.location === branch.location);
-        const alertCount = summaryDetails && !isNaN(summaryDetails.alert_count) ? summaryDetails.alert_count : 0;
+        const summaryDetails = summaryMap[branch.location];
+        const alertCount = summaryDetails ? getTotalAlerts(summaryDetails) : 0;
         branch['alertCount'] = alertCount;
+        branch['summaryDetails'] = summaryDetails;
         return branch;
     })
 }

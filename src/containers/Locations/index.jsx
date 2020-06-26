@@ -9,7 +9,7 @@ import GeoMap from "./components/GeoMap";
 import {compose} from "redux";
 import {fetchAlerts} from "../../redux/actions/alertActions";
 import {updateBranchDetailsWithAlertCount} from '../../logic/alertManager';
-import {fetchAlertSummaryFromDatabase} from '../../repositories/alertRepository';
+import {fetchAlertSummaryFromDatabase, fetchAlertsFromDatabase} from '../../repositories/alertRepository';
 
 class Locations extends PureComponent {
     static propTypes = {
@@ -49,8 +49,6 @@ class Locations extends PureComponent {
 
         const {alertSummaryLoaded, alertSummaryDetails} = this.state;
         const branchDetails = updateBranchDetailsWithAlertCount(this.props.branchDetails, alertSummaryDetails);
-
-        console.log('branch name: ', this.state.branchName);
 
         return (
             //TODO: classnames should be refactored?

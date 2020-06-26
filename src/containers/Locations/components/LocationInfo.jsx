@@ -13,7 +13,7 @@ const LocationInfo = ({ t, branchName, consumption, branchDetails }) => (
           <p className="dashboard__stat-main-number">{consumption}</p>
           <hr />
         </div>
-          {branchName ? <LocationTable branchDetails={branchDetails}/> : <SummaryTable branchDetails={branchDetails}/>}
+          {branchName ? <LocationTable branchDetails={branchDetails} branchName={branchName}/> : <SummaryTable branchDetails={branchDetails}/>}
       </div>
     </Panel>
 );
