@@ -90,12 +90,12 @@ class CompControl extends PureComponent {
                                 </UncontrolledDropdown>
                             </div>
                             <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
-                                <label className="form__form-group-label">Compare
+                                <label className="form__form-group-label">Dataset 1
                                     <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
                                 </label>
                             </div>
                             <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
-                                <label className="form__form-group-label">With
+                                <label className="form__form-group-label">Dataset 2
                                     <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
                                 </label>
 

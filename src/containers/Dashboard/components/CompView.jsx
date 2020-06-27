@@ -62,13 +62,14 @@ class CompView extends React.Component {
                 tooltip: {
                     valueDecimals: 2,
                 },
+                color: '#126e9c',
             }, {
                 name: 'Dataset 2',
                 data: toDataSet,
                 tooltip: {
                     valueDecimals: 2,
                 },
-                color: '#338992',
+                color: '#8d2d2d',
             }]
         };
     }
