@@ -77,7 +77,7 @@ class CompControl extends PureComponent {
                             <h5 className="bold-text">{t('dashboard.today_status')}</h5>
                         </div>
                         <div className="dashboard__sales-report">
-                            <div className="progress-wrap progress-wrap--small">
+                            <div className="control-panel progress-wrap progress-wrap--small">
                                 <UncontrolledDropdown>
                                     <DropdownToggle className="icon icon--right" outline size="sm">
                                         <p>{granularity}<MenuDownIcon /></p>
@@ -89,15 +89,18 @@ class CompControl extends PureComponent {
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             </div>
-                            <div className="progress-wrap progress-wrap--small progress-wrap--pink">
-                                <span className="form__form-group-label">Compare </span>
-                                <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
+                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
+                                <label className="form__form-group-label">Compare
+                                    <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
+                                </label>
                             </div>
-                            <div className="progress-wrap progress-wrap--small progress-wrap--pink">
-                                <span className="form__form-group-label">With </span>
-                                <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
+                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
+                                <label className="form__form-group-label">With
+                                    <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
+                                </label>
+
                             </div>
-                            <div className="progress-wrap progress-wrap--small progress-wrap--pink">
+                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
                                 <Button onClick={this.onSubmitFilters} color="primary" size="sm">Apply</Button>
                             </div>
                         </div>

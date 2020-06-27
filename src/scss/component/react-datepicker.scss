@@ -566,6 +566,21 @@
     width: 100%;
 }
 
+.react-datepicker__input-container .input-component {
+    border-radius: 4px;
+    line-height: 16px;
+    padding: 8px 10px 8px;
+    border: 1px solid #898989;
+
+    @include themify($themes) {
+        color: themed('colorText');
+    }
+
+    @include themify($themes) {
+        background-color: themed('colorBackground');
+    }
+}
+
 .react-datepicker__year-read-view,
 .react-datepicker__month-read-view,
 .react-datepicker__month-year-read-view {

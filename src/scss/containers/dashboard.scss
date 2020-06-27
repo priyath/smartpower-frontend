@@ -1,4 +1,13 @@
 .dashboard {
+  .dashboard__sales-report .control-panel {
+    text-align: center;
+
+    input {
+      flex: 0 0 200px;
+      margin-left: 10px;
+    }
+  }
+
   .MuiTypography-body2 {
     font-size: 1em;
   }

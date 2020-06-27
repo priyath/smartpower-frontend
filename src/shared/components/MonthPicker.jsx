@@ -10,6 +10,7 @@ class MonthPicker extends React.Component {
     render() {
         return (
             <DatePicker
+                className='input-component'
                 selected={this.props.startDate}
                 onChange={this.handleChange}
                 dateFormat="MM/yyyy"
