@@ -181,16 +181,12 @@
     }
   }
 
-  @include themify($themes) {
-    background-color: themed('colorHover');
-  }
-
   .sidebar__link {
     padding-left: 43px;
 
     &:hover {
       @include themify($themes) {
-        background-color: themed('colorBackground');
+        background-color: themed('colorHover');
       }
     }
   }
