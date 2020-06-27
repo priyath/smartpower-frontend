@@ -14,7 +14,8 @@ class Alerts extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchAlerts();
+        const location =new URLSearchParams(window.location.search).get("location");
+        this.props.fetchAlerts(location);
     }
 
     render() {
@@ -48,7 +49,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchAlerts: () => dispatch(fetchAlerts())
+    fetchAlerts: (location) => dispatch(fetchAlerts(location))
 });
 
 export default compose(withTranslation('common'), connect(mapStateToProps, mapDispatchToProps), )(Alerts);

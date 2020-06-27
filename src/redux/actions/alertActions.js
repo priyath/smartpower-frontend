@@ -41,10 +41,10 @@ export function setPersistedAlerts(alertListResponse) {
     };
 }
 
-export function fetchAlerts() {
+export function fetchAlerts(loc) {
     return (dispatch, getState) => {
         const selectedBranchIdx = getState().topbar.selectedBranchIdx;
-        const location = getState().topbar.branchDetails[selectedBranchIdx].location;
+        const location = loc ? loc : getState().topbar.branchDetails[selectedBranchIdx].location;
         fetchAlertsFromDatabase(location).then((response) => {
             dispatch(setPersistedAlerts(response))
         })

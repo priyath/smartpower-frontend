@@ -47,10 +47,12 @@ export default class SummaryTable extends PureComponent {
     render() {
         const { branchDetails } = this.props;
         const rows = this.createRows(branchDetails.find(detail => detail.location === this.props.branchName));
+        const href = `/alerts?location=${this.props.branchName}`;
         //TODO: default css class names products should be changed to users
         return (
             <Col md={12} lg={12}>
                 <EditTable heads={this.heads} rows={rows} enableRowSelect />
+                <a className='location--view__details' href={href}>View Details</a>
             </Col>
         );
     }
