@@ -47,8 +47,10 @@ class Locations extends PureComponent {
             t, rtl, theme, initialLoad, alertSummaryLoad
         } = this.props;
 
-        const {alertSummaryLoaded, alertSummaryDetails} = this.state;
+        const {alertSummaryLoaded, alertSummaryDetails, branchName} = this.state;
         const branchDetails = updateBranchDetailsWithAlertCount(this.props.branchDetails, alertSummaryDetails);
+
+        const panelTitle = branchName ? 'Alert Summary - ' + branchName : 'Alert Summary';
 
         return (
             //TODO: classnames should be refactored?
@@ -65,6 +67,7 @@ class Locations extends PureComponent {
                             <GeoMap
                                 onMarkerClick={this.onMarkerClick.bind(this)} branchList={branchDetails}/>
                             <LocationInfo
+                                panelTitle={panelTitle}
                                 dir={rtl.direction}
                                 theme={theme.className}
                                 branchName={this.state.branchName}

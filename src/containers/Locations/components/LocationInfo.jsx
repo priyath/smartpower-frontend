@@ -5,14 +5,9 @@ import Panel from '../../../shared/components/Panel';
 import SummaryTable from "./SummaryTable";
 import LocationTable from "./LocationTable";
 
-const LocationInfo = ({ t, branchName, consumption, branchDetails }) => (
-    <Panel md={12} lg={6} xl={4} title={branchName}>
+const LocationInfo = ({ t, branchName, consumption, branchDetails, panelTitle }) => (
+    <Panel md={12} lg={6} xl={4} title={panelTitle}>
       <div className="dashboard__stat dashboard__stat--budget">
-        <div className="dashboard__stat-main">
-          <p className="dashboard__stat-main-title">Branch Information</p>
-          <p className="dashboard__stat-main-number">{consumption}</p>
-          <hr />
-        </div>
           {branchName ? <LocationTable branchDetails={branchDetails} branchName={branchName}/> : <SummaryTable branchDetails={branchDetails}/>}
       </div>
     </Panel>
