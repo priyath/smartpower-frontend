@@ -31,6 +31,14 @@ const theme = {
             textTransform: 'uppercase'
         }
     },
+    loading: {
+        labelStyle: {
+            color: 'white'
+        },
+        style: {
+            backgroundColor: '#232323',
+        }
+    },
     xAxis: {
         gridLineColor: '#707073',
         labels: {
