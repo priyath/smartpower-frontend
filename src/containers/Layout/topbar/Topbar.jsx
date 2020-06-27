@@ -39,15 +39,17 @@ class Topbar extends PureComponent {
                     <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
                       <p className="topbar__branch_selection_label">{location}<ChevronDownIcon /></p>
                     </DropdownToggle>
-                    <DropdownMenu>
-                      {
-                        branchDetails ? branchDetails.map((branch, idx)=> {
-                          return (
-                              <DropdownItem key={idx} onClick={(e)=>this.changeSelectedBranch(e, idx)}>{branch.location}</DropdownItem>
-                          )
-                        }) :  <DropdownItem>Loading</DropdownItem>
-                      }
-                    </DropdownMenu>
+                    <div className="topbar__dropdown">
+                      <DropdownMenu>
+                        {
+                          branchDetails ? branchDetails.map((branch, idx)=> {
+                            return (
+                                <DropdownItem key={idx} onClick={(e)=>this.changeSelectedBranch(e, idx)}>{branch.location}</DropdownItem>
+                            )
+                          }) :  <DropdownItem>Loading</DropdownItem>
+                        }
+                      </DropdownMenu>
+                    </div>
                   </div> :
                   <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
                     <p className="topbar__branch_selection_label">LOADING BRANCHES ...</p>

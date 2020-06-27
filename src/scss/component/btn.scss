@@ -120,7 +120,7 @@
   }
 
   &.btn-outline-secondary {
-    border-color: #e7e2e2;
+    border-color: #898989;
 
     &, p {
 
@@ -137,12 +137,12 @@
     }
 
     &:before {
-      background-color: #e7e2e2;
+      background-color: #2a2a31;
     }
 
     &:hover, &:focus, &:active, &:active:focus {
       background: transparent;
-      border-color: #e7e2e2;
+      border-color: #2a2a31;
       color: #444444;
 
       p {

@@ -149,6 +149,27 @@
   fill: #b1c3c8;
 }
 
+.topbar__dropdown .dropdown-menu {
+  @include themify($themes) {
+    background: themed('colorBackground');
+  }
+  border-bottom-color: #9a9a9a;
+  border-left-color: #9a9a9a;
+  border-right-color: #9a9a9a;
+}
+
+.topbar__dropdown .dropdown-item {
+  @include themify($themes) {
+    color: themed('colorText');
+  }
+
+  &:hover {
+    @include themify($themes) {
+      background-color: themed('colorHover');
+    }
+  }
+}
+
 .topbar__menu {
   width: 200px;
   border-radius: 0;
