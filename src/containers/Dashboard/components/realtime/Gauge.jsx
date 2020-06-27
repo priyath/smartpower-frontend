@@ -19,7 +19,7 @@ class ReactRadialGauge extends React.Component {
       majorTicks: getTickInterval(startValue, endValue, tickInterval),
       strokeTicks: true,
       highlights: getHighlights(this.props.gaugeObject),
-      colorPlate:"#fff",
+      colorPlate:"#232329",
       borderShadowWidth: 0,
       valueBox: true,
       valueInt: 3,
@@ -30,7 +30,14 @@ class ReactRadialGauge extends React.Component {
       needleCircleOuter: true,
       needleCircleInner: false,
       animationDuration: 700,
-      animationRule:"linear"
+      animationRule:"linear",
+      colorBorderOuter: '#29663c',
+      colorBorderOuterEnd: '#232329',
+      colorBorderMiddle: '#232329',
+      colorBorderMiddleEnd: '#232329',
+      colorBorderInner: '#232329',
+      colorBorderInnerEnd: '#232329',
+      colorNumbers: '#5de2c5'
     });
     this.gauge = new RadialGauge(options).draw()
   }
