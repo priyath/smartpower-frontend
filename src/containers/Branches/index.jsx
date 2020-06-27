@@ -22,7 +22,7 @@ class BranchSummary extends PureComponent {
 
     render() {
         const {
-            t, rtl, branchSummaryDetails, fetchingBranchSummary, branchSummaryLoaded
+            t, rtl, branchDetails, branchSummaryDetails, fetchingBranchSummary, branchSummaryLoaded
         } = this.props;
 
         return (
@@ -33,7 +33,7 @@ class BranchSummary extends PureComponent {
                     </Col>
                 </Row>
                         <div>
-                            <BranchFilter fetchSummaryDetails={this.fetchSummaryDetails}/>
+                            <BranchFilter branchDetails={branchDetails} fetchSummaryDetails={this.fetchSummaryDetails}/>
                             <Row>
                                 {
                                     branchSummaryLoaded && !fetchingBranchSummary ?
