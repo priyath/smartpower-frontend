@@ -18,7 +18,7 @@ class BranchConfig extends Component {
     render() {
         const { t } = this.props;
         return (
-            <Container>
+            <Container className="thresholds">
                 <Row>
                     <Col md={12}>
                         <h3 className="page-title">Branch Configuration</h3>
