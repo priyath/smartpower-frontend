@@ -49,6 +49,7 @@ class IntervalDatePickerField extends PureComponent {
             <Row>
                 <Col md={3} class="text-center" align="right">
                     <DatePicker
+                        className='input-component'
                         selected={startDate}
                         selectsStart
                         startDate={startDate}
@@ -62,7 +63,7 @@ class IntervalDatePickerField extends PureComponent {
                 </Col>
                 <Col md={3} class="text-center" align="center">
                     <DatePicker
-                        class="test-xxx"
+                        className='input-component'
                         selected={endDate}
                         selectsEnd
                         startDate={startDate}
