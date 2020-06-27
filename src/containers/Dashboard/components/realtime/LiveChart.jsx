@@ -212,7 +212,11 @@ export default class LiveChart extends React.Component {
         this.options = {
             chartOptions: {
                 title: {
-                    text: ''
+                    text: '',
+                    style: {
+                        textTransform: 'uppercase',
+                        fontSize: '15px'
+                    }
                 },
                 time: {
                     useUTC: false

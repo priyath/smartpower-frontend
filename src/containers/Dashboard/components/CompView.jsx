@@ -42,7 +42,11 @@ class CompView extends React.Component {
                 type: 'column',
             },
             title: {
-                text: 'Comparison of Energy Consumption'
+                text: 'Comparison of Energy Consumption',
+                style: {
+                    textTransform: 'uppercase',
+                    fontSize: '15px'
+                }
             },
             xAxis: {
                 categories: categories
