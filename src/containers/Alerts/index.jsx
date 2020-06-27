@@ -22,7 +22,7 @@ class Alerts extends Component {
         const { t, alertList, alertsLoaded } = this.props;
         const AlertWithLoading = WithLoading(AlertTable);
         return (
-            <Container>
+            <Container className={'alerts-container'}>
                 <Row>
                     <Col md={12}>
                         <h3 className="page-title">{t('tables.data_table.title')}</h3>
