@@ -48,9 +48,16 @@ const Map = compose(
     withGoogleMap,
 )(props => (
     <GoogleMap
+
         defaultZoom={8}
-        defaultCenter={{ lat: 6.839094, lng: 79.885041 }}
-        defaultOptions={{ styles: silverMapStyle }}
+        defaultCenter={{ lat: 7.738738, lng: 80.690157 }}
+        defaultOptions={{
+            styles: silverMapStyle,
+            streetViewControl: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+        }}
+
     >
         <MarkerClusterer
             averageCenter
@@ -96,7 +103,7 @@ const Map = compose(
                     >
                         {props.isOpen && props.infoIndex === index && (
                         <InfoWindow>
-                            <h4>{branch.location}</h4>
+                            <p style={{ color: 'black'}}>{branch.location}</p>
                         </InfoWindow>
                     )}</Marker>
             )})}
