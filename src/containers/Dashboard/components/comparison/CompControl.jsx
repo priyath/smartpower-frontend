@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-    Button, Card, CardBody, Col, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown,
+    Button, ButtonGroup, ButtonToolbar, Card, CardBody, Col, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown,
 } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -76,33 +76,29 @@ class CompControl extends PureComponent {
                         <div className="card__title">
                             <h5 className="bold-text">{t('dashboard.today_status')}</h5>
                         </div>
-                        <div className="dashboard__sales-report">
-                            <div className="control-panel progress-wrap progress-wrap--small">
-                                <UncontrolledDropdown>
-                                    <DropdownToggle className="icon icon--right" outline size="sm">
-                                        <p>{granularity}<MenuDownIcon /></p>
-                                    </DropdownToggle>
-                                    <DropdownMenu className="dropdown__menu">
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'month')}>Month</DropdownItem>
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'week')}>Week</DropdownItem>
-                                        <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'day')}>Day</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </div>
-                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
-                                <label className="form__form-group-label">
-                                    <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
-                                </label>
-                            </div>
-                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
-                                <label className="form__form-group-label">
-                                    <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
-                                </label>
+                        <div className="dashboard__comp-control">
 
+                        <ButtonToolbar>
+                            <UncontrolledDropdown className={'dashboard__comp-control-dropdown'}>
+                                <DropdownToggle className="icon icon--right" outline size="sm">
+                                    <p>{granularity}<MenuDownIcon /></p>
+                                </DropdownToggle>
+                                <DropdownMenu className="dropdown__menu">
+                                    <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'month')}>Month</DropdownItem>
+                                    <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'week')}>Week</DropdownItem>
+                                    <DropdownItem onClick={(e) => this.onChangeGranularity(e, 'day')}>Day</DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+
+                            <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
+
+                            <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
+
+                            <div className="control-panel dashboard__comp-control--apply">
+                                    <Button onClick={this.onSubmitFilters} color="primary" size="sm">Apply</Button>
                             </div>
-                            <div className="control-panel progress-wrap progress-wrap--small progress-wrap--pink">
-                                <Button onClick={this.onSubmitFilters} color="primary" size="sm">Apply</Button>
-                            </div>
+                        </ButtonToolbar>
+
                         </div>
                     </CardBody>
                 </Card>

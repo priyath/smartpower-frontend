@@ -1,11 +1,11 @@
 .dashboard {
-  .dashboard__sales-report .control-panel {
-    text-align: center;
 
-    input {
-      flex: 0 0 200px;
-      margin-left: 10px;
-    }
+  .btn-toolbar {
+    justify-content: space-between;
+  }
+
+  .dashboard__comp-control-dropdown {
+    margin: 0;
   }
 
   .MuiTypography-body2 {

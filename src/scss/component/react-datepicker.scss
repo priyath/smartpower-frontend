@@ -563,13 +563,13 @@
 .react-datepicker__input-container {
     position: relative;
     display: inline-block;
-    width: 100%;
 }
 
 .react-datepicker__input-container .input-component {
     border-radius: 4px;
     line-height: 16px;
     padding: 8px 10px 8px;
+    margin-bottom: 20px;
     border: 1px solid #898989;
 
     @include themify($themes) {
