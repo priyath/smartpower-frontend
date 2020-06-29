@@ -17,7 +17,7 @@ class RealtimeView extends Component {
         const { gauges, thresholds, selectedGaugeIdx, t, onGaugeSelect, getRealTimeData } = this.props;
         return (
             <Row>
-                <Panel md={12} lg={12} xl={5} sm={12} xs={12}  title={t('dashboard.main_gauges')}>
+                <Panel md={12} lg={12} xl={6} sm={12} xs={12}  title={t('dashboard.main_gauges')}>
                     <GaugeGrid gauges={gauges} onGaugeSelect={onGaugeSelect}/>
                 </Panel>
                 <LiveChart

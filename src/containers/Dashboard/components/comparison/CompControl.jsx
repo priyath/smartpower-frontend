@@ -90,9 +90,13 @@ class CompControl extends PureComponent {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
 
-                            <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
+                            <div className='dashboard__comp-control-date-picker'>
+                                <MonthPicker onChangeDate={this.onChangeFromDate} startDate={compareOne}/>
+                            </div>
 
-                            <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
+                            <div className='dashboard__comp-control-date-picker'>
+                                <MonthPicker onChangeDate={this.onChangeToDate} startDate={compareTwo}/>
+                            </div>
 
                             <div className="control-panel dashboard__comp-control--apply">
                                     <Button onClick={this.onSubmitFilters} color="primary" size="sm">Apply</Button>
