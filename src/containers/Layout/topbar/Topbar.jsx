@@ -6,6 +6,7 @@ import TopbarProfile from './TopbarProfile';
 import TopbarNotification from './TopbarNotification';
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
 import ChevronDownIcon from "mdi-react/ChevronDownIcon";
+import TopbarLanguage from "./TopbarLanguage";
 
 class Topbar extends PureComponent {
   static propTypes = {
@@ -32,30 +33,31 @@ class Topbar extends PureComponent {
               changeSidebarVisibility={changeSidebarVisibility}
             />
             <Link className="topbar__logo" to="/dashboard" />
-            <UncontrolledDropdown>
-              {
-                branchDetails ?
-                  <div>
-                    <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-                      <p className="topbar__branch_selection_label">{location}<ChevronDownIcon /></p>
-                    </DropdownToggle>
-                    <div className="topbar__dropdown">
-                      <DropdownMenu>
-                        {
-                          branchDetails ? branchDetails.map((branch, idx)=> {
-                            return (
-                                <DropdownItem key={idx} onClick={(e)=>this.changeSelectedBranch(e, idx)}>{branch.location}</DropdownItem>
-                            )
-                          }) :  <DropdownItem>Loading</DropdownItem>
-                        }
-                      </DropdownMenu>
-                    </div>
-                  </div> :
-                  <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>
-                    <p className="topbar__branch_selection_label">LOADING BRANCHES ...</p>
-                  </DropdownToggle>
-              }
-            </UncontrolledDropdown>
+            {/*<UncontrolledDropdown>*/}
+            {/*  {*/}
+            {/*    branchDetails ?*/}
+            {/*        <div>*/}
+            {/*          <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>*/}
+            {/*            <p className="topbar__branch_selection_label">{location}<ChevronDownIcon /></p>*/}
+            {/*          </DropdownToggle>*/}
+            {/*          <div className="topbar__dropdown">*/}
+            {/*            <DropdownMenu>*/}
+            {/*              {*/}
+            {/*                branchDetails ? branchDetails.map((branch, idx)=> {*/}
+            {/*                  return (*/}
+            {/*                      <DropdownItem key={idx} onClick={(e)=>this.changeSelectedBranch(e, idx)}>{branch.location}</DropdownItem>*/}
+            {/*                  )*/}
+            {/*                }) :  <DropdownItem>Loading</DropdownItem>*/}
+            {/*              }*/}
+            {/*            </DropdownMenu>*/}
+            {/*          </div>*/}
+            {/*        </div> :*/}
+            {/*        <DropdownToggle className="icon icon--right dashboard-comp-dropdown-menu" outline>*/}
+            {/*          <p className="topbar__branch_selection_label">LOADING BRANCHES ...</p>*/}
+            {/*        </DropdownToggle>*/}
+            {/*  }*/}
+            {/*</UncontrolledDropdown>*/}
+            <TopbarLanguage/>
           </div>
           <div className="topbar__right">
             <TopbarNotification alert={alert} dismissAlert={dismissAlert} location={location} />

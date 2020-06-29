@@ -6,6 +6,10 @@
   z-index: 101;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.05);
 
+  .topbar__language {
+    margin-left: 2.5%;
+  }
+
   @include themify($themes) {
     background: themed('colorBackground');
   }
@@ -277,7 +281,7 @@
   display: none;
 
   &.topbar__collapse--language {
-    min-width: 70px;
+    min-width: 200px;
     display: block;
 
     & > button {
@@ -305,8 +309,9 @@
   }
 
   &.topbar__collapse-content--language {
-    max-width: 70px;
+    max-width: 200px;
     padding: 10px 0;
+    bottom: 0;
     width: 100%;
   }
 
@@ -338,7 +343,7 @@
 
 .topbar__language-btn-title {
   display: flex;
-  font-size: 11px;
+  font-size: 14px;
   align-items: center;
   margin: auto 0;
 
@@ -473,6 +478,10 @@
   &:hover {
     color: $color-accent;
   }
+}
+
+svg.mdi-icon.topbar__icon {
+  margin-right: 0;
 }
 
 .topbar__btn {
