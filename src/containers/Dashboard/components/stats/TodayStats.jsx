@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 const TodayStats = ({ t, todayStats }) => (
-    <Col md={12} xl={6} lg={6} xs={12}>
+    <Col md={12} xl={5} lg={6} xs={12}>
         <Card>
             <CardBody className="dashboard__card-widget">
                 <div className="card__title">
