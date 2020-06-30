@@ -1,28 +1,12 @@
 import React, { PureComponent } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Collapse } from 'reactstrap';
+import {Collapse} from 'reactstrap';
 import DownIcon from 'mdi-react/ChevronDownIcon';
 import PropTypes from 'prop-types';
 
-const gb = `${process.env.PUBLIC_URL}/img/language/gb.png`;
-const fr = `${process.env.PUBLIC_URL}/img/language/fr.png`;
-const de = `${process.env.PUBLIC_URL}/img/language/de.png`;
-
-const GbLng = () => (
+const DropdownBranch = ({location}) => (
     <span className="topbar__language-btn-title">
-    <span className='topbar__dropdown-branch-name'>LOL C - B1 Office</span>
-  </span>
-);
-
-const FrLng = () => (
-    <span className="topbar__language-btn-title">
-    <span>FR</span>
-  </span>
-);
-
-const DeLng = () => (
-    <span className="topbar__language-btn-title">
-    <span>DE</span>
+    <span>{location}</span>
   </span>
 );
 
@@ -35,7 +19,7 @@ class TopbarLanguage extends PureComponent {
         super();
         this.state = {
             collapse: false,
-            mainButtonContent: <GbLng />,
+            mainButtonContent: <DropdownBranch location='Loading Branches ...'/>,
         };
     }
 
@@ -43,62 +27,54 @@ class TopbarLanguage extends PureComponent {
         this.setState(prevState => ({ collapse: !prevState.collapse }));
     };
 
-    changeLanguage = (lng) => {
-        const { i18n } = this.props;
-        i18n.changeLanguage(lng);
-        switch (lng) {
-            case 'en':
-                this.setState({ mainButtonContent: <GbLng /> });
-                break;
-            case 'fr':
-                this.setState({ mainButtonContent: <FrLng /> });
-                break;
-            case 'de':
-                this.setState({ mainButtonContent: <DeLng /> });
-                break;
-            default:
-                this.setState({ mainButtonContent: <GbLng /> });
-                break;
-        }
-    };
+    changeSelectedBranch(e, idx) {
+        this.toggle();
+        this.props.updateBranchSelection(idx);
+    }
 
     render() {
-        const { mainButtonContent, collapse } = this.state;
+        const { collapse } = this.state;
+        const { branchDetails, location } = this.props;
 
         return (
+            branchDetails ?
             <div className="topbar__language topbar__collapse topbar__collapse--language">
-                <button className="topbar__btn" type="button" onClick={this.toggle}>
-                    {mainButtonContent}
-                    <DownIcon className="topbar__icon" />
+                <button className="topbar__btn topbar__dropdown-main-content" type="button" onClick={this.toggle}>
+                    {location}
+                    <DownIcon className="topbar__icon"/>
                 </button>
-                {collapse && <button className="topbar__back" type="button" onClick={this.toggle} />}
+                {collapse && <button className="topbar__back" type="button" onClick={this.toggle}/>}
                 <Collapse
-                    isOpen={collapse}
-                    className="topbar__collapse-content topbar__collapse-content--language"
+                isOpen={collapse}
+                className="topbar__collapse-content topbar__collapse-content--language"
                 >
-                    <button
+                {
+                    branchDetails ? branchDetails.map((branch, idx) => {
+                        return (
+                            <button
+                                className="topbar__language-btn"
+                                type="button"
+                                onClick={(e) => this.changeSelectedBranch(e, idx)}
+                            >
+                                <DropdownBranch key={idx} location={branch.location}/>
+                            </button>
+                        )
+                    }) : <button
                         className="topbar__language-btn"
                         type="button"
                         onClick={() => this.changeLanguage('en')}
                     >
-                        <GbLng />
+                        <DropdownBranch key={0} location={'Loading..'}/>
                     </button>
-                    <button
-                        className="topbar__language-btn"
-                        type="button"
-                        onClick={() => this.changeLanguage('fr')}
-                    >
-                        <FrLng />
-                    </button>
-                    <button
-                        className="topbar__language-btn"
-                        type="button"
-                        onClick={() => this.changeLanguage('de')}
-                    >
-                        <DeLng />
-                    </button>
+                }
                 </Collapse>
-            </div>
+            </div> :
+                <div className="topbar__language topbar__collapse topbar__collapse--language">
+                    <button className="topbar__btn topbar__dropdown-main-content" type="button" onClick={this.toggle}>
+                        Loading Branches ...
+                        <DownIcon className="topbar__icon"/>
+                    </button>
+                </div>
         );
     }
 }

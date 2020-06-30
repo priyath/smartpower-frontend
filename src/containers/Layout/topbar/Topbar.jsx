@@ -57,7 +57,9 @@ class Topbar extends PureComponent {
             {/*        </DropdownToggle>*/}
             {/*  }*/}
             {/*</UncontrolledDropdown>*/}
-            <TopbarLanguage/>
+            {
+              <TopbarLanguage location={location} branchDetails={branchDetails} updateBranchSelection={this.props.updateBranchSelection}/>
+            }
           </div>
           <div className="topbar__right">
             <TopbarNotification alert={alert} dismissAlert={dismissAlert} location={location} />
