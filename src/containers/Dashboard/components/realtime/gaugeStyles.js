@@ -4,7 +4,7 @@ import {blue, grey} from "@material-ui/core/colors";
 export const useStyles = makeStyles(theme => ({
     card: {
         maxWidth: 400,
-        height: 250,
+        height: 225,
         backgroundColor: '#2a2a31'
     },
     link:{

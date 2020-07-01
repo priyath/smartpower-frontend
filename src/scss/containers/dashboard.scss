@@ -22,6 +22,15 @@
     }
   }
 
+  .dashboard__realtime-gauge-panel .panel__body.card-body {
+    padding: 10px;
+  }
+
+  .MuiCardHeader-root {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   .dashboard__gauge-grid-gauge {
     display: block;
     max-width: 100%;

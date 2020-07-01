@@ -348,7 +348,7 @@ export default class LiveChart extends React.Component {
         return (
             <Panel md={12} lg={12} xl={6} sm={12} xs={12} title='LIVE'>
                 <div dir="ltr">
-                    <ResponsiveContainer height={500} className="dashboard__area">
+                    <ResponsiveContainer height={400} className="dashboard__area dashboard__area-realtime-container">
                         <HighchartsReact
                             highcharts={Highcharts}
                             containerProps={{style: {height: "100%"}}}
