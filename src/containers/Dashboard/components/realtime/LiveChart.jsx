@@ -26,7 +26,7 @@ const theme = {
             color: '#E0E0E3',
             textTransform: 'uppercase',
             fontSize: '20px'
-        }
+        },
     },
     subtitle: {
         style: {
@@ -212,7 +212,6 @@ export default class LiveChart extends React.Component {
         this.options = {
             chartOptions: {
                 title: {
-                    text: '',
                     style: {
                         textTransform: 'uppercase',
                         fontSize: '15px'
