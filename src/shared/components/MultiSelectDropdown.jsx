@@ -35,15 +35,17 @@ export default class MultiSelectDropdown extends PureComponent {
     render() {
         const {branchDetails} = this.props;
         return (
-            <Select
-                defaultValue={getSelections(branchDetails)}
-                isMulti
-                name="branch-summary"
-                options={getSelections(branchDetails)}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                styles={colourStyles}
-            />
+            <div style={{ display: 'inline-block', width: '400px' }}>
+                <Select
+                    defaultValue={getSelections(branchDetails)}
+                    isMulti
+                    name="branch-summary"
+                    options={getSelections(branchDetails)}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    styles={colourStyles}
+                />
+            </div>
         );
     }
 }

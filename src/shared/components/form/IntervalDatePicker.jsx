@@ -46,8 +46,7 @@ class IntervalDatePickerField extends PureComponent {
         const { startDate, endDate } = this.state;
 
         return (
-            <Row>
-                <Col md={3} class="text-center" align="right">
+                <div>
                     <DatePicker
                         className='input-component'
                         selected={startDate}
@@ -60,8 +59,6 @@ class IntervalDatePickerField extends PureComponent {
                         dropDownMode="select"
                         withPortal={isMobileOnly}
                     />
-                </Col>
-                <Col md={3} class="text-center" align="center">
                     <DatePicker
                         className='input-component'
                         selected={endDate}
@@ -74,11 +71,8 @@ class IntervalDatePickerField extends PureComponent {
                         dropDownMode="select"
                         withPortal={isMobileOnly}
                     />
-                </Col>
-                <Col md={4} class="text-center" align="right">
                     <Button onClick={this.handleSubmit} color="primary" size="sm">Apply</Button>
-                </Col>
-            </Row>
+                </div>
         );
     }
 }
