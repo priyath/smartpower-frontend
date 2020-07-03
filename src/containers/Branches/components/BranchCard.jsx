@@ -40,7 +40,7 @@ export default class BranchCard extends PureComponent {
     const { energyConsumption, alertCount, location } = this.props.branchSummary;
 
     return (
-      <Panel xl={4} lg={12} title={location}>
+      <Panel panelClass='branch_summary-card' xl={4} lg={12} title={location}>
         <Table responsive striped>
           <thead>
           <tr>
