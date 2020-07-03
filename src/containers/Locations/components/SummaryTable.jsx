@@ -13,6 +13,7 @@ export default class SummaryTable extends PureComponent {
                 key: 'location',
                 name: 'Location',
                 sortable: false,
+                width: 200,
             },
             {
                 key: 'alerts',

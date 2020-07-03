@@ -18,6 +18,7 @@ export default class SummaryTable extends PureComponent {
                 key: 'alertType',
                 name: 'Alert Type',
                 sortable: false,
+                width: 200,
             },
             {
                 key: 'alerts',
