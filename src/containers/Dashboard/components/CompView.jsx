@@ -89,7 +89,7 @@ class CompView extends React.Component {
                     getComparisonData={this.getComparisonData}
                 />
                 <Panel md={12} lg={12} xl={12} sm={12} xs={12} title={t('dashboard.comp_view')}>
-                    <ResponsiveContainer height={600}>
+                    <ResponsiveContainer className='dashboard__area' height={600}>
                         { !this.state.initialLoad ? <div style={tempStyle}>Retrieving Data...</div> :
                             <HighComp
                                 compKeys={compKeys}

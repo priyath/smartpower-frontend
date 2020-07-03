@@ -1,5 +1,13 @@
 .dashboard {
 
+  .dashboard__area .highcharts-container {
+    width: 100% !important;
+  }
+
+  .dashboard__area .highcharts-root {
+    width: 100% !important;
+  }
+
   .dashboard__comp-control .dashboard__comp-control-date-picker {
     text-align: center;
   }
