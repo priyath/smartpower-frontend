@@ -12,6 +12,8 @@
 
   .topbar__dropdown-main-content {
     font-size: 14px;
+    display: inline-flex;
+    align-items: center;
   }
 
   @include themify($themes) {
